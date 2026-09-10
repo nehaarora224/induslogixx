@@ -117,12 +117,42 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="color-mix(in srgb, var(--color-text) 45%, transparent)" stroke-width="1.5" style="position: absolute; left: 10px;"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
           <input class="input" type="search" placeholder="Search shipments, drivers, vehicles" style="width: 288px; height: 38px; padding-left: 32px; font-size: 13.5px;" value="{{ searchValue }}" onInput="{{ onSearchInput }}" onKeyDown="{{ onSearchKey }}">
         </div>
-        <button class="btn btn-secondary" style="width: 38px; height: 38px; padding: 0; position: relative;" aria-label="Notifications" onClick="{{ onNotifications }}">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9Z"></path><path d="M10 18a2 2 0 0 0 4 0"></path></svg>
-          <sc-if value="{{ hasOpenExceptions }}" hint-placeholder-val="{{ true }}">
-            <span style="position: absolute; top: 7px; right: 8px; width: 6px; height: 6px; background: var(--color-accent);"></span>
+        <div style="position: relative;">
+          <button class="btn btn-secondary" style="width: 38px; height: 38px; padding: 0; position: relative;" aria-label="Notifications" onClick="{{ onNotifications }}">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9Z"></path><path d="M10 18a2 2 0 0 0 4 0"></path></svg>
+            <sc-if value="{{ hasOpenExceptions }}" hint-placeholder-val="{{ true }}">
+              <span style="position: absolute; top: 7px; right: 8px; width: 6px; height: 6px; background: var(--color-accent); border-radius: 50%;"></span>
+            </sc-if>
+          </button>
+          <sc-if value="{{ notifOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position: fixed; inset: 0; z-index: 30;" onClick="{{ onCloseNotifications }}"></div>
+            <div style="position: absolute; top: calc(100% + 8px); right: 0; z-index: 31; width: 320px; max-width: calc(100vw - 32px); background: var(--color-elevated); border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-md); overflow: hidden;" onClick="{{ stopNotifClick }}">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--color-divider);">
+                <span style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 14px;">Notifications</span>
+                <span style="font-size: 11px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ notifCountLabel }}</span>
+              </div>
+              <div style="max-height: 320px; overflow-y: auto;">
+                <sc-if value="{{ hasNotifications }}" hint-placeholder-val="{{ true }}">
+                  <sc-for list="{{ notifications }}" as="n" hint-placeholder-count="4">
+                    <div style="display: flex; align-items: flex-start; gap: 10px; padding: 11px 14px; border-top: 1px solid var(--color-divider);">
+                      <span style="{{ n.dotStyle }}"></span>
+                      <div style="flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0;">
+                        <span style="font-size: 13px; line-height: 1.4;">{{ n.message }}</span>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <span style="{{ n.tagStyle }}">{{ n.severity }}</span>
+                          <span style="font-size: 11px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ n.time }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </sc-if>
+                <sc-if value="{{ noNotifications }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding: 22px 14px; text-align: center; font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">You're all caught up.</div>
+                </sc-if>
+              </div>
+            </div>
           </sc-if>
-        </button>
+        </div>
         <button style="display: flex; align-items: center; gap: 9px; padding: 4px 10px 4px 4px; border: 1px solid var(--color-divider); background: none; cursor: pointer; font: inherit; border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onProfile }}">
           <span style="width: 28px; height: 28px; display: grid; place-items: center; background: var(--color-accent); color: var(--color-bg); font-size: 11.5px;">{{ userInitials }}</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"></path></svg>
@@ -358,7 +388,18 @@ const pill = c => 'display: inline-flex; align-items: center; padding: 3px 8px; 
 const kpiCard = tint => 'padding: 15px 16px; display: flex; flex-direction: column; gap: 9px; background: ' + tint + ';';
 
 class Component extends DCLogic {
-  state = { nav: 'Overview', filter: 'All', vehicle: 'TRK-024', collapsed: false, allAlerts: false, search: '' };
+  state = { nav: 'Overview', filter: 'All', vehicle: 'TRK-024', collapsed: false, allAlerts: false, search: '', notifOpen: false };
+
+  componentDidMount() {
+    this._onKeydown = e => {
+      if (e.key === 'Escape' && this.state.notifOpen) this.setState({ notifOpen: false });
+    };
+    document.addEventListener('keydown', this._onKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._onKeydown);
+  }
 
   renderVals() {
     const { filter, vehicle, collapsed } = this.state;
@@ -397,6 +438,22 @@ class Component extends DCLogic {
     const openExceptions = exceptions.filter(e => e.status !== 'Resolved');
     const total = shipments.length;
 
+    const SEV_COLOR = { Critical: C.delayed, High: C.out, Warning: C.out };
+    const notifCandidates = [];
+    const delayedShip = shipments.find(s => s.status === 'Delayed');
+    if (delayedShip) notifCandidates.push({ message: 'Shipment ' + delayedShip.id + ' has been delayed.', severity: 'Critical', time: '5 min ago' });
+    const atRiskException = exceptions.find(e => e.status !== 'Resolved' && e.type === 'Delivery Failed');
+    if (atRiskException) notifCandidates.push({ message: 'Delivery for ' + (atRiskException.shipmentId && atRiskException.shipmentId !== '—' ? atRiskException.shipmentId : atRiskException.id) + ' is at risk.', severity: 'High', time: '20 min ago' });
+    const maintVehicle = IndusStore.getVehicles().find(v => v.status === 'Maintenance');
+    if (maintVehicle) notifCandidates.push({ message: 'Vehicle ' + maintVehicle.id + ' requires maintenance.', severity: 'Warning', time: '45 min ago' });
+    const otherException = openExceptions.find(e => e.type !== 'Delivery Failed');
+    if (otherException) notifCandidates.push({ message: 'New exception requires review.', severity: 'Warning', time: '1 hr ago' });
+    const notifications = notifCandidates.slice(0, 5).map(n => ({
+      ...n,
+      dotStyle: 'width: 7px; height: 7px; flex: none; margin-top: 5px; border-radius: 50%; background: ' + (SEV_COLOR[n.severity] || C.muted) + ';',
+      tagStyle: pill(SEV_COLOR[n.severity] || C.muted)
+    }));
+
     const kpis = [
       { label: 'Total shipments', value: String(total), delta: total + ' scheduled today', deltaColor: C.muted, tint: TINT.blue, icon: 'M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5', iconColor: C.transit, onClick: () => window.location.href = 'shipments.html' },
       { label: 'In transit', value: String(counts.inTransit), delta: counts.inTransit + ' vehicles on route', deltaColor: C.muted, tint: TINT.blue, icon: 'M3 16V8h11v8H3Zm11-5h4l3 3v2h-7v-5Z', iconColor: C.transit, onClick: () => window.location.href = 'shipments.html?status=' + encodeURIComponent('In Transit') },
@@ -405,8 +462,8 @@ class Component extends DCLogic {
     ].map(k => ({ ...k, cardStyle: kpiCard(k.tint) + ' cursor: pointer; text-align: left; border: 0; font: inherit;' }));
 
     const alertDefs = [
-      { match: e => e.status !== 'Resolved' && e.type === 'Delayed Shipment', title: 'shipments delayed', detail: 'Delivery windows are slipping — customers may need updating.', severity: 'Critical', color: C.delayed, tint: TINT.red, action: 'View delayed shipments', onClick: () => window.location.href = 'shipments.html?status=Delayed' },
-      { match: e => e.status !== 'Resolved' && (e.type === 'Delivery Failed'), title: 'deliveries failed or at risk', detail: 'Recipients unavailable or delivery windows closing soon.', severity: 'High', color: C.out, tint: TINT.amber, action: 'Review exceptions', onClick: () => window.location.href = 'exceptions.html?type=' + encodeURIComponent('Delivery Failed') },
+      { match: e => e.status !== 'Resolved' && e.type === 'Delayed Shipment', title: 'Shipments delayed', detail: 'Delivery windows are slipping — customers may need updating.', severity: 'Critical', color: C.delayed, tint: TINT.red, action: 'View delayed shipments', onClick: () => window.location.href = 'shipments.html?status=Delayed' },
+      { match: e => e.status !== 'Resolved' && (e.type === 'Delivery Failed'), title: 'Deliveries failed or at risk', detail: 'Recipients unavailable or delivery windows closing soon.', severity: 'High', color: C.out, tint: TINT.amber, action: 'Review exceptions', onClick: () => window.location.href = 'exceptions.html?type=' + encodeURIComponent('Delivery Failed') },
       { match: e => e.status !== 'Resolved' && e.type === 'Vehicle Breakdown', title: 'vehicles need attention', detail: 'Maintenance or breakdown issues may affect deliveries.', severity: 'High', color: C.out, tint: TINT.amber, action: 'Review vehicles', onClick: () => window.location.href = 'vehicles.html?status=Maintenance' },
       { match: e => e.status !== 'Resolved' && (e.type === 'Route Deviation' || e.type === 'Driver Issue' || e.type === 'Address Problem' || e.type === 'Temperature Excursion' || e.type === 'Other'), title: 'other open exceptions', detail: 'Route, driver, or delivery issues awaiting review.', severity: 'Warning', color: C.out, tint: TINT.amber, action: 'View exceptions', onClick: () => window.location.href = 'exceptions.html' }
     ].map(d => ({ ...d, count: String(openExceptions.filter(d.match).length) })).filter(d => Number(d.count) > 0);
@@ -488,8 +545,15 @@ class Component extends DCLogic {
       onSearchKey: e => {
         if (e.key === 'Enter' && this.state.search.trim()) window.location.href = 'shipments.html?q=' + encodeURIComponent(this.state.search.trim());
       },
-      hasOpenExceptions: openExceptions.length > 0,
-      onNotifications: () => window.location.href = 'exceptions.html',
+      hasOpenExceptions: notifications.length > 0,
+      notifOpen: this.state.notifOpen,
+      notifications,
+      hasNotifications: notifications.length > 0,
+      noNotifications: notifications.length === 0,
+      notifCountLabel: notifications.length + ' new',
+      onNotifications: () => this.setState({ notifOpen: !this.state.notifOpen }),
+      onCloseNotifications: () => this.setState({ notifOpen: false }),
+      stopNotifClick: e => e.stopPropagation(),
       workspaceName: IndusStore.getSettings().companyName,
       userInitials: IndusStore.getUser().initials,
       userName: IndusStore.getUser().name,
