@@ -451,8 +451,8 @@ class Component extends DCLogic {
         statusStyle: pill(STA[dv.status] || STA.Open),
         overview: [
           { label: 'Related shipment', value: dv.shipmentId && dv.shipmentId !== '—' ? dv.shipmentId : 'None', href: dv.shipmentId && dv.shipmentId !== '—' ? 'shipment-details.html?id=' + encodeURIComponent(dv.shipmentId) : null },
-          { label: 'Driver', value: dv.driverId || 'Unassigned', href: null, plain: true },
-          { label: 'Vehicle', value: dv.vehicleId || '—', href: null, plain: true },
+          { label: 'Driver', value: dv.driverId || 'Unassigned', href: dv.driverId ? 'drivers.html?q=' + encodeURIComponent(dv.driverId) : null, plain: !dv.driverId },
+          { label: 'Vehicle', value: dv.vehicleId || '—', href: dv.vehicleId ? 'vehicles.html?q=' + encodeURIComponent(dv.vehicleId) : null, plain: !dv.vehicleId },
           { label: 'Location', value: dv.location || '—', plain: true },
           { label: 'Assignee', value: dv.assignee || 'Unassigned', plain: true },
           { label: 'Reported', value: fmtDate(dv.createdAt), plain: true }

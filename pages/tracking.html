@@ -371,14 +371,37 @@ const CITIES = [
   { name: 'SONIPAT', x: 302, y: 78, anchor: 'middle', dx: 0, dy: -16 }
 ];
 
-const VEHICLES = [
+const VEHICLES_BASE = [
   { id: 'VH-018', x: 272, y: 348, route: 'r1', type: 'Container Truck', driver: 'Amit Verma', shipment: 'SHP-10482', lane: 'Gurugram → Delhi', place: 'Gurugram', status: 'In Transit', eta: 'Today, 4:35 PM', progress: 68, color: C.transit },
   { id: 'VH-012', x: 505, y: 312, route: 'r2', type: 'Tempo 14ft', driver: 'Vikram Singh', shipment: 'SHP-10491', lane: 'Delhi → Noida', place: 'Noida', status: 'Delayed', eta: '24 min late · 5:10 PM', progress: 54, color: C.delayed },
   { id: 'VH-009', x: 330, y: 168, route: 'r4', type: 'Container Truck', driver: 'Neeraj Yadav', shipment: 'SHP-10472', lane: 'Delhi → Sonipat', place: 'Sonipat Road', status: 'In Transit', eta: 'Today, 5:20 PM', progress: 41, color: C.transit },
   { id: 'VH-021', x: 636, y: 262, route: 'r3', type: 'Pickup 8ft', driver: 'Sunil Rathi', shipment: 'SHP-10465', lane: 'Noida → Ghaziabad', place: 'Ghaziabad', status: 'On Time', eta: 'Today, 3:55 PM', progress: 82, color: C.ok },
   { id: 'VH-024', x: 412, y: 205, route: null, type: 'Tempo 14ft', driver: 'Rahul Sharma', shipment: 'No active shipment', lane: 'Delhi NCR · idle', place: 'Delhi NCR', status: 'Available', eta: 'Ready for dispatch', progress: 0, color: C.ok },
-  { id: 'VH-031', x: 586, y: 196, route: null, type: 'Container Truck', driver: 'Unassigned', shipment: 'No active shipment', lane: 'Ghaziabad depot', place: 'Ghaziabad', status: 'Maintenance', eta: 'Back 10 Sep', progress: 0, color: C.warn }
+  { id: 'VH-031', x: 586, y: 196, route: null, type: 'Container Truck', driver: 'Unassigned', shipment: 'No active shipment', lane: 'Ghaziabad depot', place: 'Ghaziabad', status: 'Maintenance', eta: 'Back 10 Sep', progress: 0, color: C.warn },
+  { id: 'VH-011', x: 150, y: 300, route: null, type: 'Truck', driver: 'Unassigned', shipment: 'No active shipment', lane: 'Delhi depot', place: 'Delhi', status: 'Unavailable', eta: 'Out of service', progress: 0, color: C.warn },
+  { id: 'VH-007', x: 700, y: 420, route: null, type: 'Container Truck', driver: 'Kabir Anand', shipment: 'No active shipment', lane: 'Delhi NCR · idle', place: 'Delhi NCR', status: 'In Transit', eta: 'On route', progress: 45, color: C.transit },
+  { id: 'VH-014', x: 230, y: 450, route: null, type: 'Mini Truck', driver: 'Neha Rawat', shipment: 'No active shipment', lane: 'Faridabad depot', place: 'Faridabad', status: 'Maintenance', eta: 'In service', progress: 0, color: C.warn },
+  { id: 'VH-019', x: 480, y: 460, route: null, type: 'Truck', driver: 'Arjun Sharma', shipment: 'No active shipment', lane: 'Delhi depot', place: 'Delhi', status: 'Available', eta: 'Ready for dispatch', progress: 0, color: C.ok },
+  { id: 'VH-027', x: 700, y: 150, route: null, type: 'Van', driver: 'Deepak Verma', shipment: 'No active shipment', lane: 'Noida depot', place: 'Noida', status: 'Available', eta: 'Ready for dispatch', progress: 0, color: C.ok },
+  { id: 'VH-033', x: 150, y: 130, route: null, type: 'Truck', driver: 'Imran Qureshi', shipment: 'No active shipment', lane: 'Gurugram · idle', place: 'Gurugram', status: 'In Transit', eta: 'On route', progress: 50, color: C.transit },
+  { id: 'VH-041', x: 760, y: 300, route: null, type: 'Mini Truck', driver: 'Suresh Yadav', shipment: 'No active shipment', lane: 'Delhi NCR depot', place: 'Delhi NCR', status: 'Available', eta: 'Ready for dispatch', progress: 0, color: C.ok }
 ];
+const STATUS_COLOR = { 'In Transit': C.transit, Delayed: C.delayed, Available: C.ok, Maintenance: C.warn, Unavailable: C.warn };
+// Overlay live status/driver/assignment from the shared store onto whichever
+// vehicles are also managed on the Vehicles page, so a status change or a
+// new shipment assignment made elsewhere shows up here too.
+const VEHICLES = VEHICLES_BASE.map(v => {
+  const live = IndusStore.getVehicle(v.id);
+  if (!live) return v;
+  return {
+    ...v,
+    driver: live.driver && live.driver !== 'Unassigned' ? live.driver : v.driver,
+    status: live.status,
+    color: STATUS_COLOR[live.status] || v.color,
+    shipment: live.shipment && live.shipment !== '—' ? live.shipment : v.shipment,
+    place: live.location || v.place
+  };
+});
 
 const ACTIVITY = [
   { id: 'VH-018', text: 'Shipment SHP-10482 dispatched', place: 'Gurugram', time: '2 min ago', color: C.transit },
@@ -394,6 +417,8 @@ function initialSelection() {
   if (vParam && VEHICLES.some(v => v.id === vParam)) return vParam;
   const sParam = IndusStore.qs('shipment');
   if (sParam) {
+    const liveShipment = IndusStore.getShipment(sParam);
+    if (liveShipment && liveShipment.vehicle && VEHICLES.some(v => v.id === liveShipment.vehicle)) return liveShipment.vehicle;
     const match = VEHICLES.find(v => v.shipment === sParam || v.shipment === sParam.replace(/^#/, '') || ('#' + v.shipment) === sParam);
     if (match) return match.id;
   }
@@ -448,10 +473,10 @@ class Component extends DCLogic {
     });
 
     const summary = [
-      { label: 'Active vehicles', value: '14', color: null },
+      { label: 'Active vehicles', value: String(VEHICLES.length), color: null },
       { label: 'In transit', value: '86', color: null },
       { label: 'Deliveries today', value: '142', color: null },
-      { label: 'Delayed', value: '12', color: ink(C.delayed) },
+      { label: 'Delayed', value: String(VEHICLES.filter(v => v.status === 'Delayed').length), color: ink(C.delayed) },
       { label: 'On-time', value: '91.4%', color: ink(C.ok) }
     ].map((s, i) => ({
       ...s,
@@ -530,7 +555,7 @@ class Component extends DCLogic {
       onFullscreen: () => { const el = document.getElementById('map-wrap'); if (document.fullscreenElement) document.exitFullscreen(); else if (el) el.requestFullscreen(); },
       onQuery: e => this.setState({ query: e.target.value }),
       onClear: () => this.setState({ sel: null }),
-      resultLabel: q ? hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' highlighted' : 'Showing ' + visible.length + ' of 14 active vehicles',
+      resultLabel: q ? hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' highlighted' : 'Showing ' + visible.length + ' of ' + VEHICLES.length + ' active vehicles',
       vehicleCount: listSource.length + ' shown',
       shellStyle: 'display: grid; grid-template-columns: ' + (collapsed ? '68px' : '244px') + ' minmax(0, 1fr); min-height: 100vh;',
       asideStyle: 'display: flex; flex-direction: column; gap: 22px; padding: 20px ' + (collapsed ? '10px' : '16px') +

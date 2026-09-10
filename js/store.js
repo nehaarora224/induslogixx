@@ -125,6 +125,37 @@
     for (var i = 0; i < list.length; i++) if (list[i].id === id) return i;
     return -1;
   }
+  function findByName(list, name) {
+    for (var i = 0; i < list.length; i++) if (list[i].name === name) return i;
+    return -1;
+  }
+
+  // Keep a vehicle/driver's "current shipment" and status in sync with the
+  // shipment they're actually assigned to, so a create/reassign/status change
+  // on one page shows up correctly on Drivers/Vehicles/Tracking too.
+  var ACTIVE_STATUSES = ['Pending', 'In Transit', 'Out for Delivery'];
+  var DONE_STATUSES = ['Delivered', 'Cancelled'];
+  function syncAssignee(list, matchField, shipmentId, prevVal, nextVal, status, activeLabel) {
+    if (prevVal && prevVal !== '—' && prevVal !== 'Unassigned' && prevVal !== nextVal) {
+      var pi = matchField === 'name' ? findByName(list, prevVal) : findIndex(list, prevVal);
+      if (pi !== -1 && list[pi].shipment === shipmentId) {
+        list[pi] = Object.assign({}, list[pi], { shipment: '—', status: 'Available' });
+      }
+    }
+    if (nextVal && nextVal !== '—' && nextVal !== 'Unassigned') {
+      var ni = matchField === 'name' ? findByName(list, nextVal) : findIndex(list, nextVal);
+      if (ni !== -1) {
+        var patch = { shipment: shipmentId };
+        if (ACTIVE_STATUSES.indexOf(status) !== -1) patch.status = activeLabel;
+        else if (DONE_STATUSES.indexOf(status) !== -1) { patch.shipment = '—'; patch.status = 'Available'; }
+        list[ni] = Object.assign({}, list[ni], patch);
+      }
+    }
+  }
+  function syncShipmentAssignees(shipmentId, prevVehicle, nextVehicle, prevDriver, nextDriver, status) {
+    syncAssignee(state.vehicles, 'id', shipmentId, prevVehicle, nextVehicle, status, 'In Transit');
+    syncAssignee(state.drivers, 'name', shipmentId, prevDriver, nextDriver, status, 'On Route');
+  }
 
   // ---- CSV export helper -------------------------------------------------
   function toCSV(columns, rows) {
@@ -178,13 +209,17 @@
         createdAt: new Date().toISOString()
       }, data, { id: id });
       state.shipments.unshift(s);
+      syncShipmentAssignees(id, null, s.vehicle, null, s.driver, s.status);
       commit();
       return clone(s);
     },
     updateShipment: function (id, patch) {
       var i = findIndex(state.shipments, id);
       if (i === -1) return null;
-      state.shipments[i] = Object.assign({}, state.shipments[i], patch);
+      var prev = state.shipments[i];
+      var next = Object.assign({}, prev, patch);
+      state.shipments[i] = next;
+      syncShipmentAssignees(id, prev.vehicle, next.vehicle, prev.driver, next.driver, next.status);
       commit();
       return clone(state.shipments[i]);
     },
