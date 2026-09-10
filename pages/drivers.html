@@ -162,11 +162,11 @@
               <div style="display: flex; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px solid var(--color-divider);">
                 <button style="font: inherit; font-size: 13.5px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--color-accent-700); font-variant-numeric: tabular-nums; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--color-accent-300); text-underline-offset: 3px;" style-hover="color: var(--color-accent-800);" onClick="{{ a.onOpen }}">{{ a.id }}</button>
                 <span style="flex: 1; font-size: 13px; color: color-mix(in srgb, var(--color-text) 65%, transparent);">{{ a.note }}</span>
-                <button style="font: inherit; font-size: 12.5px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--color-accent-700); white-space: nowrap;" style-hover="color: var(--color-accent-800); text-decoration: underline;">{{ a.action }} →</button>
+                <button style="font: inherit; font-size: 12.5px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--color-accent-700); white-space: nowrap;" style-hover="color: var(--color-accent-800); text-decoration: underline;" onClick="{{ a.onOpen }}">{{ a.action }} →</button>
               </div>
             </sc-for>
           </div>
-          <button class="btn btn-ghost" style="margin-top: 10px; padding: 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-700);">View all →</button>
+          <button class="btn btn-ghost" style="margin-top: 10px; padding: 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-700);" onClick="{{ onViewAllAttention }}">View all →</button>
         </div>
       </section>
 
@@ -271,7 +271,7 @@
 
         <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
           <div style="overflow-x: auto;">
-            <table class="table" style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13.5px; background: #ffffff;">
+            <table id="driver-table" class="table" style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13.5px; background: #ffffff;">
               <thead>
                 <tr>
                   <th style="width: 42px; padding: 12px 0 12px 16px;">
@@ -628,6 +628,19 @@ class Component extends DCLogic {
 
   statusOf(r) { return r.status; }
 
+  componentDidMount() {
+    this._onKeydown = e => {
+      if (e.key !== 'Escape') return;
+      if (this.state.addOpen) this.setState({ addOpen: false });
+      else if (this.state.detail) this.setState({ detail: null });
+    };
+    document.addEventListener('keydown', this._onKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._onKeydown);
+  }
+
   renderVals() {
     const st = this.state;
     const { collapsed } = st;
@@ -730,6 +743,7 @@ class Component extends DCLogic {
     return {
       nav, expanded, summary, availability, chips,
       hasChips: chips.length > 0,
+      onViewAllAttention: () => { const el = document.getElementById('driver-table'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
       attention: [
         { id: 'DR-018', note: 'License expires in 12 days', action: 'Review documents' },
         { id: 'DR-024', note: 'Availability not updated', action: 'Update availability' },

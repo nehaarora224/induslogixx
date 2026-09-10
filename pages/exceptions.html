@@ -313,6 +313,17 @@ class Component extends DCLogic {
 
   setFilter(patch) { this.setState(patch); }
 
+  componentDidMount() {
+    this._onKeydown = e => {
+      if (e.key === 'Escape' && this.state.detail) this.setState({ detail: null });
+    };
+    document.addEventListener('keydown', this._onKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._onKeydown);
+  }
+
   renderVals() {
     const st = this.state;
     const { collapsed } = st;

@@ -162,11 +162,11 @@
               <div style="display: flex; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px solid var(--color-divider);">
                 <button style="font: inherit; font-size: 13.5px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--color-accent-700); font-variant-numeric: tabular-nums; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--color-accent-300); text-underline-offset: 3px;" style-hover="color: var(--color-accent-800);" onClick="{{ m.onOpen }}">{{ m.id }}</button>
                 <span style="flex: 1; font-size: 13px; color: color-mix(in srgb, var(--color-text) 65%, transparent);">{{ m.note }}</span>
-                <button style="font: inherit; font-size: 12.5px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--color-accent-700); white-space: nowrap;" style-hover="color: var(--color-accent-800); text-decoration: underline;">{{ m.action }} →</button>
+                <button style="font: inherit; font-size: 12.5px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--color-accent-700); white-space: nowrap;" style-hover="color: var(--color-accent-800); text-decoration: underline;" onClick="{{ m.onOpen }}">{{ m.action }} →</button>
               </div>
             </sc-for>
           </div>
-          <button class="btn btn-ghost" style="margin-top: 10px; padding: 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-700);">View maintenance →</button>
+          <button class="btn btn-ghost" style="margin-top: 10px; padding: 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-700);" onClick="{{ onViewMaintenance }}">View maintenance →</button>
         </div>
       </section>
 
@@ -272,7 +272,7 @@
 
         <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
           <div style="overflow-x: auto;">
-            <table class="table" style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13.5px; background: #ffffff;">
+            <table id="vehicle-table" class="table" style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13.5px; background: #ffffff;">
               <thead>
                 <tr>
                   <th style="width: 42px; padding: 12px 0 12px 16px;">
@@ -565,6 +565,19 @@ class Component extends DCLogic {
 
   setFilter(patch) { this.setState({ ...patch, page: 1, menu: null }); }
 
+  componentDidMount() {
+    this._onKeydown = e => {
+      if (e.key !== 'Escape') return;
+      if (this.state.addOpen) this.setState({ addOpen: false });
+      else if (this.state.detail) this.setState({ detail: null });
+    };
+    document.addEventListener('keydown', this._onKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._onKeydown);
+  }
+
   renderVals() {
     const st = this.state;
     const { collapsed } = st;
@@ -664,6 +677,7 @@ class Component extends DCLogic {
     return {
       nav, expanded, summary, fleet, chips,
       hasChips: chips.length > 0,
+      onViewMaintenance: () => { this.setState({ status: 'Maintenance', page: 1 }); const el = document.getElementById('vehicle-table'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); },
       maintenance: [
         { id: 'VH-031', note: 'Service due in 2 days', action: 'Schedule service' },
         { id: 'VH-014', note: 'Brake inspection overdue', action: 'Schedule inspection' },

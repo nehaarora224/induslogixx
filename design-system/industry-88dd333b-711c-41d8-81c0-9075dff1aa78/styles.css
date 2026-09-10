@@ -105,6 +105,28 @@ h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: var(--font-headi
    ══════════════════════════════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; }
+
+/* — interaction system: one short, consistent transition for every
+   hover/focus/active/open state, plus baseline press + pointer feedback
+   for anything clickable. Kept to transform/opacity/color where possible
+   for performance; no animation library. — */
+button, a, select, .input, .seg-opt, .radio .dot,
+.table tbody tr, .dialog-backdrop, .dialog {
+  transition: background-color 140ms ease, border-color 140ms ease,
+    color 140ms ease, box-shadow 140ms ease, transform 140ms ease, opacity 140ms ease;
+}
+button:not(:disabled), a[href], select, .seg-opt, .radio,
+button.blueprint, a.blueprint {
+  cursor: pointer;
+}
+button:not(:disabled):active { transform: scale(0.97); }
+.btn:not(:disabled):active { transform: translateY(1px); }
+button.blueprint:hover, a.blueprint:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+button.blueprint:active, a.blueprint:active { transform: translateY(1px); }
+
 body { margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400; }
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading); font-weight: var(--font-heading-weight);
@@ -158,6 +180,7 @@ figcaption {
 .btn-ghost { color: var(--color-accent); padding-inline: var(--space-1); }
 .btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
 .btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.btn:not(.btn-ghost):not(:disabled):hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 .btn-icon { width: 36px; height: 36px; padding: 0; }
 .btn-block { width: 100%; margin-top: var(--space-2); }
 

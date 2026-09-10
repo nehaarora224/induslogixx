@@ -515,7 +515,7 @@ class Component extends DCLogic {
         label: p.label,
         icon: p.icon,
         extra: p.extra || false,
-        onExtra: () => {},
+        onExtra: () => this.setState({ menu: p.key }),
         open: menu === p.key,
         query: queries[p.key],
         searchHint: p.hint,

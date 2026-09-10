@@ -112,7 +112,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 11a8 8 0 1 0-2.3 5.7"></path><path d="M20 4v7h-7"></path></svg>
           <span>Refresh</span>
         </button>
-        <button class="btn btn-secondary" style="width: 38px; height: 38px; padding: 0;" aria-label="Full screen">
+        <button class="btn btn-secondary" style="width: 38px; height: 38px; padding: 0;" aria-label="Full screen" onClick="{{ onFullscreen }}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9V4h5M20 15v5h-5M15 4h5v5M9 20H4v-5"></path></svg>
         </button>
       </div>
@@ -142,7 +142,7 @@
       </section>
 
       <section style="display: flex; gap: 18px; flex-wrap: wrap; align-items: stretch; min-width: 0;">
-        <div class="blueprint" style="{{ mapWrapStyle }}">
+        <div id="map-wrap" class="blueprint" style="{{ mapWrapStyle }}">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <div style="{{ sweepStyle }}"></div>
           <svg viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%;" aria-label="Live tracking map of Delhi NCR">
@@ -527,6 +527,7 @@ class Component extends DCLogic {
       query: this.state.query,
       updatedLabel: this.state.updated,
       onRefresh: () => this.refresh(),
+      onFullscreen: () => { const el = document.getElementById('map-wrap'); if (document.fullscreenElement) document.exitFullscreen(); else if (el) el.requestFullscreen(); },
       onQuery: e => this.setState({ query: e.target.value }),
       onClear: () => this.setState({ sel: null }),
       resultLabel: q ? hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' highlighted' : 'Showing ' + visible.length + ' of 14 active vehicles',
@@ -557,7 +558,7 @@ class Component extends DCLogic {
         { label: 'Zoom out', icon: 'M5 12h14', onClick: () => this.setState({ zoom: Math.max(1, +(zoom - 0.25).toFixed(2)) }) },
         { label: 'Recenter', icon: 'M12 3v3m0 12v3M3 12h3m12 0h3M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z', onClick: () => this.setState({ zoom: 1, query: '' }) },
         { label: 'Map layers', icon: 'M12 3 3 8l9 5 9-5-9-5ZM3 14l9 5 9-5', onClick: () => this.refresh() },
-        { label: 'Full screen', icon: 'M4 9V4h5M20 15v5h-5M15 4h5v5M9 20H4v-5', onClick: () => {} }
+        { label: 'Full screen', icon: 'M4 9V4h5M20 15v5h-5M15 4h5v5M9 20H4v-5', onClick: () => { const el = document.getElementById('map-wrap'); if (document.fullscreenElement) document.exitFullscreen(); else if (el) el.requestFullscreen(); } }
       ],
       filters: ['All', 'Vehicles', 'Shipments', 'Delayed', 'Routes'].map(label => ({
         label,

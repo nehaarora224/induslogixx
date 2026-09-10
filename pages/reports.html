@@ -207,7 +207,7 @@
         </div>
       </section>
 
-      <section style="display: flex; flex-direction: column; gap: 12px;">
+      <section id="trend-section" style="display: flex; flex-direction: column; gap: 12px;">
         <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding-bottom: 9px; border-bottom: 1px solid var(--color-divider);">
           <div style="display: flex; flex-direction: column; gap: 4px;">
             <h2 style="margin: 0; font-size: 21px;">On-time delivery performance</h2>
@@ -285,7 +285,7 @@
         </div>
       </section>
 
-      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 26px;">
+      <section id="delivery-section" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 26px;">
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--color-divider);">
             <h2 style="margin: 0; font-size: 19px;">Delivery performance</h2>
@@ -543,9 +543,9 @@ class Component extends DCLogic {
     const openExceptions = IndusStore.getExceptions().filter(e => e.status !== 'Resolved');
 
     const kpis = [
-      { label: 'On-time delivery', value: counts.onTimePct + '%', delta: scale >= 1 ? '+1.8%' : '—', signal: C.green, good: true, icon: ICONS.check, onClick: () => {} },
+      { label: 'On-time delivery', value: counts.onTimePct + '%', delta: scale >= 1 ? '+1.8%' : '—', signal: C.green, good: true, icon: ICONS.check, onClick: () => document.getElementById('trend-section').scrollIntoView({ behavior: 'smooth', block: 'start' }) },
       { label: 'Total deliveries', value: String(scaled(counts.total)), delta: '+12.4%', signal: C.blue, good: true, icon: ICONS.box, onClick: () => window.location.href = 'shipments.html' },
-      { label: 'Avg. delivery time', value: '2h 18m', delta: '-8 min', signal: C.blue, good: true, icon: ICONS.clock, onClick: () => {} },
+      { label: 'Avg. delivery time', value: '2h 18m', delta: '-8 min', signal: C.blue, good: true, icon: ICONS.clock, onClick: () => document.getElementById('delivery-section').scrollIntoView({ behavior: 'smooth', block: 'start' }) },
       { label: 'Delivery exceptions', value: String(scaled(openExceptions.length || 12)), delta: '-3', signal: C.mustard, good: true, icon: ICONS.alert, onClick: () => window.location.href = 'exceptions.html' },
       { label: 'Delayed deliveries', value: String(scaled(counts.delayed)), delta: '+2', signal: C.red, good: false, icon: ICONS.late, emphasis: true, onClick: () => window.location.href = 'shipments.html?status=Delayed' }
     ].map(k => ({
@@ -667,7 +667,7 @@ class Component extends DCLogic {
     }));
 
     const insights = [
-      { kicker: 'On-time delivery', body: 'Improved by 1.8% over the previous period — morning dispatch slots are holding.', action: 'Open trend', signal: C.green, icon: ICONS.trend, onClick: () => {} },
+      { kicker: 'On-time delivery', body: 'Improved by 1.8% over the previous period — morning dispatch slots are holding.', action: 'Open trend', signal: C.green, icon: ICONS.trend, onClick: () => document.getElementById('trend-section').scrollIntoView({ behavior: 'smooth', block: 'start' }) },
       { kicker: 'Delays', body: 'Most delays occurred between 4 PM and 7 PM. Evening windows are the constraint.', action: 'View delayed', signal: C.red, icon: ICONS.late, onClick: () => window.location.href = 'shipments.html?status=Delayed' },
       { kicker: 'Location', body: 'Delhi NCR recorded the highest number of delivery exceptions this period.', action: 'Inspect routes', signal: C.mustard, icon: ICONS.pin, onClick: () => window.location.href = 'exceptions.html' },
       { kicker: 'Fleet', body: 'Vehicle utilization increased 6% this week; 32 vehicles remain available.', action: 'Plan capacity', signal: C.blue, icon: ICONS.truck, onClick: () => window.location.href = 'vehicles.html' }
