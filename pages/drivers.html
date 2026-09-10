@@ -317,14 +317,14 @@
                       </button>
                       <sc-if value="{{ r.menuOpen }}" hint-placeholder-val="{{ false }}">
                         <div style="position: absolute; right: 14px; top: 40px; z-index: 5; min-width: 196px; display: flex; flex-direction: column; text-align: left; background: #ffffff; border: 1px solid var(--color-neutral-300); box-shadow: var(--shadow-md);">
-                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">View driver</button>
-                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Edit driver</button>
-                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Assign vehicle</button>
-                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Assign shipment</button>
-                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">View route</button>
-                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Update availability</button>
-                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">View documents</button>
-                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; text-align: left; border: 0; border-top: 2px solid var(--color-divider); background: none; cursor: pointer; color: #8a3d2e;" style-hover="background: #f6eeec;">Deactivate driver</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onViewRow }}">View driver</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onViewRow }}">Edit driver</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onCloseMenu }}">Assign vehicle</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onCloseMenu }}">Assign shipment</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onTrackRoute }}">View route</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onViewRow }}">Update availability</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onCloseMenu }}">View documents</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; text-align: left; border: 0; border-top: 2px solid var(--color-divider); background: none; cursor: pointer; color: #8a3d2e;" style-hover="background: #f6eeec;" onClick="{{ r.onDeactivate }}">Deactivate driver</button>
                         </div>
                       </sc-if>
                     </td>
@@ -528,7 +528,7 @@
         <button class="btn btn-primary" style="padding: 9px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);">Edit driver</button>
         <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign vehicle</button>
         <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign shipment</button>
-        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-neutral-300);">View route</button>
+        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-neutral-300);" onClick="{{ onDetailViewRoute }}">View route</button>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 24px; padding: 22px 24px 40px;">
@@ -832,7 +832,15 @@ class Component extends DCLogic {
             const on = e.target.checked;
             this.setState({ selected: on ? sel.concat([r.id]) : sel.filter(id => id !== r.id) });
           },
-          onMenu: e => { e.stopPropagation(); this.setState({ menu: st.menu === r.id ? null : r.id }); }
+          onMenu: e => { e.stopPropagation(); this.setState({ menu: st.menu === r.id ? null : r.id }); },
+          onViewRow: e => { e.stopPropagation(); this.setState({ detail: r.id, menu: null }); },
+          onTrackRoute: e => {
+            e.stopPropagation();
+            this.setState({ menu: null });
+            if (r.vehicle && r.vehicle !== 'Unassigned') window.location.href = 'tracking.html?q=' + encodeURIComponent(r.vehicle);
+          },
+          onDeactivate: e => { e.stopPropagation(); IndusStore.updateDriver(r.id, { status: 'Unavailable' }); this.forceUpdate(); this.setState({ menu: null }); },
+          onCloseMenu: e => { e.stopPropagation(); this.setState({ menu: null }); }
         };
       }),
 
@@ -869,6 +877,7 @@ class Component extends DCLogic {
 
       detailOpen: !!dv,
       onCloseDetail: () => this.setState({ detail: null }),
+      onDetailViewRoute: () => { if (dv && dv.vehicle && dv.vehicle !== 'Unassigned') window.location.href = 'tracking.html?q=' + encodeURIComponent(dv.vehicle); },
       availabilityOptions: ['Available', 'On Route', 'Off Duty', 'Unavailable'].map(label => {
         const on = dvStatus === label;
         const s = S[label];

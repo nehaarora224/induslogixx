@@ -239,9 +239,9 @@
                 </div>
               </div>
               <div style="display: flex; border-top: 1px solid var(--color-divider);">
-                <button style="flex: 1; padding: 10px 6px; font: inherit; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; border: 0; border-right: 1px solid var(--color-divider); background: none; color: var(--color-accent-700); cursor: pointer;" style-hover="background: var(--color-accent-100);">Shipment</button>
-                <button style="flex: 1; padding: 10px 6px; font: inherit; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; border: 0; border-right: 1px solid var(--color-divider); background: none; color: var(--color-accent-700); cursor: pointer;" style-hover="background: var(--color-accent-100);">Vehicle</button>
-                <button style="flex: 1; padding: 10px 6px; font: inherit; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; border: 0; background: none; color: var(--color-accent-700); cursor: pointer;" style-hover="background: var(--color-accent-100);">Route</button>
+                <button style="flex: 1; padding: 10px 6px; font: inherit; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; border: 0; border-right: 1px solid var(--color-divider); background: none; color: var(--color-accent-700); cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ sel.onShipmentTab }}">Shipment</button>
+                <button style="flex: 1; padding: 10px 6px; font: inherit; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; border: 0; border-right: 1px solid var(--color-divider); background: none; color: var(--color-accent-700); cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ sel.onVehicleTab }}">Vehicle</button>
+                <button style="flex: 1; padding: 10px 6px; font: inherit; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; border: 0; background: none; color: var(--color-accent-700); cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ sel.onRouteTab }}">Route</button>
               </div>
             </div>
           </sc-if>
@@ -576,7 +576,10 @@ class Component extends DCLogic {
         ...sel,
         progress: sel.progress + '%',
         pillStyle: pill(sel.color),
-        barStyle: 'width: ' + sel.progress + '%; height: 100%; background: ' + sel.color + ';'
+        barStyle: 'width: ' + sel.progress + '%; height: 100%; background: ' + sel.color + ';',
+        onShipmentTab: () => window.location.href = 'shipments.html?q=' + encodeURIComponent(sel.shipment),
+        onVehicleTab: () => window.location.href = 'vehicles.html?q=' + encodeURIComponent(sel.id),
+        onRouteTab: () => this.setState({ zoom: 1 })
       } : null,
       activity: ACTIVITY.slice(0, this.props.activityCount ?? 6).map((a, i) => ({
         ...a,
