@@ -61,7 +61,18 @@
           <span style="white-space: nowrap;">Settings</span>
         </sc-if>
       </button>
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
+            <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onToggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ false }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path></svg>
+        </sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ true }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        </sc-if>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">{{ themeLabel }}</span>
+        </sc-if>
+      </button>
+<button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Help &amp; Support</span>
@@ -96,7 +107,7 @@
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-neutral-400)" stroke-width="1.5"><path d="M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5"></path></svg>
         <div style="font-family: var(--font-heading); font-size: 24px;">Shipment not found</div>
         <div style="font-size: 13.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">This shipment may have been removed, or the link is incorrect.</div>
-        <a href="shipments.html" class="btn btn-secondary" style="margin-top: 8px; padding: 10px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Back to Shipments</a>
+        <a href="shipments.html" class="btn btn-secondary" style="margin-top: 8px; padding: 10px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: var(--color-elevated); border-color: var(--color-accent-300); color: var(--color-accent-700);">Back to Shipments</a>
       </main>
     </sc-if>
 
@@ -209,10 +220,10 @@
               <a href="{{ e.href }}" style="{{ e.style }}">
                 <div style="flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0;">
                   <div style="display: flex; align-items: center; gap: 9px; flex-wrap: wrap;">
-                    <span style="font-size: 14.5px; color: var(--color-text);">{{ e.title }}</span>
+                    <span style="font-size: 14.5px; color: currentColor;">{{ e.title }}</span>
                     <span style="{{ e.tagStyle }}">{{ e.severity }}</span>
                   </div>
-                  <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ e.type }} · {{ e.status }}</span>
+                  <span style="font-size: 12.5px; color: color-mix(in srgb, currentColor 60%, transparent);">{{ e.type }} · {{ e.status }}</span>
                 </div>
                 <span style="font-size: 12px; color: var(--color-accent-700); white-space: nowrap;">Open →</span>
               </a>
@@ -235,7 +246,7 @@
           </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border: 1px solid var(--color-divider); background: #FFFFFF; border-radius: var(--radius-md);">
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border: 1px solid var(--color-divider); background: var(--color-elevated); border-radius: var(--radius-md);">
           <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Update status</span>
           <div class="seg" style="flex-wrap: wrap;">
             <sc-for list="{{ statusOptions }}" as="o" hint-placeholder-count="5">
@@ -244,7 +255,7 @@
           </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border: 1px solid var(--color-divider); background: #FFFFFF; border-radius: var(--radius-md);">
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border: 1px solid var(--color-divider); background: var(--color-elevated); border-radius: var(--radius-md);">
           <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Reassign</span>
           <label style="display: flex; flex-direction: column; gap: 4px;">
             <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Vehicle</span>
@@ -266,7 +277,7 @@
           </label>
         </div>
 
-        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: #a9513f55; color: #8a3d2e;" style-hover="background: #f6eeec;" onClick="{{ onCancelShipment }}">Cancel this shipment</button>
+        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: var(--color-elevated); border-color: #a9513f55; color: #8a3d2e;" style-hover="background: #f6eeec;" onClick="{{ onCancelShipment }}">Cancel this shipment</button>
       </aside>
     </main>
     </sc-if>
@@ -347,7 +358,11 @@ class Component extends DCLogic {
       userRole: IndusStore.getUser().role,
       onProfile: () => window.location.href = 'profile.html',
       onSettings: () => window.location.href = 'settings.html',
-      onHelp: () => window.location.href = 'mailto:support@induslogix.com'
+      onHelp: () => window.location.href = 'mailto:support@induslogix.com',
+      isDark: IndusStore.getTheme() === 'dark',
+      isLight: IndusStore.getTheme() !== 'dark',
+      themeLabel: IndusStore.getTheme() === 'dark' ? 'Light mode' : 'Dark mode',
+      onToggleTheme: () => { IndusStore.toggleTheme(); this.forceUpdate(); },
     };
 
     if (!shipment) {
@@ -409,7 +424,7 @@ class Component extends DCLogic {
           title: e.title, severity: e.severity, type: e.type, status: e.status,
           href: 'exceptions.html?id=' + encodeURIComponent(e.id),
           tagStyle: pill(sv),
-          style: 'display: flex; align-items: center; gap: 14px; padding: 13px 16px; border: 1px solid ' + sv.sig + '33; border-left: 3px solid ' + sv.sig + '; background: ' + sv.tint + '; border-radius: var(--radius-md);'
+          style: 'display: flex; align-items: center; gap: 14px; padding: 13px 16px; color: #1d1f20; border: 1px solid ' + sv.sig + '33; border-left: 3px solid ' + sv.sig + '; background: ' + sv.tint + '; border-radius: var(--radius-md);'
         };
       }),
       summary: [

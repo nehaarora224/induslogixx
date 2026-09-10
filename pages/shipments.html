@@ -60,7 +60,18 @@
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Settings</span>
         </sc-if>
+      </button>      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onToggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ false }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path></svg>
+        </sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ true }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        </sc-if>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">{{ themeLabel }}</span>
+        </sc-if>
       </button>
+
       <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);" onClick="{{ onHelp }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
@@ -115,9 +126,9 @@
       <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
         <div style="position: relative; display: flex; align-items: center; flex: 1 1 340px; min-width: 260px;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="color-mix(in srgb, var(--color-text) 45%, transparent)" stroke-width="1.5" style="position: absolute; left: 11px;"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
-          <input class="input" type="search" placeholder="Search shipment ID, customer, destination, driver..." style="width: 100%; height: 40px; padding-left: 34px; font-size: 13.5px; background: #ffffff; border-color: var(--color-neutral-300);" style-focus="border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-100);" onInput="{{ onSearch }}">
+          <input class="input" type="search" placeholder="Search shipment ID, customer, destination, driver..." style="width: 100%; height: 40px; padding-left: 34px; font-size: 13.5px; background: var(--color-elevated); border-color: var(--color-neutral-300);" style-focus="border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-100);" onInput="{{ onSearch }}">
         </div>
-        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onStatusSelect }}" value="{{ statusValue }}">
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: var(--color-elevated); border-color: var(--color-neutral-300);" onChange="{{ onStatusSelect }}" value="{{ statusValue }}">
           <option value="All">Status: all</option>
           <option value="Pending">Pending</option>
           <option value="In Transit">In Transit</option>
@@ -125,13 +136,13 @@
           <option value="Delivered">Delivered</option>
           <option value="Delayed">Delayed</option>
         </select>
-        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onDate }}" value="{{ dateValue }}">
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: var(--color-elevated); border-color: var(--color-neutral-300);" onChange="{{ onDate }}" value="{{ dateValue }}">
           <option value="All">Date: all</option>
           <option value="Today">Today</option>
           <option value="Yesterday">Yesterday</option>
           <option value="Last 7 days">Last 7 days</option>
         </select>
-        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onCustomer }}" value="{{ customerValue }}">
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: var(--color-elevated); border-color: var(--color-neutral-300);" onChange="{{ onCustomer }}" value="{{ customerValue }}">
           <option value="All">Customer: all</option>
           <option value="ABC Retail">ABC Retail</option>
           <option value="XYZ Stores">XYZ Stores</option>
@@ -139,7 +150,7 @@
           <option value="Delhi Wholesale">Delhi Wholesale</option>
           <option value="Prime Distributors">Prime Distributors</option>
         </select>
-        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onDriver }}" value="{{ driverValue }}">
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: var(--color-elevated); border-color: var(--color-neutral-300);" onChange="{{ onDriver }}" value="{{ driverValue }}">
           <option value="All">Driver: all</option>
           <option value="Rahul Mehta">Rahul Mehta</option>
           <option value="Amit Kumar">Amit Kumar</option>
@@ -147,7 +158,7 @@
           <option value="Vikram Singh">Vikram Singh</option>
           <option value="Arjun Sharma">Arjun Sharma</option>
         </select>
-        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onVehicle }}" value="{{ vehicleValue }}">
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: var(--color-elevated); border-color: var(--color-neutral-300);" onChange="{{ onVehicle }}" value="{{ vehicleValue }}">
           <option value="All">Vehicle: all</option>
           <option value="TRK-024">TRK-024</option>
           <option value="TRK-018">TRK-018</option>
@@ -174,19 +185,19 @@
         <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; background: var(--color-accent-100); border: 1px solid var(--color-accent-300); border-radius: var(--radius-md); animation: il-rise 0.25s ease both;">
           <span style="font-size: 13.5px; color: var(--color-accent-800);">{{ selectionLabel }}</span>
           <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
-            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkVehicle }}" value="">
+            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: var(--color-elevated); border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkVehicle }}" value="">
               <option value="" disabled>Assign vehicle…</option>
               <sc-for list="{{ vehicleOptions }}" as="o" hint-placeholder-count="5">
                 <option value="{{ o.value }}">{{ o.label }}</option>
               </sc-for>
             </select>
-            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkDriver }}" value="">
+            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: var(--color-elevated); border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkDriver }}" value="">
               <option value="" disabled>Assign driver…</option>
               <sc-for list="{{ driverOptions }}" as="o" hint-placeholder-count="5">
                 <option value="{{ o.value }}">{{ o.label }}</option>
               </sc-for>
             </select>
-            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkStatus }}" value="">
+            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: var(--color-elevated); border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkStatus }}" value="">
               <option value="" disabled>Change status…</option>
               <option value="Pending">Pending</option>
               <option value="In Transit">In Transit</option>
@@ -195,13 +206,13 @@
               <option value="Delayed">Delayed</option>
               <option value="Cancelled">Cancelled</option>
             </select>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onBulkExport }}">Export</button>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: var(--color-elevated); border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onBulkExport }}">Export</button>
             <button class="btn btn-ghost" style="padding: 8px 10px; font-size: 12.5px; color: var(--color-accent-700);" onClick="{{ onClearSelection }}">Clear selection</button>
           </div>
         </div>
       </sc-if>
 
-      <section class="blueprint" style="padding: 0; background: #ffffff; min-width: 0;">
+      <section class="blueprint" style="padding: 0; background: var(--color-elevated); min-width: 0;">
         <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 16px; border-bottom: 1px solid var(--color-divider);">
           <span style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ resultLabel }}</span>
@@ -210,7 +221,7 @@
 
         <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
           <div style="overflow-x: auto;">
-            <table class="table" style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13.5px; background: #ffffff;">
+            <table class="table" style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13.5px; background: var(--color-elevated);">
               <thead>
                 <tr>
                   <th style="width: 42px; padding: 12px 0 12px 16px;">
@@ -221,8 +232,8 @@
                   <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">ETA</th>
                   <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Customer</th>
                   <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Vehicle · Driver</th>
-                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent); position: sticky; right: 86px; background: #ffffff; border-left: 1px solid var(--color-neutral-200);">Status</th>
-                  <th style="text-align: right; padding: 12px 16px 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent); position: sticky; right: 0; background: #ffffff;">Actions</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent); position: sticky; right: 86px; background: var(--color-elevated); border-left: 1px solid var(--color-neutral-200);">Status</th>
+                  <th style="text-align: right; padding: 12px 16px 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent); position: sticky; right: 0; background: var(--color-elevated);">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -246,11 +257,11 @@
                       </span>
                     </td>
                     <td style="{{ r.actionCellStyle }}">
-                      <button style="display: inline-grid; place-items: center; width: 30px; height: 30px; border: 1px solid transparent; background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 55%, transparent); border-radius: var(--radius-md);" style-hover="border-color: var(--color-neutral-300); background: #ffffff;" onClick="{{ r.onMenu }}" aria-label="Row actions">
+                      <button style="display: inline-grid; place-items: center; width: 30px; height: 30px; border: 1px solid transparent; background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 55%, transparent); border-radius: var(--radius-md);" style-hover="border-color: var(--color-neutral-300); background: var(--color-elevated);" onClick="{{ r.onMenu }}" aria-label="Row actions">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="12" cy="19" r="1.6"></circle></svg>
                       </button>
                       <sc-if value="{{ r.menuOpen }}" hint-placeholder-val="{{ false }}">
-                        <div style="position: absolute; right: 14px; top: 40px; z-index: 5; min-width: 184px; display: flex; flex-direction: column; text-align: left; background: #ffffff; border: 1px solid var(--color-neutral-300); box-shadow: var(--shadow-md);">
+                        <div style="position: absolute; right: 14px; top: 40px; z-index: 5; min-width: 184px; display: flex; flex-direction: column; text-align: left; background: var(--color-elevated); border: 1px solid var(--color-neutral-300); box-shadow: var(--shadow-md);">
                           <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onViewDetails }}">View details</button>
                           <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onEdit }}">Edit shipment</button>
                           <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);" onClick="{{ r.onTrack }}">Track shipment</button>
@@ -270,7 +281,7 @@
               <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent); font-variant-numeric: tabular-nums;">{{ pageLabel }}</span>
               <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">
                 <span>Rows per page</span>
-                <select class="input" style="width: auto; height: 32px; padding: 2px 8px; font-size: 12.5px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onPerPage }}" value="{{ perPageValue }}">
+                <select class="input" style="width: auto; height: 32px; padding: 2px 8px; font-size: 12.5px; background: var(--color-elevated); border-color: var(--color-neutral-300);" onChange="{{ onPerPage }}" value="{{ perPageValue }}">
                   <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
@@ -293,7 +304,7 @@
             <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-neutral-400)" stroke-width="1.5"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
             <div style="font-family: var(--font-heading); font-size: 22px;">No shipments found</div>
             <div style="font-size: 13.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Try adjusting your search or filters.</div>
-            <button class="btn btn-secondary" style="margin-top: 6px; padding: 10px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onClear }}">Clear filters</button>
+            <button class="btn btn-secondary" style="margin-top: 6px; padding: 10px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: var(--color-elevated); border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onClear }}">Clear filters</button>
           </div>
         </sc-if>
       </section>
@@ -352,7 +363,7 @@ class Component extends DCLogic {
           (active ? ' background: var(--color-accent); color: #ffffff;'
                   : ' background: none; color: color-mix(in srgb, var(--color-text) 78%, transparent);'),
         badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
-          (active ? ' background: #ffffff; color: var(--color-accent-800);' : ' background: #a9513f; color: #ffffff;'),
+          (active ? ' background: var(--color-elevated); color: var(--color-accent-800);' : ' background: #a9513f; color: #ffffff;'),
         onClick: () => {
           const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'exceptions.html', Reports: 'reports.html' }[label];
           if (url && label !== st.nav) window.location.href = url; else this.setState({ nav: label });
@@ -388,7 +399,7 @@ class Component extends DCLogic {
       label, onClick,
       style: 'min-width: 32px; height: 32px; padding: 0 9px; font: inherit; font-size: 12.5px; font-variant-numeric: tabular-nums; cursor: pointer; border: 1px solid ' +
         (active ? 'var(--color-accent)' : 'var(--color-neutral-300)') + '; border-radius: var(--radius-md);' +
-        (active ? ' background: var(--color-accent); color: #ffffff;' : ' background: #ffffff; color: inherit;')
+        (active ? ' background: var(--color-accent); color: #ffffff;' : ' background: var(--color-elevated); color: inherit;')
     });
     const nums = [];
     [1, 2, 3].filter(n => n <= pageCount).forEach(n => nums.push(pageBtn(String(n), n === cur, () => this.setState({ page: n, menu: null }))));
@@ -396,7 +407,7 @@ class Component extends DCLogic {
     if (pageCount > 3) nums.push(pageBtn(String(pageCount), cur === pageCount, () => this.setState({ page: pageCount, menu: null })));
 
     const arrow = on => 'min-width: 32px; height: 32px; font: inherit; font-size: 14px; cursor: ' + (on ? 'pointer' : 'not-allowed') +
-      '; border: 1px solid var(--color-neutral-300); background: #ffffff; border-radius: var(--radius-md); color: inherit; opacity: ' + (on ? '1' : '0.45') + ';';
+      '; border: 1px solid var(--color-neutral-300); background: var(--color-elevated); border-radius: var(--radius-md); color: inherit; opacity: ' + (on ? '1' : '0.45') + ';';
 
     const ids = rowsAll.map(r => r.id);
     const sel = st.selected.filter(id => ids.includes(id));
@@ -406,7 +417,7 @@ class Component extends DCLogic {
       hasChips: chips.length > 0,
       shellStyle: 'display: grid; grid-template-columns: ' + (collapsed ? '68px' : '244px') + ' minmax(0, 1fr); min-height: 100vh;',
       asideStyle: 'display: flex; flex-direction: column; gap: 22px; padding: 20px ' + (collapsed ? '10px' : '16px') +
-        '; background: #ffffff; border-right: 1px solid var(--color-divider); position: sticky; top: 0; align-self: start; height: 100vh; box-sizing: border-box; overflow-y: auto; overflow-x: hidden;',
+        '; background: var(--color-elevated); border-right: 1px solid var(--color-divider); position: sticky; top: 0; align-self: start; height: 100vh; box-sizing: border-box; overflow-y: auto; overflow-x: hidden;',
       brandRowStyle: 'display: flex; align-items: center; gap: 8px;' + (collapsed ? ' flex-direction: column;' : ' justify-content: space-between;'),
       brandLinkStyle: 'display: flex; align-items: center; gap: 10px; color: inherit;' + (collapsed ? '' : ' padding: 4px 8px;'),
       toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' +
@@ -419,6 +430,10 @@ class Component extends DCLogic {
       onProfile: () => window.location.href = 'profile.html',
       onSettings: () => window.location.href = 'settings.html',
       onHelp: () => window.location.href = 'mailto:support@induslogix.com',
+      isDark: IndusStore.getTheme() === 'dark',
+      isLight: IndusStore.getTheme() !== 'dark',
+      themeLabel: IndusStore.getTheme() === 'dark' ? 'Light mode' : 'Dark mode',
+      onToggleTheme: () => { IndusStore.toggleTheme(); this.forceUpdate(); },
 
       tabs: ['All', 'Pending', 'In Transit', 'Out for Delivery', 'Delivered', 'Delayed'].map(label => {
         const active = st.status === label;

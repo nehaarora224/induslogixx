@@ -63,7 +63,18 @@
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Settings</span>
         </sc-if>
+      </button>      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onToggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ false }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path></svg>
+        </sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ true }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        </sc-if>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">{{ themeLabel }}</span>
+        </sc-if>
       </button>
+
       <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
@@ -188,9 +199,9 @@
                   <span style="font-family: var(--font-heading); font-size: 19px; line-height: 1.1;">{{ a.title }}</span>
                   <span style="{{ a.tagStyle }}">{{ a.severity }}</span>
                 </div>
-                <span style="font-size: 13.5px; line-height: 1.45; color: color-mix(in srgb, var(--color-text) 65%, transparent);">{{ a.detail }}</span>
+                <span style="font-size: 13.5px; line-height: 1.45; color: color-mix(in srgb, #1d1f20 65%, transparent);">{{ a.detail }}</span>
               </div>
-              <button class="btn btn-secondary" style="align-self: center; padding: 9px 14px; font-size: 12.5px; white-space: nowrap; background: #FFFFFF; border-color: var(--color-accent-300); color: var(--color-accent-700);" style-hover="background: var(--color-accent-100);" onClick="{{ a.onClick }}">{{ a.action }} →</button>
+              <button class="btn btn-secondary" style="align-self: center; padding: 9px 14px; font-size: 12.5px; white-space: nowrap; background: var(--color-elevated); border-color: var(--color-accent-300); color: var(--color-accent-700);" style-hover="background: var(--color-accent-100);" onClick="{{ a.onClick }}">{{ a.action }} →</button>
             </div>
           </sc-for>
         </div>
@@ -340,7 +351,7 @@ const C = {
   pending: '#b0842f',
   muted: 'color-mix(in srgb, var(--color-text) 65%, transparent)'
 };
-const TINT = { blue: 'color-mix(in srgb, var(--color-accent-100) 70%, #ffffff)', green: '#edf3ee', amber: '#f7f3e8', red: '#f6eeec' };
+const TINT = { blue: 'color-mix(in srgb, var(--color-accent-100) 70%, var(--color-elevated))', green: '#edf3ee', amber: '#f7f3e8', red: '#f6eeec' };
 const INK = { 'var(--color-accent)': 'var(--color-accent-700)', '#b0842f': '#8a6423', '#4f7a5c': '#3b5f46', '#a9513f': '#8a3d2e' };
 const ink = c => INK[c] || c;
 const pill = c => 'display: inline-flex; align-items: center; padding: 3px 8px; font-size: 11.5px; letter-spacing: 0.02em; border: 1px solid ' + ink(c) + '; color: ' + ink(c) + '; border-radius: 2px;';
@@ -403,7 +414,7 @@ class Component extends DCLogic {
       ...a,
       tagStyle: pill(a.color),
       cardStyle: 'display: flex; align-items: center; gap: 16px; padding: 16px 18px; background: ' + a.tint +
-        '; border: 1px solid ' + a.color + '33; border-left: 4px solid ' + a.color + '; border-radius: var(--radius-md);',
+        '; color: #1d1f20; border: 1px solid ' + a.color + '33; border-left: 4px solid ' + a.color + '; border-radius: var(--radius-md);',
       countStyle: 'flex: none; font-family: var(--font-heading); font-size: 34px; line-height: 1; font-variant-numeric: tabular-nums; color: ' + ink(a.color) + ';'
     }));
     const shownAlerts = this.state.allAlerts ? alerts : alerts.slice(0, 2);
@@ -486,6 +497,10 @@ class Component extends DCLogic {
       onProfile: () => window.location.href = 'profile.html',
       onSettings: () => window.location.href = 'settings.html',
       onHelp: () => window.location.href = 'mailto:support@induslogix.com',
+      isDark: IndusStore.getTheme() === 'dark',
+      isLight: IndusStore.getTheme() !== 'dark',
+      themeLabel: IndusStore.getTheme() === 'dark' ? 'Light mode' : 'Dark mode',
+      onToggleTheme: () => { IndusStore.toggleTheme(); this.forceUpdate(); },
       onAssignVehicle: () => window.location.href = 'vehicles.html',
       onPlanRoute: () => window.location.href = 'tracking.html'
     };

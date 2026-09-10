@@ -62,7 +62,18 @@
           <span style="white-space: nowrap;">Settings</span>
         </sc-if>
       </button>
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
+            <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onToggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ false }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path></svg>
+        </sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ true }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        </sc-if>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">{{ themeLabel }}</span>
+        </sc-if>
+      </button>
+<button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Help &amp; Support</span>
@@ -104,7 +115,7 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{ rangeOpen }}" hint-placeholder-val="{{ false }}">
-            <div style="position: absolute; top: calc(100% + 6px); right: 0; z-index: 20; min-width: 176px; background: #FFFFFF; border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
+            <div style="position: absolute; top: calc(100% + 6px); right: 0; z-index: 20; min-width: 176px; background: var(--color-elevated); border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
               <sc-for list="{{ rangeOptions }}" as="r" hint-placeholder-count="5">
                 <button style="{{ r.style }}" style-hover="background: var(--color-accent-100);" onClick="{{ r.onClick }}">{{ r.label }}</button>
               </sc-for>
@@ -117,7 +128,7 @@
             <span>Export report</span>
           </button>
           <sc-if value="{{ exportOpen }}" hint-placeholder-val="{{ false }}">
-            <div style="position: absolute; top: calc(100% + 6px); right: 0; z-index: 20; min-width: 164px; background: #FFFFFF; border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
+            <div style="position: absolute; top: calc(100% + 6px); right: 0; z-index: 20; min-width: 164px; background: var(--color-elevated); border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
               <sc-for list="{{ exportOptions }}" as="e" hint-placeholder-count="3">
                 <button style="{{ e.style }}" style-hover="background: var(--color-accent-100);" onClick="{{ e.onClick }}">{{ e.label }}</button>
               </sc-for>
@@ -127,7 +138,7 @@
       </div>
     </header>
 
-    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 11px 32px; border-bottom: 1px solid var(--color-divider); background: #FFFFFF;">
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 11px 32px; border-bottom: 1px solid var(--color-divider); background: var(--color-elevated);">
       <sc-for list="{{ filterControls }}" as="f" hint-placeholder-count="5">
         <div style="position: relative;">
           <button style="{{ f.style }}" style-hover="background: var(--color-accent-100);" onClick="{{ f.onClick }}">
@@ -135,7 +146,7 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"></path></svg>
           </button>
           <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
-            <div style="position: absolute; top: calc(100% + 8px); left: 0; z-index: 20; min-width: 182px; background: #FFFFFF; border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
+            <div style="position: absolute; top: calc(100% + 8px); left: 0; z-index: 20; min-width: 182px; background: var(--color-elevated); border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); overflow: hidden;">
               <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="4">
                 <button style="{{ o.style }}" style-hover="background: var(--color-accent-100);" onClick="{{ o.onClick }}">{{ o.label }}</button>
               </sc-for>
@@ -171,7 +182,7 @@
             <span style="{{ k.railStyle }}"></span>
             <span style="display: flex; align-items: center; gap: 8px;">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{ k.signal }}" stroke-width="1.5" style="flex: none;"><path d="{{ k.icon }}"></path></svg>
-              <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 58%, transparent); white-space: nowrap;">{{ k.label }}</span>
+              <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, currentColor 58%, transparent); white-space: nowrap;">{{ k.label }}</span>
             </span>
             <span style="{{ k.valueStyle }}">{{ k.value }}</span>
             <span style="display: flex; align-items: baseline; gap: 5px;">
@@ -199,7 +210,7 @@
               </div>
               <div style="display: flex; align-items: baseline; gap: 9px;">
                 <span style="font-family: var(--font-heading); font-size: 38px; line-height: 0.95; font-variant-numeric: tabular-nums; color: {{ a.text }};">{{ a.count }}</span>
-                <span style="font-size: 12.5px; line-height: 1.35; color: color-mix(in srgb, var(--color-text) 65%, transparent);">{{ a.note }}</span>
+                <span style="font-size: 12.5px; line-height: 1.35; color: color-mix(in srgb, currentColor 65%, transparent);">{{ a.note }}</span>
               </div>
               <button style="align-self: flex-start; margin-top: 2px; padding: 0; border: 0; background: none; font: inherit; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: {{ a.text }}; cursor: pointer; border-bottom: 1px solid {{ a.signal }};" onClick="{{ a.onClick }}">{{ a.action }} →</button>
             </div>
@@ -551,7 +562,7 @@ class Component extends DCLogic {
     ].map(k => ({
       ...k,
       style: 'position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; padding: 15px 16px 15px; font: inherit; cursor: pointer; text-align: left; border-radius: var(--radius-md); border: 1px solid ' +
-        (k.emphasis ? INK[C.red] + '40' : 'var(--color-divider)') + '; background: ' + (k.emphasis ? TINT[C.red] : '#FFFFFF') + ';',
+        (k.emphasis ? INK[C.red] + '40' : 'var(--color-divider)') + '; background: ' + (k.emphasis ? TINT[C.red] : 'var(--color-elevated)') + ';' + (k.emphasis ? ' color: ' + INK[C.red] + ';' : ''),
       railStyle: 'position: absolute; top: -1px; left: -1px; width: calc(100% + 2px); height: 3px; background: ' + k.signal + ';',
       valueStyle: 'font-family: var(--font-heading); font-size: 34px; line-height: 0.95; font-variant-numeric: tabular-nums;' + (k.emphasis ? ' color: ' + INK[C.red] + ';' : ''),
       deltaStyle: 'font-size: 13px; font-variant-numeric: tabular-nums; color: ' + (k.good ? INK[C.green] : INK[C.red]) + ';'
@@ -565,7 +576,7 @@ class Component extends DCLogic {
     ].map(a => ({
       ...a,
       text: INK[a.signal],
-      style: 'display: flex; flex-direction: column; gap: 9px; padding: 14px 16px 15px; border: 1px solid ' + INK[a.signal] + '33; border-left: 3px solid ' + a.signal + '; background: ' + TINT[a.signal] + '; border-radius: var(--radius-md);'
+      style: 'display: flex; flex-direction: column; gap: 9px; padding: 14px 16px 15px; color: #1d1f20; border: 1px solid ' + INK[a.signal] + '33; border-left: 3px solid ' + a.signal + '; background: ' + TINT[a.signal] + '; border-radius: var(--radius-md);'
     }));
 
     const ax = {};
@@ -606,7 +617,7 @@ class Component extends DCLogic {
       prev: h.p + '%',
       delta: (h.v - h.p >= 0 ? '+' : '') + (h.v - h.p) + '%',
       deltaColor: h.v - h.p >= 0 ? INK[C.green] : INK[C.red],
-      style: 'position: absolute; z-index: 5; pointer-events: none; min-width: 196px; padding: 12px 14px; background: #FFFFFF; border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); top: 4px; ' +
+      style: 'position: absolute; z-index: 5; pointer-events: none; min-width: 196px; padding: 12px 14px; background: var(--color-elevated); border: 1px solid var(--color-divider); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); top: 4px; ' +
         (tipLeft > 60 ? 'right: ' + (100 - tipLeft + 2).toFixed(1) + '%;' : 'left: ' + (tipLeft + 2).toFixed(1) + '%;')
     } : null;
 
@@ -674,7 +685,7 @@ class Component extends DCLogic {
     ].map(n => ({
       ...n,
       text: INK[n.signal],
-      style: 'display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border: 1px solid var(--color-divider); border-top: 2px solid ' + n.signal + '; background: #FFFFFF; border-radius: var(--radius-md);'
+      style: 'display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border: 1px solid var(--color-divider); border-top: 2px solid ' + n.signal + '; background: var(--color-elevated); border-radius: var(--radius-md);'
     }));
 
     const reports = [
@@ -754,7 +765,11 @@ class Component extends DCLogic {
       userRole: IndusStore.getUser().role,
       onProfile: () => window.location.href = 'profile.html',
       onSettings: () => window.location.href = 'settings.html',
-      onHelp: () => window.location.href = 'mailto:support@induslogix.com'
+      onHelp: () => window.location.href = 'mailto:support@induslogix.com',
+      isDark: IndusStore.getTheme() === 'dark',
+      isLight: IndusStore.getTheme() !== 'dark',
+      themeLabel: IndusStore.getTheme() === 'dark' ? 'Light mode' : 'Dark mode',
+      onToggleTheme: () => { IndusStore.toggleTheme(); this.forceUpdate(); },
     };
   }
 }

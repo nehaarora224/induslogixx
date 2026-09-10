@@ -9,8 +9,26 @@
   "use strict";
 
   var KEY = "induslogix:v1";
+  var THEME_KEY = "induslogix:theme";
 
   function clone(x) { return JSON.parse(JSON.stringify(x)); }
+
+  // ---- Theme --------------------------------------------------------------
+  // Applied synchronously here (this script runs in <head>, before the body
+  // paints) so the saved theme takes effect immediately with no flash, and
+  // persisted to its own localStorage key so it survives navigation/refresh
+  // independently of the app's data.
+  function getTheme() {
+    try { return localStorage.getItem(THEME_KEY) || "light"; } catch (e) { return "light"; }
+  }
+  function applyTheme(t) {
+    try { document.documentElement.setAttribute("data-theme", t); } catch (e) { /* no-op */ }
+  }
+  function setTheme(t) {
+    try { localStorage.setItem(THEME_KEY, t); } catch (e) { /* storage unavailable */ }
+    applyTheme(t);
+  }
+  applyTheme(getTheme());
 
   function seedData() {
     return {
@@ -318,6 +336,15 @@
     },
 
     exportCSV: downloadCSV,
+
+    // ---- Theme --------------------------------------------------------------
+    getTheme: getTheme,
+    setTheme: setTheme,
+    toggleTheme: function () {
+      var next = getTheme() === "dark" ? "light" : "dark";
+      setTheme(next);
+      return next;
+    },
 
     reset: function () { state = seedData(); commit(); }
   };

@@ -7,7 +7,8 @@
   --color-text: #1d1f20;
   --color-accent: #5980a6;
   --color-accent-2: #728fab;
-  --color-divider: color-mix(in srgb, #1d1f20 16%, transparent);
+  --color-divider: color-mix(in srgb, var(--color-text) 16%, transparent);
+  --color-elevated: #ffffff;
 
   /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
      same step of any role matches the others in visual value. */
@@ -63,10 +64,54 @@
   --shadow-lg: 0 12px 32px color-mix(in srgb, #2b2b2d 22%, transparent);
 }
 
+/* Dark theme — same tokens, same components; only the values change. The
+   ramp steps are simply reversed (100 <-> 900 etc.) so any existing
+   component rule that pairs a "100" background with an "800" text color
+   stays legible without touching a single component rule. */
+[data-theme="dark"] {
+  --color-bg: #1a1b1d;
+  --color-surface: #232528;
+  --color-elevated: #202225;
+  --color-text: #e8e9ea;
+  --color-accent: #8fb4d9;
+  --color-accent-2: #a3bcd6;
+
+  --color-neutral-100: #2b2b2d;
+  --color-neutral-200: #424244;
+  --color-neutral-300: #5d5d60;
+  --color-neutral-400: #7a7a7d;
+  --color-neutral-500: #98989b;
+  --color-neutral-600: #b7b7ba;
+  --color-neutral-700: #d4d4d7;
+  --color-neutral-800: #e7e7ea;
+  --color-neutral-900: #f5f5f8;
+
+  --color-accent-100: #1d2d3d;
+  --color-accent-200: #2c455d;
+  --color-accent-300: #416180;
+  --color-accent-400: #597ea3;
+  --color-accent-500: #749dc4;
+  --color-accent-600: #94bce3;
+  --color-accent-700: #b5d9fd;
+  --color-accent-800: #d6ebff;
+  --color-accent-900: #eef6ff;
+
+  --color-accent-2-100: #1f2d3a;
+  --color-accent-2-200: #314457;
+  --color-accent-2-300: #486077;
+  --color-accent-2-400: #627d98;
+  --color-accent-2-500: #7e9cb8;
+  --color-accent-2-600: #9ebbd8;
+  --color-accent-2-700: #bdd8f2;
+  --color-accent-2-800: #d6ebff;
+  --color-accent-2-900: #eef6ff;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
+  transition: background-color 200ms ease, color 200ms ease;
 }
 h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); }
 
