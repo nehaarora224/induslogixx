@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/store.js"></script>
 <script src="../js/support.js"></script>
 </head>
 <body>
@@ -55,13 +56,13 @@
     <div style="height: 1px; background: var(--color-divider); margin: 0 8px;"></div>
 
     <nav style="display: flex; flex-direction: column; gap: 2px;">
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onSettings }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Settings</span>
         </sc-if>
       </button>
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Help &amp; Support</span>
@@ -74,18 +75,18 @@
         <div class="blueprint" style="padding: 12px; background: transparent;">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin-bottom: 6px;">Workspace</div>
-          <div style="font-size: 13.5px; line-height: 1.35;">ABC Manufacturing Pvt. Ltd.</div>
+          <div style="font-size: 13.5px; line-height: 1.35;">{{ workspaceName }}</div>
         </div>
       </sc-if>
-      <div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px;">
-        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: var(--color-bg); font-size: 12.5px; letter-spacing: 0.04em;">NA</div>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 4px 8px; border: 0; background: none; cursor: pointer; font: inherit; text-align: left; width: 100%; border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onProfile }}">
+        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: var(--color-bg); font-size: 12.5px; letter-spacing: 0.04em;">{{ userInitials }}</div>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <div style="display: flex; flex-direction: column; min-width: 0;">
-            <span style="font-size: 13.5px;">Niharika A.</span>
-            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Logistics Manager</span>
+            <span style="font-size: 13.5px; color: var(--color-text);">{{ userName }}</span>
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ userRole }}</span>
           </div>
         </sc-if>
-      </div>
+      </button>
     </div>
   </aside>
 
@@ -516,7 +517,7 @@ class Component extends DCLogic {
       ['Vehicles', ICONS.truck],
       ['Drivers', ICONS.users],
       ['Tracking', ICONS.pin],
-      ['Exceptions', ICONS.alert, '12'],
+      ['Exceptions', ICONS.alert, String(IndusStore.getExceptions().filter(e => e.status !== 'Resolved').length)],
       ['Reports', 'M5 20V9m7 11V4m7 16v-7']
     ];
     const nav = navItems.map(([label, icon, badge]) => {
@@ -529,38 +530,42 @@ class Component extends DCLogic {
         badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
           (active ? ' background: var(--color-bg); color: var(--color-accent-800);' : ' background: ' + C.red + '; color: #fff;'),
         onClick: () => {
-          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'dashboard.html', Reports: 'reports.html' }[label];
+          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'exceptions.html', Reports: 'reports.html' }[label];
           if (url && label !== this.state.nav) window.location.href = url; else this.setState({ nav: label });
         }
       };
     });
 
+    const RANGE_SCALE = { 'Today': 1 / 7, 'Last 7 days': 1, 'Last 30 days': 4.2, 'Last 3 months': 12.8, 'Custom range': 1 };
+    const scale = RANGE_SCALE[range] ?? 1;
+    const scaled = n => Math.max(0, Math.round(n * scale));
+    const counts = IndusStore.counts();
+    const openExceptions = IndusStore.getExceptions().filter(e => e.status !== 'Resolved');
+
     const kpis = [
-      { label: 'On-time delivery', value: '91.4%', delta: '+1.8%', signal: C.green, good: true, icon: ICONS.check },
-      { label: 'Total deliveries', value: '142', delta: '+12.4%', signal: C.blue, good: true, icon: ICONS.box },
-      { label: 'Avg. delivery time', value: '2h 18m', delta: '-8 min', signal: C.blue, good: true, icon: ICONS.clock },
-      { label: 'Delivery exceptions', value: '12', delta: '-3', signal: C.mustard, good: true, icon: ICONS.alert },
-      { label: 'Delayed deliveries', value: '6', delta: '+2', signal: C.red, good: false, icon: ICONS.late, emphasis: true }
+      { label: 'On-time delivery', value: counts.onTimePct + '%', delta: scale >= 1 ? '+1.8%' : '—', signal: C.green, good: true, icon: ICONS.check, onClick: () => {} },
+      { label: 'Total deliveries', value: String(scaled(counts.total)), delta: '+12.4%', signal: C.blue, good: true, icon: ICONS.box, onClick: () => window.location.href = 'shipments.html' },
+      { label: 'Avg. delivery time', value: '2h 18m', delta: '-8 min', signal: C.blue, good: true, icon: ICONS.clock, onClick: () => {} },
+      { label: 'Delivery exceptions', value: String(scaled(openExceptions.length || 12)), delta: '-3', signal: C.mustard, good: true, icon: ICONS.alert, onClick: () => window.location.href = 'exceptions.html' },
+      { label: 'Delayed deliveries', value: String(scaled(counts.delayed)), delta: '+2', signal: C.red, good: false, icon: ICONS.late, emphasis: true, onClick: () => window.location.href = 'shipments.html?status=Delayed' }
     ].map(k => ({
       ...k,
       style: 'position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 9px; padding: 15px 16px 15px; font: inherit; cursor: pointer; text-align: left; border-radius: var(--radius-md); border: 1px solid ' +
         (k.emphasis ? INK[C.red] + '40' : 'var(--color-divider)') + '; background: ' + (k.emphasis ? TINT[C.red] : '#FFFFFF') + ';',
       railStyle: 'position: absolute; top: -1px; left: -1px; width: calc(100% + 2px); height: 3px; background: ' + k.signal + ';',
       valueStyle: 'font-family: var(--font-heading); font-size: 34px; line-height: 0.95; font-variant-numeric: tabular-nums;' + (k.emphasis ? ' color: ' + INK[C.red] + ';' : ''),
-      deltaStyle: 'font-size: 13px; font-variant-numeric: tabular-nums; color: ' + (k.good ? INK[C.green] : INK[C.red]) + ';',
-      onClick: () => {}
+      deltaStyle: 'font-size: 13px; font-variant-numeric: tabular-nums; color: ' + (k.good ? INK[C.green] : INK[C.red]) + ';'
     }));
 
     const attention = [
-      { label: 'Delayed shipments', count: 12, note: '4 more than yesterday', action: 'View delayed', signal: C.red, icon: ICONS.late },
-      { label: 'Failed deliveries', count: 4, note: '2 require follow-up', action: 'View failures', signal: C.red, icon: ICONS.x },
-      { label: 'Vehicle issues', count: 3, note: '1 vehicle unavailable', action: 'View vehicles', signal: C.mustard, icon: ICONS.truck },
-      { label: 'Route deviations', count: 2, note: 'Across 3 active routes', action: 'Review routes', signal: C.mustard, icon: ICONS.route }
+      { label: 'Delayed shipments', count: scaled(12), note: '4 more than yesterday', action: 'View delayed', signal: C.red, icon: ICONS.late, onClick: () => window.location.href = 'shipments.html?status=Delayed' },
+      { label: 'Failed deliveries', count: scaled(4), note: '2 require follow-up', action: 'View failures', signal: C.red, icon: ICONS.x, onClick: () => window.location.href = 'exceptions.html?type=' + encodeURIComponent('Delivery Failed') },
+      { label: 'Vehicle issues', count: scaled(3), note: '1 vehicle unavailable', action: 'View vehicles', signal: C.mustard, icon: ICONS.truck, onClick: () => window.location.href = 'vehicles.html?status=Maintenance' },
+      { label: 'Route deviations', count: scaled(2), note: 'Across 3 active routes', action: 'Review routes', signal: C.mustard, icon: ICONS.route, onClick: () => window.location.href = 'exceptions.html?type=' + encodeURIComponent('Route Deviation') }
     ].map(a => ({
       ...a,
       text: INK[a.signal],
-      style: 'display: flex; flex-direction: column; gap: 9px; padding: 14px 16px 15px; border: 1px solid ' + INK[a.signal] + '33; border-left: 3px solid ' + a.signal + '; background: ' + TINT[a.signal] + '; border-radius: var(--radius-md);',
-      onClick: () => {}
+      style: 'display: flex; flex-direction: column; gap: 9px; padding: 14px 16px 15px; border: 1px solid ' + INK[a.signal] + '33; border-left: 3px solid ' + a.signal + '; background: ' + TINT[a.signal] + '; border-radius: var(--radius-md);'
     }));
 
     const ax = {};
@@ -605,33 +610,38 @@ class Component extends DCLogic {
         (tipLeft > 60 ? 'right: ' + (100 - tipLeft + 2).toFixed(1) + '%;' : 'left: ' + (tipLeft + 2).toFixed(1) + '%;')
     } : null;
 
+    const shipStatusUrl = { Delivered: 'Delivered', 'In transit': 'In Transit', Delayed: 'Delayed', Pending: 'Pending' };
+    const deliveryTotal = 118 + 18 + 6;
     const delivery = [
-      { label: 'Completed', count: 118, color: C.green },
-      { label: 'In progress', count: 18, color: C.blue },
-      { label: 'Delayed', count: 6, color: C.red }
+      { label: 'Completed', count: scaled(118), color: C.green, status: 'Delivered' },
+      { label: 'In progress', count: scaled(18), color: C.blue, status: 'In Transit' },
+      { label: 'Delayed', count: scaled(6), color: C.red, status: 'Delayed' }
     ].map((d, i) => ({
       ...d,
       text: INK[d.color],
       tint: TINT[d.color],
-      share: (d.count / 142 * 100).toFixed(1) + '%',
-      barStyle: 'width: ' + (d.count / 142 * 100) + '%; background: ' + d.color + ';',
+      share: (d.count / (scaled(deliveryTotal) || 1) * 100).toFixed(1) + '%',
+      barStyle: 'width: ' + (d.count / (scaled(deliveryTotal) || 1) * 100) + '%; background: ' + d.color + ';',
       rowStyle: 'display: flex; align-items: center; gap: 12px; padding: 11px 8px; font: inherit; border: 0; border-top: ' + (i ? '1px solid var(--color-divider)' : '0') + '; background: none; cursor: pointer;',
-      onClick: () => {}
+      onClick: () => window.location.href = 'shipments.html?status=' + encodeURIComponent(d.status)
     }));
 
-    const shipments = [
-      { label: 'Delivered', count: 142, color: C.green },
-      { label: 'In transit', count: 86, color: C.blue },
-      { label: 'Delayed', count: 12, color: C.red },
-      { label: 'Pending', count: 8, color: C.mustard }
-    ].map(s => ({
+    const shipTotal = 142 + 86 + 12 + 8;
+    let shipmentsBase = [
+      { label: 'Delivered', count: scaled(142), color: C.green },
+      { label: 'In transit', count: scaled(86), color: C.blue },
+      { label: 'Delayed', count: scaled(12), color: C.red },
+      { label: 'Pending', count: scaled(8), color: C.mustard }
+    ];
+    if (picks['Shipment status']) shipmentsBase = shipmentsBase.filter(s => s.label === picks['Shipment status'] || (picks['Shipment status'] === 'In Transit' && s.label === 'In transit'));
+    const shipments = shipmentsBase.map(s => ({
       ...s,
       text: INK[s.color],
       tint: TINT[s.color],
-      share: (s.count / 248 * 100).toFixed(0) + '%',
-      barStyle: 'display: block; height: 100%; width: ' + (s.count / 248 * 100) + '%; background: ' + s.color + ';',
+      share: (s.count / (scaled(shipTotal) || 1) * 100).toFixed(0) + '%',
+      barStyle: 'display: block; height: 100%; width: ' + (s.count / (scaled(shipTotal) || 1) * 100) + '%; background: ' + s.color + ';',
       rowStyle: 'display: flex; align-items: center; gap: 12px; padding: 4px 6px; font: inherit; border: 0; background: none; cursor: pointer;',
-      onClick: () => {}
+      onClick: () => window.location.href = 'shipments.html?status=' + encodeURIComponent(shipStatusUrl[s.label] || s.label)
     }));
 
     const fleet = [
@@ -645,37 +655,37 @@ class Component extends DCLogic {
       segStyle: 'width: ' + (f.count / 48 * 100) + '%; background: ' + f.color + ';'
     }));
 
-    const drivers = DRIVERS.map(d => ({
+    const driversBase = picks.Driver ? DRIVERS.filter(d => d.name === picks.Driver) : DRIVERS;
+    const drivers = driversBase.map(d => ({
       ...d,
       initials: d.name.split(' ').map(w => w[0]).join(''),
       onTime: d.onTime.toFixed(1) + '%',
       avatarStyle: 'width: 28px; height: 28px; flex: none; display: grid; place-items: center; font-size: 11.5px; letter-spacing: 0.04em; border: 1px solid ' + INK[d.color] + '40; background: ' + TINT[d.color] + '; color: ' + INK[d.color] + ';',
       barStyle: 'display: block; height: 100%; width: ' + ((d.onTime - 80) / 20 * 100).toFixed(0) + '%; background: ' + d.color + ';',
       pctStyle: 'font-size: 14px; font-variant-numeric: tabular-nums; color: ' + INK[d.color] + ';',
-      onClick: () => {}
+      onClick: () => window.location.href = 'drivers.html?q=' + encodeURIComponent(d.name)
     }));
 
     const insights = [
-      { kicker: 'On-time delivery', body: 'Improved by 1.8% over the previous period — morning dispatch slots are holding.', action: 'Open trend', signal: C.green, icon: ICONS.trend },
-      { kicker: 'Delays', body: 'Most delays occurred between 4 PM and 7 PM. Evening windows are the constraint.', action: 'View delayed', signal: C.red, icon: ICONS.late },
-      { kicker: 'Location', body: 'Delhi NCR recorded the highest number of delivery exceptions this period.', action: 'Inspect routes', signal: C.mustard, icon: ICONS.pin },
-      { kicker: 'Fleet', body: 'Vehicle utilization increased 6% this week; 32 vehicles remain available.', action: 'Plan capacity', signal: C.blue, icon: ICONS.truck }
+      { kicker: 'On-time delivery', body: 'Improved by 1.8% over the previous period — morning dispatch slots are holding.', action: 'Open trend', signal: C.green, icon: ICONS.trend, onClick: () => {} },
+      { kicker: 'Delays', body: 'Most delays occurred between 4 PM and 7 PM. Evening windows are the constraint.', action: 'View delayed', signal: C.red, icon: ICONS.late, onClick: () => window.location.href = 'shipments.html?status=Delayed' },
+      { kicker: 'Location', body: 'Delhi NCR recorded the highest number of delivery exceptions this period.', action: 'Inspect routes', signal: C.mustard, icon: ICONS.pin, onClick: () => window.location.href = 'exceptions.html' },
+      { kicker: 'Fleet', body: 'Vehicle utilization increased 6% this week; 32 vehicles remain available.', action: 'Plan capacity', signal: C.blue, icon: ICONS.truck, onClick: () => window.location.href = 'vehicles.html' }
     ].map(n => ({
       ...n,
       text: INK[n.signal],
-      style: 'display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border: 1px solid var(--color-divider); border-top: 2px solid ' + n.signal + '; background: #FFFFFF; border-radius: var(--radius-md);',
-      onClick: () => {}
+      style: 'display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border: 1px solid var(--color-divider); border-top: 2px solid ' + n.signal + '; background: #FFFFFF; border-radius: var(--radius-md);'
     }));
 
     const reports = [
-      { title: 'Shipment performance', desc: 'Detailed shipment completion and delay analysis', signal: C.blue, icon: ICONS.box },
-      { title: 'Fleet report', desc: 'Vehicle utilization and availability', signal: C.green, icon: ICONS.truck },
-      { title: 'Driver report', desc: 'Driver delivery and performance analysis', signal: C.blue, icon: ICONS.users },
-      { title: 'Exception report', desc: 'Delays, failures and operational issues', signal: C.red, icon: ICONS.alert }
+      { title: 'Shipment performance', desc: 'Detailed shipment completion and delay analysis', signal: C.blue, icon: ICONS.box, href: 'shipments.html' },
+      { title: 'Fleet report', desc: 'Vehicle utilization and availability', signal: C.green, icon: ICONS.truck, href: 'vehicles.html' },
+      { title: 'Driver report', desc: 'Driver delivery and performance analysis', signal: C.blue, icon: ICONS.users, href: 'drivers.html' },
+      { title: 'Exception report', desc: 'Delays, failures and operational issues', signal: C.red, icon: ICONS.alert, href: 'exceptions.html' }
     ].map((r, i) => ({
       ...r,
       style: 'display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; font: inherit; border: 0; border-top: 1px solid var(--color-divider);' + (i % 2 ? ' border-left: 1px solid var(--color-divider);' : '') + ' background: none; cursor: pointer;',
-      onClick: () => {}
+      onClick: () => window.location.href = r.href
     }));
 
     const chips = Object.keys(picks).filter(k => picks[k]).map(k => ({
@@ -704,7 +714,18 @@ class Component extends DCLogic {
       exportOptions: ['Export PDF', 'Export CSV', 'Export Excel'].map(label => ({
         label,
         style: 'display: block; width: 100%; text-align: left; padding: 9px 13px; font: inherit; font-size: 13px; border: 0; background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 78%, transparent);',
-        onClick: () => this.setState({ menu: null })
+        onClick: () => {
+          this.setState({ menu: null });
+          if (label === 'Export PDF') { window.print(); return; }
+          const summaryRows = [
+            { metric: 'On-time delivery', value: counts.onTimePct + '%' },
+            { metric: 'Total deliveries', value: String(scaled(counts.total)) },
+            { metric: 'Delayed deliveries', value: String(scaled(counts.delayed)) },
+            { metric: 'Open exceptions', value: String(openExceptions.length) }
+          ];
+          IndusStore.exportCSV('report-' + range.toLowerCase().replace(/\s+/g, '-') + '.csv',
+            [{ key: 'metric', label: 'Metric' }, { key: 'value', label: 'Value' }], summaryRows);
+        }
       })),
       onClearAll: () => this.setState({ picks: { Location: null, 'Vehicle type': null, Driver: null, 'Shipment status': null }, menu: null }),
       filterControls: Object.keys(FILTERS).map(name => ({
@@ -726,7 +747,14 @@ class Component extends DCLogic {
       brandRowStyle: 'display: flex; align-items: center; gap: 8px;' + (collapsed ? ' flex-direction: column;' : ' justify-content: space-between;'),
       brandLinkStyle: 'display: flex; align-items: center; gap: 10px; color: inherit;' + (collapsed ? '' : ' padding: 4px 8px;'),
       toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' + (collapsed ? ' margin: 0 auto;' : ''),
-      onToggle: () => this.setState({ collapsed: !collapsed })
+      onToggle: () => this.setState({ collapsed: !collapsed }),
+      workspaceName: IndusStore.getSettings().companyName,
+      userInitials: IndusStore.getUser().initials,
+      userName: IndusStore.getUser().name,
+      userRole: IndusStore.getUser().role,
+      onProfile: () => window.location.href = 'profile.html',
+      onSettings: () => window.location.href = 'settings.html',
+      onHelp: () => window.location.href = 'mailto:support@induslogix.com'
     };
   }
 }

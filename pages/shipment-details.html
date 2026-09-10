@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/store.js"></script>
+<script src="../js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="../design-system/industry-88dd333b-711c-41d8-81c0-9075dff1aa78/styles.css">
+<script src="../design-system/industry-88dd333b-711c-41d8-81c0-9075dff1aa78/_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-800); }
+  @keyframes il-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="{{ shellStyle }}">
+  <aside style="{{ asideStyle }}">
+    <div style="{{ brandRowStyle }}">
+      <a href="dashboard.html" style="{{ brandLinkStyle }}">
+        <svg width="24" height="24" viewBox="0 0 46 46" fill="none" stroke="var(--color-accent)" stroke-width="2" aria-hidden="true">
+          <rect x="1" y="1" width="44" height="44" stroke="var(--color-divider)"></rect>
+          <path d="M11 33 L22 33 Q30 33 30 25 L30 13" stroke-linecap="square"></path>
+          <circle cx="11" cy="33" r="3.6" fill="var(--color-bg)"></circle>
+          <rect x="26" y="9" width="8" height="8" fill="var(--color-accent)" stroke="none"></rect>
+        </svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;"><span>Indus</span><span style="color: var(--color-accent-700);">Logix</span></span>
+        </sc-if>
+      </a>
+      <button style="{{ toggleStyle }}" style-hover="background: color-mix(in srgb, var(--color-text) 8%, transparent);" onClick="{{ onToggle }}" aria-label="Toggle navigation">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h16M4 12h16M4 19h16"></path></svg>
+      </button>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="8">
+        <button style="{{ item.style }}" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ item.onClick }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><path d="{{ item.icon }}"></path></svg>
+          <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+            <span style="flex: 1; text-align: left; white-space: nowrap;">{{ item.label }}</span>
+          </sc-if>
+          <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="{{ item.badgeStyle }}">{{ item.badge }}</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="height: 1px; background: var(--color-divider); margin: 0 8px;"></div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onSettings }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Settings</span>
+        </sc-if>
+      </button>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Help &amp; Support</span>
+        </sc-if>
+      </button>
+    </nav>
+
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px;">
+      <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+        <div class="blueprint" style="padding: 12px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin-bottom: 6px;">Workspace</div>
+          <div style="font-size: 13.5px; line-height: 1.35;">{{ workspaceName }}</div>
+        </div>
+      </sc-if>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 4px 8px; border: 0; background: none; cursor: pointer; font: inherit; text-align: left; width: 100%; border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 8%, transparent);" onClick="{{ onProfile }}">
+        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: var(--color-bg); font-size: 12.5px; letter-spacing: 0.04em;">{{ userInitials }}</div>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; min-width: 0;">
+            <span style="font-size: 13.5px; color: var(--color-text);">{{ userName }}</span>
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ userRole }}</span>
+          </div>
+        </sc-if>
+      </button>
+    </div>
+  </aside>
+
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+
+    <sc-if value="{{ notFound }}" hint-placeholder-val="{{ false }}">
+      <main style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 90px 24px; text-align: center;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-neutral-400)" stroke-width="1.5"><path d="M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5"></path></svg>
+        <div style="font-family: var(--font-heading); font-size: 24px;">Shipment not found</div>
+        <div style="font-size: 13.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">This shipment may have been removed, or the link is incorrect.</div>
+        <a href="shipments.html" class="btn btn-secondary" style="margin-top: 8px; padding: 10px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Back to Shipments</a>
+      </main>
+    </sc-if>
+
+    <sc-if value="{{ hasShipment }}" hint-placeholder-val="{{ true }}">
+    <header style="display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; flex-wrap: wrap; padding: 22px 32px 20px; border-bottom: 1px solid var(--color-divider);">
+      <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">
+          <a href="shipments.html" style="letter-spacing: inherit;">Shipments</a>
+          <span>/</span>
+          <span style="color: color-mix(in srgb, var(--color-text) 78%, transparent); font-variant-numeric: tabular-nums;">{{ shipment.id }}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <h1 style="margin: 0; font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums;">{{ shipment.id }}</h1>
+          <span style="{{ shipment.pillStyle }}"><span style="{{ shipment.dotStyle }}"></span><span>{{ shipment.status }}</span></span>
+        </div>
+        <p style="margin: 0; font-size: 14px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">{{ shipment.customer }} · {{ shipment.destination }}</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <sc-if value="{{ justCreated }}" hint-placeholder-val="{{ false }}">
+          <span style="display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; font-size: 12.5px; background: #edf3ee; color: #3b5f46; border: 1px solid #4f7a5c55; border-radius: var(--radius-md);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span>Shipment created</span>
+          </span>
+        </sc-if>
+        <a href="{{ trackHref }}" class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path></svg>
+          <span>Track shipment</span>
+        </a>
+        <a href="create-shipment.html" class="btn btn-primary blueprint" style="padding: 10px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 5v14M5 12h14"></path></svg>
+          <span>New shipment</span>
+        </a>
+      </div>
+    </header>
+
+    <main style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 22px 32px 44px; min-width: 0;">
+      <div style="flex: 3 1 620px; min-width: 320px; display: flex; flex-direction: column; gap: 26px;">
+
+        <section class="blueprint" style="padding: 20px 22px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin-bottom: 14px;">Delivery progress</div>
+          <div style="display: flex; align-items: flex-start;">
+            <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="5">
+              <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; position: relative;">
+                <div style="{{ t.lineStyle }}"></div>
+                <div style="{{ t.dotStyle }}">
+                  <sc-if value="{{ t.done }}" hint-placeholder-val="{{ false }}">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>
+                  </sc-if>
+                </div>
+                <span style="{{ t.labelStyle }}">{{ t.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; align-items: baseline; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--color-divider);">
+            <h2 style="margin: 0; font-size: 19px;">Shipment information</h2>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px 18px;">
+            <sc-for list="{{ infoRows }}" as="i" hint-placeholder-count="6">
+              <div style="display: flex; flex-direction: column; gap: 5px;">
+                <span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ i.label }}</span>
+                <span style="font-size: 14px;">{{ i.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ shipment.notes }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-direction: column; gap: 5px; padding: 12px 14px; background: var(--color-accent-100); border-radius: var(--radius-md);">
+              <span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent-700);">Handling notes</span>
+              <span style="font-size: 13.5px; line-height: 1.5;">{{ shipment.notes }}</span>
+            </div>
+          </sc-if>
+        </section>
+
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 26px;">
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; align-items: baseline; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--color-divider);">
+              <h2 style="margin: 0; font-size: 17px;">Pickup</h2>
+            </div>
+            <sc-for list="{{ pickupRows }}" as="p" hint-placeholder-count="4">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px;">
+                <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">{{ p.label }}</span>
+                <span style="font-size: 13.5px; text-align: right;">{{ p.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; align-items: baseline; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--color-divider);">
+              <h2 style="margin: 0; font-size: 17px;">Delivery</h2>
+            </div>
+            <sc-for list="{{ deliveryRows }}" as="d" hint-placeholder-count="4">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px;">
+                <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">{{ d.label }}</span>
+                <span style="font-size: 13.5px; text-align: right;">{{ d.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <sc-if value="{{ hasExceptions }}" hint-placeholder-val="{{ false }}">
+          <section style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 9px; border-bottom: 2px solid #A9513F;">
+              <h2 style="margin: 0; font-size: 19px;">Related exceptions</h2>
+              <a href="exceptions.html" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">View all →</a>
+            </div>
+            <sc-for list="{{ relatedExceptions }}" as="e" hint-placeholder-count="3">
+              <a href="{{ e.href }}" style="{{ e.style }}">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+                  <div style="display: flex; align-items: center; gap: 9px; flex-wrap: wrap;">
+                    <span style="font-size: 14.5px; color: var(--color-text);">{{ e.title }}</span>
+                    <span style="{{ e.tagStyle }}">{{ e.severity }}</span>
+                  </div>
+                  <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ e.type }} · {{ e.status }}</span>
+                </div>
+                <span style="font-size: 12px; color: var(--color-accent-700); white-space: nowrap;">Open →</span>
+              </a>
+            </sc-for>
+          </section>
+        </sc-if>
+      </div>
+
+      <aside style="flex: 1 1 292px; min-width: 268px; max-width: 352px; position: sticky; top: 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div class="blueprint" style="padding: 0; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="padding: 13px 16px; border-bottom: 1px solid var(--color-divider); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Assignment</div>
+          <div style="display: flex; flex-direction: column; padding: 4px 16px;">
+            <sc-for list="{{ summary }}" as="s" hint-placeholder-count="4">
+              <div style="{{ s.style }}">
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ s.label }}</span>
+                <span style="font-size: 13.5px;">{{ s.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border: 1px solid var(--color-divider); background: #FFFFFF; border-radius: var(--radius-md);">
+          <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Update status</span>
+          <div class="seg" style="flex-wrap: wrap;">
+            <sc-for list="{{ statusOptions }}" as="o" hint-placeholder-count="5">
+              <button style="{{ o.style }}" onClick="{{ o.onClick }}">{{ o.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border: 1px solid var(--color-divider); background: #FFFFFF; border-radius: var(--radius-md);">
+          <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Reassign</span>
+          <label style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Vehicle</span>
+            <select class="input" style="height: 36px; font-size: 13px;" value="{{ shipment.vehicle }}" onChange="{{ onReassignVehicle }}">
+              <option value="—">Unassigned</option>
+              <sc-for list="{{ vehicleOptions }}" as="v" hint-placeholder-count="5">
+                <option value="{{ v.value }}">{{ v.label }}</option>
+              </sc-for>
+            </select>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Driver</span>
+            <select class="input" style="height: 36px; font-size: 13px;" value="{{ shipment.driver }}" onChange="{{ onReassignDriver }}">
+              <option value="Unassigned">Unassigned</option>
+              <sc-for list="{{ driverOptions }}" as="d" hint-placeholder-count="5">
+                <option value="{{ d.value }}">{{ d.label }}</option>
+              </sc-for>
+            </select>
+          </label>
+        </div>
+
+        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: #a9513f55; color: #8a3d2e;" style-hover="background: #f6eeec;" onClick="{{ onCancelShipment }}">Cancel this shipment</button>
+      </aside>
+    </main>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1200}}">
+const S = {
+  'In Transit': { sig: '#5980a6', text: '#416180', tint: '#eef6ff' },
+  'Delivered': { sig: '#4f7a5c', text: '#3b5f46', tint: '#edf3ee' },
+  'Pending': { sig: '#b0842f', text: '#8a6423', tint: '#f7f3e8' },
+  'Out for Delivery': { sig: '#b0842f', text: '#8a6423', tint: '#f7f3e8' },
+  'Delayed': { sig: '#a9513f', text: '#8a3d2e', tint: '#f6eeec' },
+  'Cancelled': { sig: '#8a8a8c', text: '#5c5c5e', tint: '#f1f1f1' }
+};
+const SEV = {
+  Critical: { sig: '#a9513f', text: '#8a3d2e', tint: '#f6eeec' },
+  High: { sig: '#b0842f', text: '#8a6423', tint: '#f7f3e8' },
+  Warning: { sig: '#b0842f', text: '#8a6423', tint: '#f7f3e8' },
+  Low: { sig: '#5980a6', text: '#416180', tint: '#eef6ff' }
+};
+const pill = st => 'display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px; font-size: 12.5px; white-space: nowrap; background: ' +
+  st.tint + '; color: ' + st.text + '; border: 1px solid ' + st.sig + '55; border-radius: var(--radius-md);';
+const dot = st => 'width: 7px; height: 7px; flex: none; background: ' + st.sig + ';';
+const fmtDate = v => {
+  if (!v) return 'Not set';
+  const d = new Date(v);
+  if (isNaN(d.getTime())) return v;
+  return d.toLocaleString([], { weekday: undefined, month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+};
+
+const STEPS = ['Pending', 'In Transit', 'Out for Delivery', 'Delivered'];
+
+class Component extends DCLogic {
+  state = { nav: 'Shipments', collapsed: false };
+
+  renderVals() {
+    const { collapsed } = this.state;
+    const expanded = !collapsed;
+    const id = IndusStore.qs('id') || '';
+    const shipment = IndusStore.getShipment(id);
+
+    const navItems = [
+      ['Overview', 'M4 13h7V4H4v9Zm9 7h7v-9h-7v9ZM4 20h7v-4H4v4Zm9-11h7V4h-7v5Z'],
+      ['Shipments', 'M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5'],
+      ['Routes', 'M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12-12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-9.5 10h5a3 3 0 0 0 3-3V9.5'],
+      ['Vehicles', 'M3 16V8h11v8H3Zm11-5h4l3 3v2h-7v-5Z'],
+      ['Drivers', 'M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6'],
+      ['Tracking', 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z'],
+      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', '12'],
+      ['Reports', 'M5 20V9m7 11V4m7 16v-7']
+    ];
+    const nav = navItems.map(([label, icon, badge]) => {
+      const active = this.state.nav === label;
+      return {
+        label, icon, badge: collapsed ? false : (badge || false),
+        style: 'display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; cursor: pointer; font: inherit; font-size: 14px; border-radius: var(--radius-md); text-align: left;' +
+          (collapsed ? ' justify-content: center; padding-inline: 0;' : '') +
+          (active ? ' background: var(--color-accent); color: var(--color-bg);' : ' background: none; color: color-mix(in srgb, var(--color-text) 78%, transparent);'),
+        badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
+          (active ? ' background: var(--color-bg); color: var(--color-accent-800);' : ' background: #a9513f; color: #fff;'),
+        onClick: () => { const url = IndusStore.NAV_MAP[label]; if (url) window.location.href = url; }
+      };
+    });
+
+    const common = {
+      nav, expanded,
+      shellStyle: 'display: grid; grid-template-columns: ' + (collapsed ? '68px' : '244px') + ' minmax(0, 1fr); min-height: 100vh;',
+      asideStyle: 'display: flex; flex-direction: column; gap: 22px; padding: 20px ' + (collapsed ? '10px' : '16px') +
+        '; border-right: 1px solid var(--color-divider); position: sticky; top: 0; align-self: start; height: 100vh; box-sizing: border-box; overflow-y: auto; overflow-x: hidden;',
+      brandRowStyle: 'display: flex; align-items: center; gap: 8px;' + (collapsed ? ' flex-direction: column;' : ' justify-content: space-between;'),
+      brandLinkStyle: 'display: flex; align-items: center; gap: 10px; color: inherit;' + (collapsed ? '' : ' padding: 4px 8px;'),
+      toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' + (collapsed ? ' margin: 0 auto;' : ''),
+      onToggle: () => this.setState({ collapsed: !collapsed }),
+      workspaceName: IndusStore.getSettings().companyName,
+      userInitials: IndusStore.getUser().initials,
+      userName: IndusStore.getUser().name,
+      userRole: IndusStore.getUser().role,
+      onProfile: () => window.location.href = 'profile.html',
+      onSettings: () => window.location.href = 'settings.html',
+      onHelp: () => window.location.href = 'mailto:support@induslogix.com'
+    };
+
+    if (!shipment) {
+      return { ...common, notFound: true, hasShipment: false };
+    }
+
+    const s = S[shipment.status] || S.Pending;
+    const stepIdx = STEPS.indexOf(shipment.status);
+    const timeline = STEPS.map((label, i) => {
+      const done = shipment.status === 'Delivered' ? true : i <= stepIdx;
+      const isCancelled = shipment.status === 'Cancelled';
+      return {
+        label,
+        done: isCancelled ? false : done,
+        dotStyle: 'width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; z-index: 1; border: 2px solid ' +
+          (isCancelled ? 'var(--color-neutral-300)' : (done ? 'var(--color-accent)' : 'var(--color-neutral-300)')) +
+          '; background: ' + (isCancelled ? '#f1f1f1' : (done ? 'var(--color-accent)' : '#ffffff')) + '; color: #ffffff;',
+        labelStyle: 'font-size: 11.5px; text-align: center; color: ' + (done && !isCancelled ? 'var(--color-text)' : 'color-mix(in srgb, var(--color-text) 50%, transparent)') + ';',
+        lineStyle: 'position: absolute; top: 13px; left: -50%; width: 100%; height: 2px; z-index: 0; background: ' +
+          (i === 0 ? 'transparent' : (done && !isCancelled ? 'var(--color-accent)' : 'var(--color-neutral-300)')) + ';'
+      };
+    });
+
+    const allDrivers = IndusStore.getDrivers();
+    const allVehicles = IndusStore.getVehicles();
+    const exceptions = IndusStore.getExceptions().filter(e => e.shipmentId === shipment.id);
+
+    return {
+      ...common,
+      hasShipment: true, notFound: false,
+      justCreated: IndusStore.qs('created') === '1',
+      shipment: { ...shipment, pillStyle: pill(s), dotStyle: dot(s) },
+      trackHref: 'tracking.html?shipment=' + encodeURIComponent(shipment.id),
+      timeline,
+      infoRows: [
+        { label: 'Order number', value: shipment.orderNo || '—' },
+        { label: 'Type', value: shipment.type || 'Standard' },
+        { label: 'Priority', value: shipment.priority || 'Normal' },
+        { label: 'Packages', value: (shipment.packages || '—') + ' × ' + (shipment.packType || 'items') },
+        { label: 'Weight', value: shipment.weight ? shipment.weight + ' kg' : '—' },
+        { label: 'Route', value: shipment.route || 'Not planned' }
+      ],
+      pickupRows: [
+        { label: 'Location', value: shipment.pickupLocation || 'Not set' },
+        { label: 'Address', value: shipment.pickupAddress || '—' },
+        { label: 'Contact', value: (shipment.pickupContact || '—') + (shipment.pickupPhone ? ' · ' + shipment.pickupPhone : '') },
+        { label: 'Scheduled', value: fmtDate(shipment.pickupWhen) }
+      ],
+      deliveryRows: [
+        { label: 'Location', value: shipment.deliveryLocation || shipment.destination || 'Not set' },
+        { label: 'Address', value: shipment.deliveryAddress || '—' },
+        { label: 'Contact', value: (shipment.deliveryContact || '—') + (shipment.deliveryPhone ? ' · ' + shipment.deliveryPhone : '') },
+        { label: 'Expected', value: fmtDate(shipment.deliveryWhen) }
+      ],
+      hasExceptions: exceptions.length > 0,
+      relatedExceptions: exceptions.map(e => {
+        const sv = SEV[e.severity] || SEV.Low;
+        return {
+          title: e.title, severity: e.severity, type: e.type, status: e.status,
+          href: 'exceptions.html?id=' + encodeURIComponent(e.id),
+          tagStyle: pill(sv),
+          style: 'display: flex; align-items: center; gap: 14px; padding: 13px 16px; border: 1px solid ' + sv.sig + '33; border-left: 3px solid ' + sv.sig + '; background: ' + sv.tint + '; border-radius: var(--radius-md);'
+        };
+      }),
+      summary: [
+        { label: 'Customer', value: shipment.customer },
+        { label: 'Vehicle', value: shipment.vehicle || '—' },
+        { label: 'Driver', value: shipment.driver || 'Unassigned' },
+        { label: 'ETA', value: shipment.eta || '—' }
+      ].map((r, i) => ({ ...r, style: 'display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 10px 0;' + (i ? ' border-top: 1px solid var(--color-divider);' : '') })),
+      statusOptions: ['Pending', 'In Transit', 'Out for Delivery', 'Delivered', 'Delayed'].map(label => {
+        const on = shipment.status === label;
+        const st = S[label];
+        return {
+          label,
+          style: 'padding: 8px 12px; font: inherit; font-size: 12.5px; cursor: pointer; border: 0;' +
+            (on ? ' background: var(--color-accent); color: var(--color-bg);' : ' background: none; color: color-mix(in srgb, var(--color-text) 68%, transparent);'),
+          onClick: () => IndusStore.updateShipment(shipment.id, { status: label }) && this.forceUpdate()
+        };
+      }),
+      vehicleOptions: allVehicles.map(v => ({ value: v.id, label: v.id + ' · ' + v.type })),
+      driverOptions: allDrivers.map(d => ({ value: d.name, label: d.name })),
+      onReassignVehicle: e => { IndusStore.updateShipment(shipment.id, { vehicle: e.target.value }); this.forceUpdate(); },
+      onReassignDriver: e => { IndusStore.updateShipment(shipment.id, { driver: e.target.value }); this.forceUpdate(); },
+      onCancelShipment: () => {
+        if (window.confirm('Cancel shipment ' + shipment.id + '? This cannot be undone.')) {
+          IndusStore.updateShipment(shipment.id, { status: 'Cancelled' });
+          this.forceUpdate();
+        }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

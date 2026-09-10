@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/store.js"></script>
 <script src="../js/support.js"></script>
 </head>
 <body>
@@ -54,13 +55,13 @@
     <div style="height: 1px; background: var(--color-divider); margin: 0 8px;"></div>
 
     <nav style="display: flex; flex-direction: column; gap: 2px;">
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);" onClick="{{ onSettings }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Settings</span>
         </sc-if>
       </button>
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);" onClick="{{ onHelp }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Help &amp; Support</span>
@@ -73,18 +74,18 @@
         <div class="blueprint" style="padding: 12px; background: transparent;">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin-bottom: 6px;">Workspace</div>
-          <div style="font-size: 13.5px; line-height: 1.35;">ABC Manufacturing Pvt. Ltd.</div>
+          <div style="font-size: 13.5px; line-height: 1.35;">{{ workspaceName }}</div>
         </div>
       </sc-if>
-      <div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px;">
-        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: #ffffff; font-size: 12.5px; letter-spacing: 0.04em;">NA</div>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 4px 8px; border: 0; background: none; cursor: pointer; font: inherit; text-align: left; width: 100%; border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onProfile }}">
+        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: #ffffff; font-size: 12.5px; letter-spacing: 0.04em;">{{ userInitials }}</div>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <div style="display: flex; flex-direction: column; min-width: 0;">
-            <span style="font-size: 13.5px;">Niharika A.</span>
-            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Logistics Manager</span>
+            <span style="font-size: 13.5px; color: var(--color-text);">{{ userName }}</span>
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ userRole }}</span>
           </div>
         </sc-if>
-      </div>
+      </button>
     </div>
   </aside>
 
@@ -95,7 +96,7 @@
         <p style="margin: 0; font-size: 15px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Manage your drivers, monitor availability, and keep assignments moving.</p>
       </div>
       <div style="display: flex; align-items: center; gap: 10px;">
-        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300); color: var(--color-accent-700);" style-hover="background: var(--color-neutral-200);">
+        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300); color: var(--color-accent-700);" style-hover="background: var(--color-neutral-200);" onClick="{{ onExportAll }}">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"></path></svg>
           <span>Export</span>
         </button>
@@ -242,11 +243,20 @@
         <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; background: var(--color-accent-100); border: 1px solid var(--color-accent-300); border-radius: var(--radius-md); animation: il-rise 0.25s ease both;">
           <span style="font-size: 13.5px; color: var(--color-accent-800);">{{ selectionLabel }}</span>
           <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign vehicle</button>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign shipment</button>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Change status</button>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Update availability</button>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Export</button>
+            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkVehicle }}" value="">
+              <option value="" disabled>Assign vehicle…</option>
+              <sc-for list="{{ vehicleOptions }}" as="o" hint-placeholder-count="5">
+                <option value="{{ o.value }}">{{ o.label }}</option>
+              </sc-for>
+            </select>
+            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkAvailability }}" value="">
+              <option value="" disabled>Update availability…</option>
+              <option value="Available">Available</option>
+              <option value="On Route">On Route</option>
+              <option value="Off Duty">Off Duty</option>
+              <option value="Unavailable">Unavailable</option>
+            </select>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onBulkExport }}">Export</button>
             <button class="btn btn-ghost" style="padding: 8px 10px; font-size: 12.5px; color: var(--color-accent-700);" onClick="{{ onClearSelection }}">Clear selection</button>
           </div>
         </div>
@@ -385,24 +395,27 @@
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 22px; padding: 22px 24px;">
+        <sc-if value="{{ addError }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; font-size: 13px; color: #8a3d2e; background: #f6eeec; border: 1px solid #a9513f55; border-radius: var(--radius-md);">{{ addError }}</div>
+        </sc-if>
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Driver information</div>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 18px;">
             <div class="field">
               <label for="d-name" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Full name <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="d-name" class="input" type="text" placeholder="e.g. Amit Verma" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="d-name" class="input" type="text" placeholder="e.g. Amit Verma" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.name }}" onInput="{{ setNewDriver.name }}">
             </div>
             <div class="field">
               <label for="d-id" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Driver ID <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="d-id" class="input" type="text" placeholder="e.g. DR-037" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="d-id" class="input" type="text" placeholder="e.g. DR-037" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.id }}" onInput="{{ setNewDriver.id }}">
             </div>
             <div class="field">
               <label for="d-phone" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Phone number <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="d-phone" class="input" type="tel" placeholder="e.g. +91 98100 00000" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="d-phone" class="input" type="tel" placeholder="e.g. +91 98100 00000" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.phone }}" onInput="{{ setNewDriver.phone }}">
             </div>
             <div class="field">
               <label for="d-email" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Email</label>
-              <input id="d-email" class="input" type="email" placeholder="e.g. name@company.com" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="d-email" class="input" type="email" placeholder="e.g. name@company.com" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.email }}" onInput="{{ setNewDriver.email }}">
             </div>
           </div>
         </div>
@@ -412,21 +425,20 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 18px;">
             <div class="field">
               <label for="d-vehicle" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Assigned vehicle</label>
-              <select id="d-vehicle" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <select id="d-vehicle" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.vehicle }}" onChange="{{ setNewDriver.vehicle }}">
                 <option value="">Unassigned</option>
-                <option value="VH-024">VH-024</option>
-                <option value="VH-018">VH-018</option>
-                <option value="VH-031">VH-031</option>
-                <option value="VH-012">VH-012</option>
+                <sc-for list="{{ vehicleOptions }}" as="v" hint-placeholder-count="5">
+                  <option value="{{ v.value }}">{{ v.label }}</option>
+                </sc-for>
               </select>
             </div>
             <div class="field">
               <label for="d-loc" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Location <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="d-loc" class="input" type="text" placeholder="e.g. Delhi NCR" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="d-loc" class="input" type="text" placeholder="e.g. Delhi NCR" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.location }}" onInput="{{ setNewDriver.location }}">
             </div>
             <div class="field">
               <label for="d-type" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Driver type <span style="color: var(--color-accent-700);">*</span></label>
-              <select id="d-type" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <select id="d-type" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.type }}" onChange="{{ setNewDriver.type }}">
                 <option value="Full-time">Full-time</option>
                 <option value="Contract">Contract</option>
                 <option value="Third-party">Third-party</option>
@@ -434,7 +446,7 @@
             </div>
             <div class="field">
               <label for="d-status" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Availability status <span style="color: var(--color-accent-700);">*</span></label>
-              <select id="d-status" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <select id="d-status" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.status }}" onChange="{{ setNewDriver.status }}">
                 <option value="Available">Available</option>
                 <option value="On Route">On Route</option>
                 <option value="Off Duty">Off Duty</option>
@@ -449,15 +461,15 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 18px;">
             <div class="field">
               <label for="d-lic" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Driving license number <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="d-lic" class="input" type="text" placeholder="e.g. DL-1420110012345" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="d-lic" class="input" type="text" placeholder="e.g. DL-1420110012345" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.license }}" onInput="{{ setNewDriver.license }}">
             </div>
             <div class="field">
               <label for="d-exp" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">License expiry <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="d-exp" class="input" type="date" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="d-exp" class="input" type="date" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.expiry }}" onInput="{{ setNewDriver.expiry }}">
             </div>
             <div class="field">
               <label for="d-docs" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Required documents</label>
-              <select id="d-docs" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <select id="d-docs" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newDriver.docs }}" onChange="{{ setNewDriver.docs }}">
                 <option value="Pending">Pending upload</option>
                 <option value="Submitted">Submitted</option>
                 <option value="Verified">Verified</option>
@@ -469,7 +481,7 @@
 
       <div style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--color-divider);">
         <button class="btn btn-secondary" style="padding: 11px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300);" onClick="{{ onCloseAdd }}">Cancel</button>
-        <button class="btn btn-primary blueprint" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);" onClick="{{ onCloseAdd }}">
+        <button class="btn btn-primary blueprint" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);" onClick="{{ onSubmitAdd }}">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <span>Add driver</span>
         </button>
@@ -602,36 +614,25 @@ const pill = st => 'display: inline-flex; align-items: center; gap: 7px; padding
 const dot = st => 'width: 7px; height: 7px; flex: none; background: ' + st.sig + ';';
 const initials = name => name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
 
-const DATA = [
-  ['Amit Verma', 'DR-018', 'VH-018', 'Gurugram', 'SHP-10482', 'On Route', 4, 'Expiring soon', 'Over 5 years'],
-  ['Rahul Sharma', 'DR-024', 'VH-024', 'Delhi NCR', '—', 'Available', 0, 'Valid', '2–5 years'],
-  ['Rohan Mehta', 'DR-031', 'VH-031', 'Noida', '—', 'Available', 2, 'Valid', 'Under 2 years'],
-  ['Vikram Singh', 'DR-012', 'VH-012', 'Delhi', 'SHP-10491', 'On Route', 5, 'Valid', 'Over 5 years'],
-  ['Kabir Anand', 'DR-007', 'VH-007', 'Delhi NCR', 'SHP-10488', 'On Route', 3, 'Valid', '2–5 years'],
-  ['Neha Rawat', 'DR-014', 'VH-014', 'Faridabad', '—', 'Off Duty', 0, 'Valid', '2–5 years'],
-  ['Arjun Sharma', 'DR-019', 'VH-019', 'Delhi', '—', 'Available', 1, 'Valid', 'Over 5 years'],
-  ['Deepak Verma', 'DR-027', 'VH-027', 'Noida', '—', 'Available', 2, 'Expired', 'Under 2 years'],
-  ['Imran Qureshi', 'DR-033', 'VH-033', 'Gurugram', 'SHP-10494', 'On Route', 4, 'Valid', '2–5 years'],
-  ['Suresh Yadav', 'DR-041', 'Unassigned', 'Delhi NCR', '—', 'Unavailable', 0, 'Valid', 'Over 5 years']
-].map(([name, id, vehicle, location, shipment, status, deliveries, license, experience]) =>
-  ({ name, id, vehicle, location, shipment, status, deliveries, license, experience }));
+const BLANK_DRIVER = { name: '', id: '', phone: '', email: '', vehicle: '', location: '', type: 'Full-time', status: 'Available', license: '', expiry: '', docs: 'Pending' };
 
 class Component extends DCLogic {
   state = {
     nav: 'Drivers', collapsed: false, menu: null, page: 1, perPage: 10,
-    query: '', status: 'All', vehicle: 'All', location: 'All',
+    query: IndusStore.qs('q') || '', status: 'All', vehicle: 'All', location: 'All',
     license: 'All', experience: 'All', assignment: 'All', moreOpen: false,
-    selected: [], addOpen: false, detail: null, overrides: {}
+    selected: [], addOpen: false, detail: null, newDriver: { ...BLANK_DRIVER }, addError: ''
   };
 
   setFilter(patch) { this.setState({ ...patch, page: 1, menu: null }); }
 
-  statusOf(r) { return this.state.overrides[r.id] || r.status; }
+  statusOf(r) { return r.status; }
 
   renderVals() {
     const st = this.state;
     const { collapsed } = st;
     const expanded = !collapsed;
+    const DATA = IndusStore.getDrivers().map(d => ({ ...d, experience: d.experience || '2–5 years', license: d.license || 'Valid' }));
     const navItems = [
       ['Overview', 'M4 13h7V4H4v9Zm9 7h7v-9h-7v9ZM4 20h7v-4H4v4Zm9-11h7V4h-7v5Z'],
       ['Shipments', 'M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5'],
@@ -639,7 +640,7 @@ class Component extends DCLogic {
       ['Vehicles', 'M3 16V8h11v8H3Zm11-5h4l3 3v2h-7v-5Z'],
       ['Drivers', 'M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6'],
       ['Tracking', 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z'],
-      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', '12'],
+      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', String(IndusStore.getExceptions().filter(e => e.status !== 'Resolved').length)],
       ['Reports', 'M5 20V9m7 11V4m7 16v-7']
     ];
     const nav = navItems.map(([label, icon, badge]) => {
@@ -653,7 +654,7 @@ class Component extends DCLogic {
         badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
           (active ? ' background: #ffffff; color: var(--color-accent-800);' : ' background: #a9513f; color: #ffffff;'),
         onClick: () => {
-          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'dashboard.html', Reports: 'reports.html' }[label];
+          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'exceptions.html', Reports: 'reports.html' }[label];
           if (url && label !== st.nav) window.location.href = url; else this.setState({ nav: label });
         }
       };
@@ -748,6 +749,13 @@ class Component extends DCLogic {
       toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' +
         (collapsed ? ' margin: 0 auto;' : ''),
       onToggle: () => this.setState({ collapsed: !collapsed }),
+      workspaceName: IndusStore.getSettings().companyName,
+      userInitials: IndusStore.getUser().initials,
+      userName: IndusStore.getUser().name,
+      userRole: IndusStore.getUser().role,
+      onProfile: () => window.location.href = 'profile.html',
+      onSettings: () => window.location.href = 'settings.html',
+      onHelp: () => window.location.href = 'mailto:support@induslogix.com',
 
       statusValue: st.status, vehicleValue: st.vehicle, locationValue: st.location,
       licenseValue: st.license, experienceValue: st.experience, assignmentValue: st.assignment,
@@ -768,6 +776,19 @@ class Component extends DCLogic {
       hasSelection: sel.length > 0,
       selectionLabel: sel.length + ' driver' + (sel.length === 1 ? '' : 's') + ' selected',
       onClearSelection: () => this.setState({ selected: [] }),
+      onBulkVehicle: e => { sel.forEach(id => IndusStore.updateDriver(id, { vehicle: e.target.value })); this.setState({ menu: null }); },
+      onBulkAvailability: e => { sel.forEach(id => IndusStore.updateDriver(id, { status: e.target.value })); this.setState({ menu: null }); },
+      onBulkExport: () => {
+        const selectedRows = DATA.filter(r => sel.includes(r.id));
+        IndusStore.exportCSV('drivers-selected.csv',
+          [{ key: 'name', label: 'Name' }, { key: 'id', label: 'Driver ID' }, { key: 'vehicle', label: 'Vehicle' }, { key: 'location', label: 'Location' }, { key: 'status', label: 'Status' }, { key: 'deliveries', label: 'Deliveries today' }],
+          selectedRows);
+      },
+      onExportAll: () => {
+        IndusStore.exportCSV('drivers.csv',
+          [{ key: 'name', label: 'Name' }, { key: 'id', label: 'Driver ID' }, { key: 'vehicle', label: 'Vehicle' }, { key: 'location', label: 'Location' }, { key: 'status', label: 'Status' }, { key: 'deliveries', label: 'Deliveries today' }],
+          rowsAll);
+      },
       allSelected: sel.length > 0 && sel.length === rowsAll.length,
       onSelectAll: e => this.setState({ selected: e.target.checked ? ids : [] }),
 
@@ -809,9 +830,28 @@ class Component extends DCLogic {
       onNext: () => this.setState({ page: Math.min(pageCount, cur + 1), menu: null }),
 
       addOpen: st.addOpen,
-      onOpenAdd: () => this.setState({ addOpen: true }),
+      onOpenAdd: () => this.setState({ addOpen: true, newDriver: { ...BLANK_DRIVER }, addError: '' }),
       onCloseAdd: () => this.setState({ addOpen: false }),
       stopDialog: e => e.stopPropagation(),
+      newDriver: st.newDriver,
+      addError: st.addError,
+      vehicleOptions: IndusStore.getVehicles().map(v => ({ value: v.id, label: v.id + ' · ' + v.type })),
+      setNewDriver: ['name', 'id', 'phone', 'email', 'vehicle', 'location', 'type', 'status', 'license', 'expiry', 'docs']
+        .reduce((acc, k) => { acc[k] = e => this.setState({ newDriver: { ...st.newDriver, [k]: e.target.value } }); return acc; }, {}),
+      onSubmitAdd: () => {
+        const nd = st.newDriver;
+        if (!nd.name.trim() || !nd.id.trim() || !nd.phone.trim() || !nd.location.trim() || !nd.license.trim() || !nd.expiry) {
+          this.setState({ addError: 'Please fill in all required fields.' });
+          return;
+        }
+        IndusStore.addDriver({
+          name: nd.name.trim(), id: nd.id.trim(), phone: nd.phone.trim(), email: nd.email.trim(),
+          vehicle: nd.vehicle || 'Unassigned', location: nd.location.trim(), status: nd.status,
+          deliveries: 0, license: 'Valid', experience: 'Under 2 years',
+          licenseNo: nd.license.trim(), licenseExpiry: nd.expiry, docs: nd.docs
+        });
+        this.setState({ addOpen: false, addError: '' });
+      },
 
       detailOpen: !!dv,
       onCloseDetail: () => this.setState({ detail: null }),
@@ -824,7 +864,7 @@ class Component extends DCLogic {
           style: 'display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; font: inherit; font-size: 13px; cursor: pointer; border: 1px solid ' +
             (on ? s.sig : 'var(--color-neutral-300)') + '; background: ' + (on ? s.tint : '#ffffff') +
             '; color: ' + (on ? s.text : 'inherit') + '; border-radius: var(--radius-md);',
-          onClick: () => dv && this.setState({ overrides: { ...st.overrides, [dv.id]: label } })
+          onClick: () => { if (dv) { IndusStore.updateDriver(dv.id, { status: label }); this.forceUpdate(); } }
         };
       }),
       detail: dv ? {

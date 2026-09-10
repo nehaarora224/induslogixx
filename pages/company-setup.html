@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/store.js"></script>
 <script src="../js/support.js"></script>
 </head>
 <body>
@@ -391,6 +392,12 @@ class Component extends DCLogic {
         ['hub', 'drivers', 'shipments', 'hours', 'pod'].forEach(k => {
           if (!String(vals[k]).trim()) next[k] = true;
         });
+        if (Object.keys(next).length === 0) {
+          IndusStore.updateSettings({
+            companyName: vals.company, industry: vals.industry, location: vals.location,
+            fleetModel: vals.model, deliveryHours: vals.hours, podRequired: vals.pod
+          });
+        }
         this.setState({ errors: next, step: Object.keys(next).length === 0 ? 'ready' : 'ops' });
       },
       errCompany: err('company'), errIndustry: err('industry'),

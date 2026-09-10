@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/store.js"></script>
 <script src="../js/support.js"></script>
 </head>
 <body>
@@ -59,13 +60,13 @@
     <div style="height: 1px; background: var(--color-divider); margin: 0 8px;"></div>
 
     <nav style="display: flex; flex-direction: column; gap: 2px;">
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onSettings }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Settings</span>
         </sc-if>
       </button>
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Help &amp; Support</span>
@@ -78,18 +79,18 @@
         <div class="blueprint" style="padding: 12px; background: transparent;">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin-bottom: 6px;">Workspace</div>
-          <div style="font-size: 13.5px; line-height: 1.35;">ABC Manufacturing Pvt. Ltd.</div>
+          <div style="font-size: 13.5px; line-height: 1.35;">{{ workspaceName }}</div>
         </div>
       </sc-if>
-      <div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px;">
-        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: var(--color-bg); font-size: 12.5px; letter-spacing: 0.04em;">NA</div>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 4px 8px; border: 0; background: none; cursor: pointer; font: inherit; text-align: left; width: 100%; border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onProfile }}">
+        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: var(--color-bg); font-size: 12.5px; letter-spacing: 0.04em;">{{ userInitials }}</div>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <div style="display: flex; flex-direction: column; min-width: 0;">
-            <span style="font-size: 13.5px;">Niharika A.</span>
-            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Logistics Manager</span>
+            <span style="font-size: 13.5px; color: var(--color-text);">{{ userName }}</span>
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ userRole }}</span>
           </div>
         </sc-if>
-      </div>
+      </button>
     </div>
   </aside>
 
@@ -324,7 +325,7 @@
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 16px 18px 12px;">
             <h2 style="margin: 0; font-size: 19px;">Delayed shipments</h2>
-            <a href="dashboard.html" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">All exceptions →</a>
+            <a href="exceptions.html" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">All exceptions →</a>
           </div>
           <div>
             <sc-for list="{{ delayed }}" as="d" hint-placeholder-count="3">
@@ -388,8 +389,19 @@ const ACTIVITY = [
   { id: 'VH-009', text: 'Route re-planned around traffic', place: 'Sonipat Road', time: '21 min ago', color: C.transit }
 ];
 
+function initialSelection() {
+  const vParam = IndusStore.qs('vehicle');
+  if (vParam && VEHICLES.some(v => v.id === vParam)) return vParam;
+  const sParam = IndusStore.qs('shipment');
+  if (sParam) {
+    const match = VEHICLES.find(v => v.shipment === sParam || v.shipment === sParam.replace(/^#/, '') || ('#' + v.shipment) === sParam);
+    if (match) return match.id;
+  }
+  return 'VH-018';
+}
+
 class Component extends DCLogic {
-  state = { nav: 'Tracking', collapsed: false, filter: 'All', sel: 'VH-018', query: '', zoom: 1, refreshing: false, updated: 'Last updated: Just now' };
+  state = { nav: 'Tracking', collapsed: false, filter: 'All', sel: initialSelection(), query: '', zoom: 1, refreshing: false, updated: 'Last updated: Just now' };
 
   componentWillUnmount() { clearTimeout(this._t); }
 
@@ -416,7 +428,7 @@ class Component extends DCLogic {
       ['Vehicles', 'M3 16V8h11v8H3Zm11-5h4l3 3v2h-7v-5Z'],
       ['Drivers', 'M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6'],
       ['Tracking', 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z'],
-      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', '12'],
+      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', String(IndusStore.getExceptions().filter(e => e.status !== 'Resolved').length)],
       ['Reports', 'M5 20V9m7 11V4m7 16v-7']
     ];
     const nav = navItems.map(([label, icon, badge]) => {
@@ -429,7 +441,7 @@ class Component extends DCLogic {
         badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
           (active ? ' background: var(--color-bg); color: var(--color-accent-800);' : ' background: ' + C.delayed + '; color: #fff;'),
         onClick: () => {
-          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'dashboard.html', Reports: 'reports.html' }[label];
+          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'exceptions.html', Reports: 'reports.html' }[label];
           if (url && label !== this.state.nav) window.location.href = url; else this.setState({ nav: label });
         }
       };
@@ -526,6 +538,13 @@ class Component extends DCLogic {
       brandLinkStyle: 'display: flex; align-items: center; gap: 10px; color: inherit;' + (collapsed ? '' : ' padding: 4px 8px;'),
       toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' + (collapsed ? ' margin: 0 auto;' : ''),
       onToggle: () => this.setState({ collapsed: !collapsed }),
+      workspaceName: IndusStore.getSettings().companyName,
+      userInitials: IndusStore.getUser().initials,
+      userName: IndusStore.getUser().name,
+      userRole: IndusStore.getUser().role,
+      onProfile: () => window.location.href = 'profile.html',
+      onSettings: () => window.location.href = 'settings.html',
+      onHelp: () => window.location.href = 'mailto:support@induslogix.com',
       mapWrapStyle: 'position: relative; flex: 3 1 560px; min-width: 340px; height: ' + (this.props.mapHeight ?? 560) + 'px; padding: 0; background: #F5F9FF; overflow: hidden;',
       panelStyle: 'flex: 1 1 292px; min-width: 268px; max-width: 360px; display: flex; flex-direction: column; gap: 18px;',
       sweepStyle: 'position: absolute; top: 0; left: 0; width: 30%; height: 3px; background: linear-gradient(to right, transparent, var(--color-accent), transparent); z-index: 3; opacity: ' +

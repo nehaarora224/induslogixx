@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/store.js"></script>
+<script src="../js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="../design-system/industry-88dd333b-711c-41d8-81c0-9075dff1aa78/styles.css">
+<script src="../design-system/industry-88dd333b-711c-41d8-81c0-9075dff1aa78/_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-800); }
+  @keyframes il-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="{{ shellStyle }}">
+  <aside style="{{ asideStyle }}">
+    <div style="{{ brandRowStyle }}">
+      <a href="dashboard.html" style="{{ brandLinkStyle }}">
+        <svg width="24" height="24" viewBox="0 0 46 46" fill="none" stroke="var(--color-accent)" stroke-width="2" aria-hidden="true">
+          <rect x="1" y="1" width="44" height="44" stroke="var(--color-divider)"></rect>
+          <path d="M11 33 L22 33 Q30 33 30 25 L30 13" stroke-linecap="square"></path>
+          <circle cx="11" cy="33" r="3.6" fill="var(--color-bg)"></circle>
+          <rect x="26" y="9" width="8" height="8" fill="var(--color-accent)" stroke="none"></rect>
+        </svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;"><span>Indus</span><span style="color: var(--color-accent-700);">Logix</span></span>
+        </sc-if>
+      </a>
+      <button style="{{ toggleStyle }}" style-hover="background: color-mix(in srgb, var(--color-text) 8%, transparent);" onClick="{{ onToggle }}" aria-label="Toggle navigation">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h16M4 12h16M4 19h16"></path></svg>
+      </button>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="8">
+        <button style="{{ item.style }}" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ item.onClick }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><path d="{{ item.icon }}"></path></svg>
+          <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+            <span style="flex: 1; text-align: left; white-space: nowrap;">{{ item.label }}</span>
+          </sc-if>
+          <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="{{ item.badgeStyle }}">{{ item.badge }}</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="height: 1px; background: var(--color-divider); margin: 0 8px;"></div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: var(--color-accent-100); cursor: pointer; font: inherit; font-size: 14px; color: var(--color-accent-800); border-radius: var(--radius-md);" onClick="{{ onProfileNav }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Profile</span>
+        </sc-if>
+      </button>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onSettings }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Settings</span>
+        </sc-if>
+      </button>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onHelp }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Help &amp; Support</span>
+        </sc-if>
+      </button>
+    </nav>
+
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px;">
+      <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+        <div class="blueprint" style="padding: 12px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin-bottom: 6px;">Workspace</div>
+          <div style="font-size: 13.5px; line-height: 1.35;">{{ workspaceName }}</div>
+        </div>
+      </sc-if>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px;">
+        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: var(--color-bg); font-size: 12.5px; letter-spacing: 0.04em;">{{ userInitials }}</div>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; min-width: 0;">
+            <span style="font-size: 13.5px;">{{ userName }}</span>
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ userRole }}</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </aside>
+
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+    <header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; flex-wrap: wrap; padding: 26px 32px 20px; border-bottom: 1px solid var(--color-divider);">
+      <div style="display: flex; flex-direction: column; gap: 7px; min-width: 0;">
+        <h1 style="margin: 0; font-size: 32px; line-height: 1.1;">Profile</h1>
+        <p style="margin: 0; font-size: 15px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Manage your personal information and notification preferences.</p>
+      </div>
+      <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300); color: #8a3d2e;" onClick="{{ onSignOut }}">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path></svg>
+        <span>Sign out</span>
+      </button>
+    </header>
+
+    <main style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 22px 32px 44px; min-width: 0;">
+      <div style="flex: 3 1 560px; min-width: 320px; display: flex; flex-direction: column; gap: 26px;">
+
+        <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #edf3ee; color: #3b5f46; border: 1px solid #4f7a5c55; border-radius: var(--radius-md); animation: il-rise 0.25s ease both;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span style="font-size: 13.5px;">Profile updated.</span>
+          </div>
+        </sc-if>
+
+        <section class="blueprint" style="padding: 24px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+            <div style="width: 62px; height: 62px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: #ffffff; font-size: 22px; letter-spacing: 0.04em; border-radius: 50%;">{{ form.initials }}</div>
+            <div style="display: flex; flex-direction: column; gap: 3px;">
+              <span style="font-family: var(--font-heading); font-size: 22px;">{{ form.name }}</span>
+              <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ form.role }} · {{ form.department }}</span>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px;">
+            <div class="field">
+              <label style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Full name</label>
+              <input class="input" type="text" style="height: 40px; font-size: 14px;" value="{{ form.name }}" onInput="{{ setField.name }}">
+            </div>
+            <div class="field">
+              <label style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Role</label>
+              <input class="input" type="text" style="height: 40px; font-size: 14px;" value="{{ form.role }}" onInput="{{ setField.role }}">
+            </div>
+            <div class="field">
+              <label style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Email</label>
+              <input class="input" type="email" style="height: 40px; font-size: 14px;" value="{{ form.email }}" onInput="{{ setField.email }}">
+            </div>
+            <div class="field">
+              <label style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Phone</label>
+              <input class="input" type="tel" style="height: 40px; font-size: 14px;" value="{{ form.phone }}" onInput="{{ setField.phone }}">
+            </div>
+            <div class="field">
+              <label style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Department</label>
+              <input class="input" type="text" style="height: 40px; font-size: 14px;" value="{{ form.department }}" onInput="{{ setField.department }}">
+            </div>
+            <div class="field">
+              <label style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Location</label>
+              <input class="input" type="text" style="height: 40px; font-size: 14px;" value="{{ form.location }}" onInput="{{ setField.location }}">
+            </div>
+          </div>
+
+          <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--color-divider); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Member since {{ form.joined }}</span>
+            <button class="btn btn-primary blueprint" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);" onClick="{{ onSave }}">
+              <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <span>Save changes</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="blueprint" style="padding: 24px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <h2 style="margin: 0 0 16px; font-size: 19px;">Notification preferences</h2>
+          <div style="display: flex; flex-direction: column;">
+            <sc-for list="{{ notifRows }}" as="n" hint-placeholder-count="6">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 0; border-top: 1px solid var(--color-divider);">
+                <div style="display: flex; flex-direction: column; gap: 3px;">
+                  <span style="font-size: 14px;">{{ n.label }}</span>
+                  <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">{{ n.desc }}</span>
+                </div>
+                <button style="{{ n.toggleStyle }}" onClick="{{ n.onToggle }}" role="switch" aria-checked="{{ n.on }}">
+                  <span style="{{ n.knobStyle }}"></span>
+                </button>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+
+      <aside style="flex: 1 1 260px; min-width: 240px; max-width: 320px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="padding: 16px 18px; background: #ffffff; border: 1px solid var(--color-divider); border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 10px;">
+          <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Account</span>
+          <a href="settings.html" style="font-size: 13.5px;">Workspace settings →</a>
+          <a href="exceptions.html" style="font-size: 13.5px;">Your open exceptions →</a>
+          <a href="mailto:support@induslogix.com" style="font-size: 13.5px;">Contact support →</a>
+        </div>
+      </aside>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1100}}">
+class Component extends DCLogic {
+  state = { nav: 'Overview', collapsed: false, form: IndusStore.getUser(), saved: false };
+
+  renderVals() {
+    const st = this.state;
+    const { collapsed, form } = st;
+    const expanded = !collapsed;
+
+    const navItems = [
+      ['Overview', 'M4 13h7V4H4v9Zm9 7h7v-9h-7v9ZM4 20h7v-4H4v4Zm9-11h7V4h-7v5Z'],
+      ['Shipments', 'M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5'],
+      ['Routes', 'M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12-12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-9.5 10h5a3 3 0 0 0 3-3V9.5'],
+      ['Vehicles', 'M3 16V8h11v8H3Zm11-5h4l3 3v2h-7v-5Z'],
+      ['Drivers', 'M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6'],
+      ['Tracking', 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z'],
+      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', String(IndusStore.getExceptions().filter(e => e.status !== 'Resolved').length)],
+      ['Reports', 'M5 20V9m7 11V4m7 16v-7']
+    ];
+    const nav = navItems.map(([label, icon, badge]) => {
+      const active = st.nav === label;
+      return {
+        label, icon, badge: collapsed ? false : (badge || false),
+        style: 'display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; cursor: pointer; font: inherit; font-size: 14px; border-radius: var(--radius-md); text-align: left;' +
+          (collapsed ? ' justify-content: center; padding-inline: 0;' : '') +
+          (active ? ' background: var(--color-accent); color: var(--color-bg);' : ' background: none; color: color-mix(in srgb, var(--color-text) 78%, transparent);'),
+        badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
+          (active ? ' background: var(--color-bg); color: var(--color-accent-800);' : ' background: #a9513f; color: #fff;'),
+        onClick: () => { const url = IndusStore.NAV_MAP[label]; if (url) window.location.href = url; }
+      };
+    });
+
+    return {
+      nav, expanded,
+      shellStyle: 'display: grid; grid-template-columns: ' + (collapsed ? '68px' : '244px') + ' minmax(0, 1fr); min-height: 100vh;',
+      asideStyle: 'display: flex; flex-direction: column; gap: 22px; padding: 20px ' + (collapsed ? '10px' : '16px') +
+        '; border-right: 1px solid var(--color-divider); position: sticky; top: 0; align-self: start; height: 100vh; box-sizing: border-box; overflow-y: auto; overflow-x: hidden;',
+      brandRowStyle: 'display: flex; align-items: center; gap: 8px;' + (collapsed ? ' flex-direction: column;' : ' justify-content: space-between;'),
+      brandLinkStyle: 'display: flex; align-items: center; gap: 10px; color: inherit;' + (collapsed ? '' : ' padding: 4px 8px;'),
+      toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' + (collapsed ? ' margin: 0 auto;' : ''),
+      onToggle: () => this.setState({ collapsed: !collapsed }),
+      workspaceName: IndusStore.getSettings().companyName,
+      userInitials: form.initials, userName: form.name, userRole: form.role,
+      onProfileNav: () => {}, onSettings: () => window.location.href = 'settings.html',
+      onHelp: () => window.location.href = 'mailto:support@induslogix.com',
+      onSignOut: () => { if (window.confirm('Sign out of IndusLogix?')) window.location.href = '../index.html'; },
+
+      saved: st.saved,
+      form,
+      setField: ['name', 'role', 'email', 'phone', 'department', 'location']
+        .reduce((acc, k) => { acc[k] = e => this.setState({ form: { ...form, [k]: e.target.value }, saved: false }); return acc; }, {}),
+      onSave: () => { IndusStore.updateUser(form); this.setState({ saved: true }); },
+
+      notifRows: [
+        { key: 'email', label: 'Email notifications', desc: 'Shipment and account updates by email.' },
+        { key: 'sms', label: 'SMS notifications', desc: 'Critical alerts by text message.' },
+        { key: 'push', label: 'Push notifications', desc: 'Real-time alerts in the browser.' },
+        { key: 'delayAlerts', label: 'Delay alerts', desc: 'Notify when a shipment runs late.' },
+        { key: 'exceptionAlerts', label: 'Exception alerts', desc: 'Notify on new operational exceptions.' },
+        { key: 'dailySummary', label: 'Daily summary', desc: 'A daily digest of fleet activity.' }
+      ].map(n => {
+        const on = !!(form.notifications || {})[n.key];
+        return {
+          ...n, on,
+          toggleStyle: 'position: relative; width: 40px; height: 22px; padding: 2px; border: 0; cursor: pointer; border-radius: 11px; transition: background 0.15s ease; background: ' + (on ? 'var(--color-accent)' : 'var(--color-neutral-300)') + ';',
+          knobStyle: 'display: block; width: 18px; height: 18px; background: #ffffff; border-radius: 50%; transition: transform 0.15s ease; transform: translateX(' + (on ? '18px' : '0') + ');',
+          onToggle: () => {
+            const next = { ...(form.notifications || {}), [n.key]: !on };
+            const nextForm = { ...form, notifications: next };
+            IndusStore.updateUser({ notifications: next });
+            this.setState({ form: nextForm, saved: false });
+          }
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

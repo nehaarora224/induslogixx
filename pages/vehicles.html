@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/store.js"></script>
 <script src="../js/support.js"></script>
 </head>
 <body>
@@ -54,13 +55,13 @@
     <div style="height: 1px; background: var(--color-divider); margin: 0 8px;"></div>
 
     <nav style="display: flex; flex-direction: column; gap: 2px;">
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);" onClick="{{ onSettings }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Settings</span>
         </sc-if>
       </button>
-      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);" onClick="{{ onHelp }}">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <span style="white-space: nowrap;">Help &amp; Support</span>
@@ -73,18 +74,18 @@
         <div class="blueprint" style="padding: 12px; background: transparent;">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin-bottom: 6px;">Workspace</div>
-          <div style="font-size: 13.5px; line-height: 1.35;">ABC Manufacturing Pvt. Ltd.</div>
+          <div style="font-size: 13.5px; line-height: 1.35;">{{ workspaceName }}</div>
         </div>
       </sc-if>
-      <div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px;">
-        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: #ffffff; font-size: 12.5px; letter-spacing: 0.04em;">NA</div>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 4px 8px; border: 0; background: none; cursor: pointer; font: inherit; text-align: left; width: 100%; border-radius: var(--radius-md);" style-hover="background: color-mix(in srgb, var(--color-text) 6%, transparent);" onClick="{{ onProfile }}">
+        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: #ffffff; font-size: 12.5px; letter-spacing: 0.04em;">{{ userInitials }}</div>
         <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
           <div style="display: flex; flex-direction: column; min-width: 0;">
-            <span style="font-size: 13.5px;">Niharika A.</span>
-            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Logistics Manager</span>
+            <span style="font-size: 13.5px; color: var(--color-text);">{{ userName }}</span>
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{{ userRole }}</span>
           </div>
         </sc-if>
-      </div>
+      </button>
     </div>
   </aside>
 
@@ -95,7 +96,7 @@
         <p style="margin: 0; font-size: 15px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Manage your fleet, monitor vehicle availability, and keep operations moving.</p>
       </div>
       <div style="display: flex; align-items: center; gap: 10px;">
-        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300); color: var(--color-accent-700);" style-hover="background: var(--color-neutral-200);">
+        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300); color: var(--color-accent-700);" style-hover="background: var(--color-neutral-200);" onClick="{{ onExportAll }}">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"></path></svg>
           <span>Export</span>
         </button>
@@ -243,11 +244,20 @@
         <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; background: var(--color-accent-100); border: 1px solid var(--color-accent-300); border-radius: var(--radius-md); animation: il-rise 0.25s ease both;">
           <span style="font-size: 13.5px; color: var(--color-accent-800);">{{ selectionLabel }}</span>
           <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign driver</button>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign shipment</button>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Change status</button>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Schedule maintenance</button>
-            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Export</button>
+            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkDriver }}" value="">
+              <option value="" disabled>Assign driver…</option>
+              <sc-for list="{{ driverOptions }}" as="o" hint-placeholder-count="5">
+                <option value="{{ o.value }}">{{ o.label }}</option>
+              </sc-for>
+            </select>
+            <select class="input" style="width: auto; height: 34px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onChange="{{ onBulkStatus }}" value="">
+              <option value="" disabled>Change status…</option>
+              <option value="Available">Available</option>
+              <option value="In Transit">In Transit</option>
+              <option value="Maintenance">Maintenance</option>
+              <option value="Unavailable">Unavailable</option>
+            </select>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onBulkExport }}">Export</button>
             <button class="btn btn-ghost" style="padding: 8px 10px; font-size: 12.5px; color: var(--color-accent-700);" onClick="{{ onClearSelection }}">Clear selection</button>
           </div>
         </div>
@@ -371,20 +381,23 @@
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 22px; padding: 22px 24px;">
+        <sc-if value="{{ addError }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; font-size: 13px; color: #8a3d2e; background: #f6eeec; border: 1px solid #a9513f55; border-radius: var(--radius-md);">{{ addError }}</div>
+        </sc-if>
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Vehicle information</div>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 18px;">
             <div class="field">
               <label for="v-id" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Vehicle ID <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="v-id" class="input" type="text" placeholder="e.g. VH-049" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="v-id" class="input" type="text" placeholder="e.g. VH-049" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newVehicle.id }}" onInput="{{ setNewVehicle.id }}">
             </div>
             <div class="field">
               <label for="v-reg" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Registration number <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="v-reg" class="input" type="text" placeholder="e.g. DL 01 AB 4521" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="v-reg" class="input" type="text" placeholder="e.g. DL 01 AB 4521" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newVehicle.reg }}" onInput="{{ setNewVehicle.reg }}">
             </div>
             <div class="field">
               <label for="v-type" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Vehicle type <span style="color: var(--color-accent-700);">*</span></label>
-              <select id="v-type" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <select id="v-type" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newVehicle.type }}" onChange="{{ setNewVehicle.type }}">
                 <option value="">Select type</option>
                 <option value="Truck">Truck</option>
                 <option value="Container Truck">Container Truck</option>
@@ -394,11 +407,11 @@
             </div>
             <div class="field">
               <label for="v-model" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Make / model</label>
-              <input id="v-model" class="input" type="text" placeholder="e.g. Tata 1109g" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="v-model" class="input" type="text" placeholder="e.g. Tata 1109g" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newVehicle.model }}" onInput="{{ setNewVehicle.model }}">
             </div>
             <div class="field">
               <label for="v-cap" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Vehicle capacity</label>
-              <input id="v-cap" class="input" type="text" placeholder="e.g. 9 tonnes" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="v-cap" class="input" type="text" placeholder="e.g. 9 tonnes" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newVehicle.capacity }}" onInput="{{ setNewVehicle.capacity }}">
             </div>
           </div>
         </div>
@@ -408,21 +421,20 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 18px;">
             <div class="field">
               <label for="v-loc" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Current location <span style="color: var(--color-accent-700);">*</span></label>
-              <input id="v-loc" class="input" type="text" placeholder="e.g. Delhi NCR" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <input id="v-loc" class="input" type="text" placeholder="e.g. Delhi NCR" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newVehicle.location }}" onInput="{{ setNewVehicle.location }}">
             </div>
             <div class="field">
               <label for="v-driver" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Assigned driver</label>
-              <select id="v-driver" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <select id="v-driver" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newVehicle.driver }}" onChange="{{ setNewVehicle.driver }}">
                 <option value="">Unassigned</option>
-                <option value="Rahul Sharma">Rahul Sharma</option>
-                <option value="Amit Verma">Amit Verma</option>
-                <option value="Rohan Mehta">Rohan Mehta</option>
-                <option value="Vikram Singh">Vikram Singh</option>
+                <sc-for list="{{ driverOptions }}" as="d" hint-placeholder-count="5">
+                  <option value="{{ d.value }}">{{ d.label }}</option>
+                </sc-for>
               </select>
             </div>
             <div class="field">
               <label for="v-status" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Status <span style="color: var(--color-accent-700);">*</span></label>
-              <select id="v-status" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+              <select id="v-status" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);" value="{{ newVehicle.status }}" onChange="{{ setNewVehicle.status }}">
                 <option value="Available">Available</option>
                 <option value="In Transit">In Transit</option>
                 <option value="Maintenance">Maintenance</option>
@@ -435,7 +447,7 @@
 
       <div style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--color-divider);">
         <button class="btn btn-secondary" style="padding: 11px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300);" onClick="{{ onCloseAdd }}">Cancel</button>
-        <button class="btn btn-primary blueprint" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);" onClick="{{ onCloseAdd }}">
+        <button class="btn btn-primary blueprint" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);" onClick="{{ onSubmitAdd }}">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
           <span>Add vehicle</span>
         </button>
@@ -464,12 +476,21 @@
         </button>
       </div>
 
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 24px; border-bottom: 1px solid var(--color-divider);">
+        <span style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Set status</span>
+        <div class="seg" style="flex-wrap: wrap;">
+          <sc-for list="{{ statusOptions }}" as="o" hint-placeholder-count="4">
+            <button style="{{ o.style }}" onClick="{{ o.onClick }}">
+              <span style="{{ o.dotStyle }}"></span>
+              <span>{{ o.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
       <div style="display: flex; gap: 8px; flex-wrap: wrap; padding: 16px 24px; border-bottom: 1px solid var(--color-divider);">
-        <button class="btn btn-primary" style="padding: 9px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);">Edit vehicle</button>
-        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign driver</button>
-        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign shipment</button>
-        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Track vehicle</button>
-        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-neutral-300);">Schedule maintenance</button>
+        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onTrackVehicle }}">Track vehicle</button>
+        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-neutral-300);" onClick="{{ onScheduleMaintenance }}">Schedule maintenance</button>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 24px; padding: 22px 24px 40px;">
@@ -532,26 +553,14 @@ const pill = st => 'display: inline-flex; align-items: center; gap: 7px; padding
   st.tint + '; color: ' + st.text + '; border: 1px solid ' + st.sig + '55; border-radius: var(--radius-md);';
 const dot = st => 'width: 7px; height: 7px; flex: none; background: ' + st.sig + ';';
 
-const DATA = [
-  ['VH-024', 'DL 01 AB 4521', 'Truck', 'Rahul Sharma', 'Delhi NCR', 'Available', '—'],
-  ['VH-018', 'HR 26 CF 7821', 'Container Truck', 'Amit Verma', 'Gurugram', 'In Transit', 'SHP-10482'],
-  ['VH-031', 'UP 16 DK 2934', 'Van', 'Rohan Mehta', 'Noida', 'Maintenance', '—'],
-  ['VH-011', 'DL 05 CE 9182', 'Truck', 'Unassigned', 'Delhi', 'Unavailable', '—'],
-  ['VH-007', 'DL 03 BR 1140', 'Container Truck', 'Kabir Anand', 'Delhi NCR', 'In Transit', 'SHP-10488'],
-  ['VH-014', 'HR 55 AL 3308', 'Mini Truck', 'Neha Rawat', 'Faridabad', 'Maintenance', '—'],
-  ['VH-019', 'DL 08 CN 6642', 'Truck', 'Arjun Sharma', 'Delhi', 'Available', '—'],
-  ['VH-027', 'UP 14 EE 5510', 'Van', 'Deepak Verma', 'Noida', 'Available', '—'],
-  ['VH-033', 'HR 26 DA 9075', 'Truck', 'Imran Qureshi', 'Gurugram', 'In Transit', 'SHP-10491'],
-  ['VH-041', 'DL 01 CH 2287', 'Mini Truck', 'Suresh Yadav', 'Delhi NCR', 'Available', '—']
-].map(([id, reg, type, driver, location, status, shipment]) =>
-  ({ id, reg, type, driver, location, status, shipment }));
+const BLANK_VEHICLE = { id: '', reg: '', type: '', model: '', capacity: '', location: '', driver: '', status: 'Available' };
 
 class Component extends DCLogic {
   state = {
     nav: 'Vehicles', collapsed: false, menu: null, page: 1, perPage: 10,
-    query: '', status: 'All', type: 'All', location: 'All',
+    query: IndusStore.qs('q') || '', status: IndusStore.qs('status') || 'All', type: 'All', location: 'All',
     driver: 'All', capacity: 'All', maint: 'All', moreOpen: false,
-    selected: [], addOpen: false, detail: null
+    selected: [], addOpen: false, detail: null, newVehicle: { ...BLANK_VEHICLE }, addError: ''
   };
 
   setFilter(patch) { this.setState({ ...patch, page: 1, menu: null }); }
@@ -560,6 +569,8 @@ class Component extends DCLogic {
     const st = this.state;
     const { collapsed } = st;
     const expanded = !collapsed;
+    const DATA = IndusStore.getVehicles();
+    const allDrivers = IndusStore.getDrivers();
     const navItems = [
       ['Overview', 'M4 13h7V4H4v9Zm9 7h7v-9h-7v9ZM4 20h7v-4H4v4Zm9-11h7V4h-7v5Z'],
       ['Shipments', 'M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5'],
@@ -567,7 +578,7 @@ class Component extends DCLogic {
       ['Vehicles', 'M3 16V8h11v8H3Zm11-5h4l3 3v2h-7v-5Z'],
       ['Drivers', 'M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6'],
       ['Tracking', 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z'],
-      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', '12'],
+      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', String(IndusStore.getExceptions().filter(e => e.status !== 'Resolved').length)],
       ['Reports', 'M5 20V9m7 11V4m7 16v-7']
     ];
     const nav = navItems.map(([label, icon, badge]) => {
@@ -581,7 +592,7 @@ class Component extends DCLogic {
         badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
           (active ? ' background: #ffffff; color: var(--color-accent-800);' : ' background: #a9513f; color: #ffffff;'),
         onClick: () => {
-          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'dashboard.html', Reports: 'reports.html' }[label];
+          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'exceptions.html', Reports: 'reports.html' }[label];
           if (url && label !== st.nav) window.location.href = url; else this.setState({ nav: label });
         }
       };
@@ -666,6 +677,13 @@ class Component extends DCLogic {
       toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' +
         (collapsed ? ' margin: 0 auto;' : ''),
       onToggle: () => this.setState({ collapsed: !collapsed }),
+      workspaceName: IndusStore.getSettings().companyName,
+      userInitials: IndusStore.getUser().initials,
+      userName: IndusStore.getUser().name,
+      userRole: IndusStore.getUser().role,
+      onProfile: () => window.location.href = 'profile.html',
+      onSettings: () => window.location.href = 'settings.html',
+      onHelp: () => window.location.href = 'mailto:support@induslogix.com',
 
       statusValue: st.status, typeValue: st.type, locationValue: st.location, perPageValue: String(st.perPage),
       onSearch: e => this.setFilter({ query: e.target.value }),
@@ -686,6 +704,19 @@ class Component extends DCLogic {
       hasSelection: sel.length > 0,
       selectionLabel: sel.length + ' vehicle' + (sel.length === 1 ? '' : 's') + ' selected',
       onClearSelection: () => this.setState({ selected: [] }),
+      onBulkDriver: e => { sel.forEach(id => IndusStore.updateVehicle(id, { driver: e.target.value })); this.setState({ menu: null }); },
+      onBulkStatus: e => { sel.forEach(id => IndusStore.updateVehicle(id, { status: e.target.value })); this.setState({ menu: null }); },
+      onBulkExport: () => {
+        const selectedRows = DATA.filter(r => sel.includes(r.id));
+        IndusStore.exportCSV('vehicles-selected.csv',
+          [{ key: 'id', label: 'Vehicle ID' }, { key: 'reg', label: 'Registration' }, { key: 'type', label: 'Type' }, { key: 'driver', label: 'Driver' }, { key: 'location', label: 'Location' }, { key: 'status', label: 'Status' }],
+          selectedRows);
+      },
+      onExportAll: () => {
+        IndusStore.exportCSV('vehicles.csv',
+          [{ key: 'id', label: 'Vehicle ID' }, { key: 'reg', label: 'Registration' }, { key: 'type', label: 'Type' }, { key: 'driver', label: 'Driver' }, { key: 'location', label: 'Location' }, { key: 'status', label: 'Status' }],
+          rowsAll);
+      },
       allSelected: sel.length > 0 && sel.length === rowsAll.length,
       onSelectAll: e => this.setState({ selected: e.target.checked ? ids : [] }),
 
@@ -727,12 +758,40 @@ class Component extends DCLogic {
       onNext: () => this.setState({ page: Math.min(pageCount, cur + 1), menu: null }),
 
       addOpen: st.addOpen,
-      onOpenAdd: () => this.setState({ addOpen: true }),
+      onOpenAdd: () => this.setState({ addOpen: true, newVehicle: { ...BLANK_VEHICLE }, addError: '' }),
       onCloseAdd: () => this.setState({ addOpen: false }),
       stopDialog: e => e.stopPropagation(),
+      newVehicle: st.newVehicle,
+      addError: st.addError,
+      driverOptions: allDrivers.map(d => ({ value: d.name, label: d.name })),
+      setNewVehicle: ['id', 'reg', 'type', 'model', 'capacity', 'location', 'driver', 'status']
+        .reduce((acc, k) => { acc[k] = e => this.setState({ newVehicle: { ...st.newVehicle, [k]: e.target.value } }); return acc; }, {}),
+      onSubmitAdd: () => {
+        const nv = st.newVehicle;
+        if (!nv.id.trim() || !nv.reg.trim() || !nv.type || !nv.location.trim()) {
+          this.setState({ addError: 'Please fill in all required fields.' });
+          return;
+        }
+        IndusStore.addVehicle({ id: nv.id.trim(), reg: nv.reg.trim(), type: nv.type, driver: nv.driver || 'Unassigned', location: nv.location.trim(), status: nv.status, shipment: '—', model: nv.model, capacity: nv.capacity });
+        this.setState({ addOpen: false, addError: '' });
+      },
 
       detailOpen: !!dv,
       onCloseDetail: () => this.setState({ detail: null }),
+      statusOptions: ['Available', 'In Transit', 'Maintenance', 'Unavailable'].map(label => {
+        const on = dv && dv.status === label;
+        const sOpt = S[label];
+        return {
+          label,
+          dotStyle: 'width: 7px; height: 7px; flex: none; background: ' + sOpt.sig + ';',
+          style: 'display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; font: inherit; font-size: 13px; cursor: pointer; border: 1px solid ' +
+            (on ? sOpt.sig : 'var(--color-neutral-300)') + '; background: ' + (on ? sOpt.tint : '#ffffff') +
+            '; color: ' + (on ? sOpt.text : 'inherit') + '; border-radius: var(--radius-md);',
+          onClick: () => { if (dv) { IndusStore.updateVehicle(dv.id, { status: label }); this.forceUpdate(); } }
+        };
+      }),
+      onTrackVehicle: () => { if (dv) window.location.href = 'tracking.html?vehicle=' + encodeURIComponent(dv.id); },
+      onScheduleMaintenance: () => { if (dv) { IndusStore.updateVehicle(dv.id, { status: 'Maintenance' }); this.forceUpdate(); } },
       detail: dv ? {
         id: dv.id, reg: dv.reg, status: dv.status,
         pillStyle: pill(dvs), dotStyle: dot(dvs),
