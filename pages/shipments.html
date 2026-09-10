@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="../design-system/industry-88dd333b-711c-41d8-81c0-9075dff1aa78/styles.css">
+<script src="../design-system/industry-88dd333b-711c-41d8-81c0-9075dff1aa78/_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-800); }
+  @keyframes il-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="{{ shellStyle }}">
+  <aside style="{{ asideStyle }}">
+    <div style="{{ brandRowStyle }}">
+      <a href="dashboard.html" style="{{ brandLinkStyle }}">
+        <svg width="24" height="24" viewBox="0 0 46 46" fill="none" stroke="var(--color-accent)" stroke-width="2" aria-hidden="true">
+          <rect x="1" y="1" width="44" height="44" stroke="var(--color-divider)"></rect>
+          <path d="M11 33 L22 33 Q30 33 30 25 L30 13" stroke-linecap="square"></path>
+          <circle cx="11" cy="33" r="3.6" fill="var(--color-bg)"></circle>
+          <rect x="26" y="9" width="8" height="8" fill="var(--color-accent)" stroke="none"></rect>
+        </svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;"><span>Indus</span><span style="color: var(--color-accent-700);">Logix</span></span>
+        </sc-if>
+      </a>
+      <button style="{{ toggleStyle }}" style-hover="background: var(--color-neutral-200);" onClick="{{ onToggle }}" aria-label="Toggle navigation">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h16M4 12h16M4 19h16"></path></svg>
+      </button>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="8">
+        <button style="{{ item.style }}" style-hover="background: var(--color-neutral-200);" onClick="{{ item.onClick }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><path d="{{ item.icon }}"></path></svg>
+          <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+            <span style="flex: 1; text-align: left; white-space: nowrap;">{{ item.label }}</span>
+          </sc-if>
+          <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="{{ item.badgeStyle }}">{{ item.badge }}</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="height: 1px; background: var(--color-divider); margin: 0 8px;"></div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Settings</span>
+        </sc-if>
+      </button>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Help &amp; Support</span>
+        </sc-if>
+      </button>
+    </nav>
+
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px;">
+      <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+        <div class="blueprint" style="padding: 12px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin-bottom: 6px;">Workspace</div>
+          <div style="font-size: 13.5px; line-height: 1.35;">ABC Manufacturing Pvt. Ltd.</div>
+        </div>
+      </sc-if>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px;">
+        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: #ffffff; font-size: 12.5px; letter-spacing: 0.04em;">NA</div>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; min-width: 0;">
+            <span style="font-size: 13.5px;">Niharika A.</span>
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Logistics Manager</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </aside>
+
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+    <header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; flex-wrap: wrap; padding: 26px 32px 22px; border-bottom: 1px solid var(--color-divider);">
+      <div style="display: flex; flex-direction: column; gap: 7px; min-width: 0;">
+        <h1 style="margin: 0; font-size: 32px; line-height: 1.1; color: var(--color-text);">Shipments</h1>
+        <p style="margin: 0; font-size: 15px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Manage and monitor all your shipments in one place.</p>
+      </div>
+      <button class="btn btn-primary blueprint" style="padding: 12px 22px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 5v14M5 12h14"></path></svg>
+        <span>Create shipment</span>
+      </button>
+    </header>
+
+    <main style="display: flex; flex-direction: column; gap: 16px; padding: 22px 32px 44px; min-width: 0;">
+      <div style="display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--color-divider);">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+          <button style="{{ t.style }}" onClick="{{ t.onClick }}">
+            <span>{{ t.label }}</span>
+            <span style="{{ t.countStyle }}">{{ t.count }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <div style="position: relative; display: flex; align-items: center; flex: 1 1 340px; min-width: 260px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="color-mix(in srgb, var(--color-text) 45%, transparent)" stroke-width="1.5" style="position: absolute; left: 11px;"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
+          <input class="input" type="search" placeholder="Search shipment ID, customer, destination, driver..." style="width: 100%; height: 40px; padding-left: 34px; font-size: 13.5px; background: #ffffff; border-color: var(--color-neutral-300);" style-focus="border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-100);" onInput="{{ onSearch }}">
+        </div>
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onStatusSelect }}" value="{{ statusValue }}">
+          <option value="All">Status: all</option>
+          <option value="Pending">Pending</option>
+          <option value="In Transit">In Transit</option>
+          <option value="Out for Delivery">Out for Delivery</option>
+          <option value="Delivered">Delivered</option>
+          <option value="Delayed">Delayed</option>
+        </select>
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onDate }}" value="{{ dateValue }}">
+          <option value="All">Date: all</option>
+          <option value="Today">Today</option>
+          <option value="Yesterday">Yesterday</option>
+          <option value="Last 7 days">Last 7 days</option>
+        </select>
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onCustomer }}" value="{{ customerValue }}">
+          <option value="All">Customer: all</option>
+          <option value="ABC Retail">ABC Retail</option>
+          <option value="XYZ Stores">XYZ Stores</option>
+          <option value="Metro Supplies">Metro Supplies</option>
+          <option value="Delhi Wholesale">Delhi Wholesale</option>
+          <option value="Prime Distributors">Prime Distributors</option>
+        </select>
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onDriver }}" value="{{ driverValue }}">
+          <option value="All">Driver: all</option>
+          <option value="Rahul Mehta">Rahul Mehta</option>
+          <option value="Amit Kumar">Amit Kumar</option>
+          <option value="Rohan Singh">Rohan Singh</option>
+          <option value="Vikram Singh">Vikram Singh</option>
+          <option value="Arjun Sharma">Arjun Sharma</option>
+        </select>
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onVehicle }}" value="{{ vehicleValue }}">
+          <option value="All">Vehicle: all</option>
+          <option value="TRK-024">TRK-024</option>
+          <option value="TRK-018">TRK-018</option>
+          <option value="TRK-031">TRK-031</option>
+          <option value="TRK-011">TRK-011</option>
+          <option value="TRK-019">TRK-019</option>
+        </select>
+      </div>
+
+      <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Active filters</span>
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="2">
+            <button style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; font: inherit; font-size: 12.5px; color: var(--color-accent-700); background: var(--color-accent-100); border: 1px solid var(--color-accent-300); border-radius: var(--radius-md); cursor: pointer;" style-hover="background: var(--color-accent-200);" onClick="{{ c.onRemove }}">
+              <span>{{ c.label }}</span>
+              <span style="font-size: 13px; line-height: 1;">×</span>
+            </button>
+          </sc-for>
+          <button class="btn btn-ghost" style="padding: 5px 8px; font-size: 12.5px; color: var(--color-accent-700);" onClick="{{ onClear }}">Clear all filters</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasSelection }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; background: var(--color-accent-100); border: 1px solid var(--color-accent-300); border-radius: var(--radius-md); animation: il-rise 0.25s ease both;">
+          <span style="font-size: 13.5px; color: var(--color-accent-800);">{{ selectionLabel }}</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign vehicle</button>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign driver</button>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Change status</button>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Export</button>
+            <button class="btn btn-ghost" style="padding: 8px 10px; font-size: 12.5px; color: var(--color-accent-700);" onClick="{{ onClearSelection }}">Clear selection</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <section class="blueprint" style="padding: 0; background: #ffffff; min-width: 0;">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 16px; border-bottom: 1px solid var(--color-divider);">
+          <span style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ resultLabel }}</span>
+          <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Click a row to open shipment details</span>
+        </div>
+
+        <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
+          <div style="overflow-x: auto;">
+            <table class="table" style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 13.5px; background: #ffffff;">
+              <thead>
+                <tr>
+                  <th style="width: 42px; padding: 12px 0 12px 16px;">
+                    <input type="checkbox" style="width: 15px; height: 15px; accent-color: var(--color-accent); cursor: pointer;" onChange="{{ onSelectAll }}" checked="{{ allSelected }}" aria-label="Select all shipments">
+                  </th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Shipment ID</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Destination</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">ETA</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Customer</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Vehicle · Driver</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent); position: sticky; right: 86px; background: #ffffff; border-left: 1px solid var(--color-neutral-200);">Status</th>
+                  <th style="text-align: right; padding: 12px 16px 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent); position: sticky; right: 0; background: #ffffff;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+                  <tr style="{{ r.rowStyle }}" style-hover="background: var(--color-accent-100);" onClick="{{ r.onOpen }}">
+                    <td style="padding: 13px 0 13px 16px;">
+                      <input type="checkbox" style="width: 15px; height: 15px; accent-color: var(--color-accent); cursor: pointer;" checked="{{ r.selected }}" onChange="{{ r.onSelect }}" onClick="{{ r.stop }}" aria-label="Select shipment">
+                    </td>
+                    <td style="padding: 13px 10px; font-variant-numeric: tabular-nums;"><span style="color: var(--color-accent-700); text-decoration: underline; text-decoration-color: var(--color-accent-300); text-underline-offset: 3px;">{{ r.id }}</span></td>
+                    <td style="padding: 13px 10px;">{{ r.destination }}</td>
+                    <td style="padding: 13px 10px; font-variant-numeric: tabular-nums;">{{ r.eta }}</td>
+                    <td style="padding: 13px 10px;">{{ r.customer }}</td>
+                    <td style="padding: 13px 10px;">
+                      <div style="font-variant-numeric: tabular-nums;">{{ r.vehicle }}</div>
+                      <div style="font-size: 12px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">{{ r.driver }}</div>
+                    </td>
+                    <td style="{{ r.statusCellStyle }}">
+                      <span style="{{ r.pillStyle }}">
+                        <span style="{{ r.dotStyle }}"></span>
+                        <span>{{ r.status }}</span>
+                      </span>
+                    </td>
+                    <td style="{{ r.actionCellStyle }}">
+                      <button style="display: inline-grid; place-items: center; width: 30px; height: 30px; border: 1px solid transparent; background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 55%, transparent); border-radius: var(--radius-md);" style-hover="border-color: var(--color-neutral-300); background: #ffffff;" onClick="{{ r.onMenu }}" aria-label="Row actions">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="12" cy="19" r="1.6"></circle></svg>
+                      </button>
+                      <sc-if value="{{ r.menuOpen }}" hint-placeholder-val="{{ false }}">
+                        <div style="position: absolute; right: 14px; top: 40px; z-index: 5; min-width: 184px; display: flex; flex-direction: column; text-align: left; background: #ffffff; border: 1px solid var(--color-neutral-300); box-shadow: var(--shadow-md);">
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">View details</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Edit shipment</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Track shipment</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Duplicate shipment</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 2px solid var(--color-divider); background: none; cursor: pointer; color: #8a3d2e;" style-hover="background: #f6eeec;">Cancel shipment</button>
+                        </div>
+                      </sc-if>
+                    </td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 16px; border-top: 1px solid var(--color-divider);">
+            <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+              <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent); font-variant-numeric: tabular-nums;">{{ pageLabel }}</span>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">
+                <span>Rows per page</span>
+                <select class="input" style="width: auto; height: 32px; padding: 2px 8px; font-size: 12.5px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onPerPage }}" value="{{ perPageValue }}">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </label>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <button style="{{ prevStyle }}" onClick="{{ onPrev }}" aria-label="Previous page">‹</button>
+              <sc-for list="{{ pages }}" as="p" hint-placeholder-count="5">
+                <button style="{{ p.style }}" onClick="{{ p.onClick }}">{{ p.label }}</button>
+              </sc-for>
+              <button style="{{ nextStyle }}" onClick="{{ onNext }}" aria-label="Next page">›</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 74px 24px; text-align: center; animation: il-rise 0.4s ease both;">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-neutral-400)" stroke-width="1.5"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
+            <div style="font-family: var(--font-heading); font-size: 22px;">No shipments found</div>
+            <div style="font-size: 13.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Try adjusting your search or filters.</div>
+            <button class="btn btn-secondary" style="margin-top: 6px; padding: 10px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onClear }}">Clear filters</button>
+          </div>
+        </sc-if>
+      </section>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1000}}">
+const S = {
+  'In Transit': { sig: '#5980a6', text: '#416180', tint: '#eef6ff' },
+  'Delivered': { sig: '#4f7a5c', text: '#3b5f46', tint: '#edf3ee' },
+  'Pending': { sig: '#b0842f', text: '#8a6423', tint: '#f7f3e8' },
+  'Out for Delivery': { sig: '#b0842f', text: '#8a6423', tint: '#f7f3e8' },
+  'Delayed': { sig: '#a9513f', text: '#8a3d2e', tint: '#f6eeec' }
+};
+const pill = st => 'display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px; font-size: 12px; white-space: nowrap; background: ' +
+  st.tint + '; color: ' + st.text + '; border: 1px solid ' + st.sig + '55; border-radius: var(--radius-md);';
+const dot = st => 'width: 7px; height: 7px; flex: none; background: ' + st.sig + ';';
+
+const DATA = [
+  ['#SH-1024', 'ABC Retail', 'Gurgaon', 'TRK-024', 'Rahul Mehta', '11:40 AM', 'In Transit'],
+  ['#SH-1025', 'XYZ Stores', 'Noida', 'TRK-018', 'Amit Kumar', '12:15 PM', 'Delayed'],
+  ['#SH-1026', 'Metro Supplies', 'Faridabad', 'TRK-031', 'Rohan Singh', '1:00 PM', 'Out for Delivery'],
+  ['#SH-1027', 'Delhi Wholesale', 'Ghaziabad', 'TRK-011', 'Vikram Singh', '2:30 PM', 'Pending'],
+  ['#SH-1028', 'Prime Distributors', 'Delhi', 'TRK-019', 'Arjun Sharma', '3:15 PM', 'Delivered'],
+  ['#SH-1029', 'Sunrise Foods', 'Sonipat', 'TRK-007', 'Kabir Anand', '3:50 PM', 'In Transit'],
+  ['#SH-1030', 'Vertex Pharma', 'Delhi · Okhla', 'TRK-022', 'Neha Rawat', '4:20 PM', 'Delayed'],
+  ['#SH-1031', 'Northline Traders', 'Meerut', 'TRK-014', 'Suresh Yadav', '5:05 PM', 'In Transit'],
+  ['#SH-1032', 'Kraft Interiors', 'Gurgaon · Sec 44', 'TRK-009', 'Imran Qureshi', '5:40 PM', 'Out for Delivery'],
+  ['#SH-1033', 'Ganga Textiles', 'Noida · Phase 2', 'TRK-005', 'Deepak Verma', '6:10 PM', 'Delivered']
+].map(([id, customer, destination, vehicle, driver, eta, status]) =>
+  ({ id, customer, destination, vehicle, driver, eta, status }));
+
+const COUNTS = { All: 248, Pending: 8, 'In Transit': 86, 'Out for Delivery': 12, Delivered: 142, Delayed: 12 };
+
+class Component extends DCLogic {
+  state = {
+    nav: 'Shipments', collapsed: false, menu: null, page: 1, perPage: 10,
+    query: '', status: 'All', date: 'All', customer: 'All', driver: 'All', vehicle: 'All',
+    selected: []
+  };
+
+  setFilter(patch) { this.setState({ ...patch, page: 1, menu: null }); }
+
+  renderVals() {
+    const st = this.state;
+    const { collapsed } = st;
+    const expanded = !collapsed;
+    const navItems = [
+      ['Overview', 'M4 13h7V4H4v9Zm9 7h7v-9h-7v9ZM4 20h7v-4H4v4Zm9-11h7V4h-7v5Z'],
+      ['Shipments', 'M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5'],
+      ['Routes', 'M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12-12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-9.5 10h5a3 3 0 0 0 3-3V9.5'],
+      ['Vehicles', 'M3 16V8h11v8H3Zm11-5h4l3 3v2h-7v-5Z'],
+      ['Drivers', 'M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6'],
+      ['Tracking', 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z'],
+      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', '12'],
+      ['Reports', 'M5 20V9m7 11V4m7 16v-7']
+    ];
+    const nav = navItems.map(([label, icon, badge]) => {
+      const active = st.nav === label;
+      return {
+        label, icon, badge: collapsed ? false : (badge || false),
+        style: 'display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; cursor: pointer; font: inherit; font-size: 14px; border-radius: var(--radius-md); text-align: left;' +
+          (collapsed ? ' justify-content: center; padding-inline: 0;' : '') +
+          (active ? ' background: var(--color-accent); color: #ffffff;'
+                  : ' background: none; color: color-mix(in srgb, var(--color-text) 78%, transparent);'),
+        badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
+          (active ? ' background: #ffffff; color: var(--color-accent-800);' : ' background: #a9513f; color: #ffffff;'),
+        onClick: () => {
+          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'dashboard.html', Reports: 'reports.html' }[label];
+          if (url && label !== st.nav) window.location.href = url; else this.setState({ nav: label });
+        }
+      };
+    });
+
+    const q = st.query.trim().toLowerCase();
+    const rowsAll = DATA.filter(r =>
+      (st.status === 'All' || r.status === st.status) &&
+      (st.customer === 'All' || r.customer === st.customer) &&
+      (st.driver === 'All' || r.driver === st.driver) &&
+      (st.vehicle === 'All' || r.vehicle === st.vehicle) &&
+      (!q || (r.id + ' ' + r.customer + ' ' + r.destination + ' ' + r.driver + ' ' + r.vehicle).toLowerCase().includes(q))
+    );
+
+    const chips = [];
+    if (st.status !== 'All') chips.push({ label: 'Status: ' + st.status, onRemove: () => this.setFilter({ status: 'All' }) });
+    if (st.date !== 'All') chips.push({ label: 'Date: ' + st.date, onRemove: () => this.setFilter({ date: 'All' }) });
+    if (st.customer !== 'All') chips.push({ label: 'Customer: ' + st.customer, onRemove: () => this.setFilter({ customer: 'All' }) });
+    if (st.driver !== 'All') chips.push({ label: 'Driver: ' + st.driver, onRemove: () => this.setFilter({ driver: 'All' }) });
+    if (st.vehicle !== 'All') chips.push({ label: 'Vehicle: ' + st.vehicle, onRemove: () => this.setFilter({ vehicle: 'All' }) });
+    if (q) chips.push({ label: 'Search: "' + st.query.trim() + '"', onRemove: () => this.setFilter({ query: '' }) });
+
+    const filtered = chips.length > 0;
+    const total = filtered ? rowsAll.length : COUNTS.All;
+    const pageCount = Math.max(1, Math.ceil(total / st.perPage));
+    const cur = Math.min(st.page, pageCount);
+    const from = total === 0 ? 0 : (cur - 1) * st.perPage + 1;
+    const to = Math.min(cur * st.perPage, total);
+
+    const pageBtn = (label, active, onClick) => ({
+      label, onClick,
+      style: 'min-width: 32px; height: 32px; padding: 0 9px; font: inherit; font-size: 12.5px; font-variant-numeric: tabular-nums; cursor: pointer; border: 1px solid ' +
+        (active ? 'var(--color-accent)' : 'var(--color-neutral-300)') + '; border-radius: var(--radius-md);' +
+        (active ? ' background: var(--color-accent); color: #ffffff;' : ' background: #ffffff; color: inherit;')
+    });
+    const nums = [];
+    [1, 2, 3].filter(n => n <= pageCount).forEach(n => nums.push(pageBtn(String(n), n === cur, () => this.setState({ page: n, menu: null }))));
+    if (pageCount > 4) nums.push({ label: '…', onClick: () => {}, style: 'min-width: 20px; height: 32px; border: 0; background: none; font: inherit; font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 45%, transparent); cursor: default;' });
+    if (pageCount > 3) nums.push(pageBtn(String(pageCount), cur === pageCount, () => this.setState({ page: pageCount, menu: null })));
+
+    const arrow = on => 'min-width: 32px; height: 32px; font: inherit; font-size: 14px; cursor: ' + (on ? 'pointer' : 'not-allowed') +
+      '; border: 1px solid var(--color-neutral-300); background: #ffffff; border-radius: var(--radius-md); color: inherit; opacity: ' + (on ? '1' : '0.45') + ';';
+
+    const ids = rowsAll.map(r => r.id);
+    const sel = st.selected.filter(id => ids.includes(id));
+
+    return {
+      nav, expanded, chips,
+      hasChips: chips.length > 0,
+      shellStyle: 'display: grid; grid-template-columns: ' + (collapsed ? '68px' : '244px') + ' minmax(0, 1fr); min-height: 100vh;',
+      asideStyle: 'display: flex; flex-direction: column; gap: 22px; padding: 20px ' + (collapsed ? '10px' : '16px') +
+        '; background: #ffffff; border-right: 1px solid var(--color-divider); position: sticky; top: 0; align-self: start; height: 100vh; box-sizing: border-box; overflow-y: auto; overflow-x: hidden;',
+      brandRowStyle: 'display: flex; align-items: center; gap: 8px;' + (collapsed ? ' flex-direction: column;' : ' justify-content: space-between;'),
+      brandLinkStyle: 'display: flex; align-items: center; gap: 10px; color: inherit;' + (collapsed ? '' : ' padding: 4px 8px;'),
+      toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' +
+        (collapsed ? ' margin: 0 auto;' : ''),
+      onToggle: () => this.setState({ collapsed: !collapsed }),
+
+      tabs: ['All', 'Pending', 'In Transit', 'Out for Delivery', 'Delivered', 'Delayed'].map(label => {
+        const active = st.status === label;
+        return {
+          label, count: COUNTS[label],
+          style: 'display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; font: inherit; font-size: 13.5px; cursor: pointer; border: 0; border-bottom: 3px solid ' +
+            (active ? 'var(--color-accent)' : 'transparent') + '; background: ' + (active ? 'var(--color-accent-100)' : 'none') +
+            '; color: ' + (active ? 'var(--color-accent-700)' : 'color-mix(in srgb, var(--color-text) 65%, transparent)') +
+            '; font-weight: ' + (active ? '600' : '400') + ';',
+          countStyle: 'font-size: 11.5px; font-variant-numeric: tabular-nums; padding: 1px 7px; border-radius: 2px;' +
+            (active ? ' background: var(--color-accent-200); color: var(--color-accent-800);' : ' background: var(--color-neutral-200); color: color-mix(in srgb, var(--color-text) 62%, transparent);'),
+          onClick: () => this.setFilter({ status: label })
+        };
+      }),
+
+      statusValue: st.status, dateValue: st.date, customerValue: st.customer,
+      driverValue: st.driver, vehicleValue: st.vehicle, perPageValue: String(st.perPage),
+      onSearch: e => this.setFilter({ query: e.target.value }),
+      onStatusSelect: e => this.setFilter({ status: e.target.value }),
+      onDate: e => this.setFilter({ date: e.target.value }),
+      onCustomer: e => this.setFilter({ customer: e.target.value }),
+      onDriver: e => this.setFilter({ driver: e.target.value }),
+      onVehicle: e => this.setFilter({ vehicle: e.target.value }),
+      onPerPage: e => this.setState({ perPage: Number(e.target.value), page: 1 }),
+      onClear: () => this.setState({ status: 'All', date: 'All', customer: 'All', driver: 'All', vehicle: 'All', query: '', page: 1, menu: null }),
+
+      hasSelection: sel.length > 0,
+      selectionLabel: sel.length + ' shipment' + (sel.length === 1 ? '' : 's') + ' selected',
+      onClearSelection: () => this.setState({ selected: [] }),
+      allSelected: sel.length > 0 && sel.length === rowsAll.length,
+      onSelectAll: e => this.setState({ selected: e.target.checked ? ids : [] }),
+
+      hasRows: rowsAll.length > 0,
+      isEmpty: rowsAll.length === 0,
+      resultLabel: filtered
+        ? rowsAll.length + ' matching shipment' + (rowsAll.length === 1 ? '' : 's')
+        : COUNTS.All + ' shipments · today',
+      rows: rowsAll.map(r => {
+        const s = S[r.status];
+        const selected = sel.includes(r.id);
+        return {
+          ...r, selected,
+          pillStyle: pill(s),
+          dotStyle: dot(s),
+          statusCellStyle: 'padding: 13px 10px; position: sticky; right: 86px; border-left: 1px solid var(--color-neutral-200); background: ' +
+            (selected ? '#eef6ff' : '#ffffff') + ';',
+          actionCellStyle: 'padding: 13px 16px 13px 10px; text-align: right; position: sticky; right: 0; background: ' +
+            (selected ? '#eef6ff' : '#ffffff') + ';',
+          rowStyle: 'border-top: 1px solid var(--color-neutral-200); cursor: pointer;' +
+            (selected ? ' background: var(--color-accent-100);' : '') +
+            (r.status === 'Delayed' ? ' box-shadow: inset 3px 0 0 #a9513f;' : ''),
+          menuOpen: st.menu === r.id,
+          onOpen: () => this.setState({ menu: null }),
+          stop: e => e.stopPropagation(),
+          onSelect: e => {
+            e.stopPropagation();
+            const on = e.target.checked;
+            this.setState({ selected: on ? sel.concat([r.id]) : sel.filter(id => id !== r.id) });
+          },
+          onMenu: e => { e.stopPropagation(); this.setState({ menu: st.menu === r.id ? null : r.id }); }
+        };
+      }),
+
+      pageLabel: 'Showing ' + from + '–' + to + ' of ' + total + ' shipments',
+      pages: nums,
+      prevStyle: arrow(cur > 1),
+      nextStyle: arrow(cur < pageCount),
+      onPrev: () => this.setState({ page: Math.max(1, cur - 1), menu: null }),
+      onNext: () => this.setState({ page: Math.min(pageCount, cur + 1), menu: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

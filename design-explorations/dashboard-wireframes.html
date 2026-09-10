@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Architects+Daughter&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f0eee9;font-family:'Architects Daughter',system-ui,sans-serif}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.dv-opt:target .dv-oid{background:#5980a6;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+.wf{width:880px;box-sizing:border-box;background:#fff;color:#2a2a2a;font-size:13px;display:flex;min-height:600px}
+.b{border:1.5px solid #2a2a2a;border-radius:3px;background:#fff;box-sizing:border-box}
+.d{border:1.5px dashed #8a8a8a;border-radius:3px;box-sizing:border-box}
+.ln{height:8px;background:#dedede;border-radius:5px}
+.h{font-family:'Caveat',cursive;font-weight:600;line-height:1}
+.lbl{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#7c7c7c}
+.ac{color:#5980a6}
+.note{font-family:'Caveat',cursive;font-size:15px;color:#5980a6}
+.hatch{background-image:repeating-linear-gradient(45deg,#eef1f4 0 6px,#fff 6px 12px)}
+.grid{background-image:linear-gradient(to right,#e8ecf0 1px,transparent 1px),linear-gradient(to bottom,#e8ecf0 1px,transparent 1px);background-size:34px 34px}
+.row{display:flex;align-items:center;gap:8px}
+.col{display:flex;flex-direction:column}
+.pill{border:1.5px solid #2a2a2a;border-radius:999px;padding:2px 9px;font-size:10px}
+.circ{border:1.5px solid #2a2a2a;border-radius:50%}
+</style></helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Dashboard wireframes — four structural directions</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Command center — KPI strip, map hero, deliveries table (closest to today's build)</div>
+<div class="dv-card">
+<div class="wf">
+  <div class="col b" style="width:148px;border:0;border-right:1.5px solid #2a2a2a;padding:14px 12px;gap:16px;flex:none">
+    <div class="row"><div class="b" style="width:22px;height:22px"></div><div class="h" style="font-size:17px">IndusLogix</div></div>
+    <div class="col" style="gap:9px">
+      <div class="row b" style="padding:6px 8px;background:#e7edf3"><div class="b" style="width:12px;height:12px"></div><div class="ln" style="flex:1"></div></div>
+      <div class="row" style="padding:6px 8px;gap:8px"><div class="d" style="width:12px;height:12px"></div><div class="ln" style="flex:1"></div></div>
+      <div class="row" style="padding:6px 8px;gap:8px"><div class="d" style="width:12px;height:12px"></div><div class="ln" style="flex:1"></div></div>
+      <div class="row" style="padding:6px 8px;gap:8px"><div class="d" style="width:12px;height:12px"></div><div class="ln" style="flex:1"></div></div>
+      <div class="row" style="padding:6px 8px;gap:8px"><div class="d" style="width:12px;height:12px"></div><div class="ln" style="flex:1"></div></div>
+      <div class="row" style="padding:6px 8px;gap:8px"><div class="d" style="width:12px;height:12px"></div><div class="ln" style="flex:1"></div><div class="pill">12</div></div>
+      <div class="row" style="padding:6px 8px;gap:8px"><div class="d" style="width:12px;height:12px"></div><div class="ln" style="flex:1"></div></div>
+    </div>
+    <div class="col" style="margin-top:auto;gap:8px">
+      <div class="d" style="height:44px"></div>
+      <div class="row"><div class="circ" style="width:24px;height:24px"></div><div class="ln" style="flex:1"></div></div>
+    </div>
+  </div>
+
+  <div class="col" style="flex:1;min-width:0">
+    <div class="row" style="justify-content:space-between;padding:14px 18px;border-bottom:1.5px solid #2a2a2a">
+      <div class="col" style="gap:6px"><div class="lbl">Mon 7 Sep 2026</div><div class="h" style="font-size:24px">Welcome back, Niharika</div></div>
+      <div class="row" style="gap:10px"><div class="b" style="width:180px;height:28px"></div><div class="b circ" style="width:28px;height:28px"></div><div class="b circ" style="width:28px;height:28px"></div></div>
+    </div>
+
+    <div class="col" style="padding:16px 18px;gap:16px">
+      <div class="row" style="gap:8px">
+        <div class="b" style="padding:7px 14px;background:#5980a6;color:#fff;border-color:#5980a6">+ Create shipment</div>
+        <div class="b" style="padding:7px 14px">Assign vehicle</div>
+        <div class="b" style="padding:7px 14px">Plan route</div>
+        <div class="lbl" style="margin-left:auto">● live · 2 min ago</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div class="b col" style="padding:10px;gap:8px"><div class="lbl">Total shipments</div><div class="h" style="font-size:28px">248</div><div class="ln" style="width:70%"></div></div>
+        <div class="b col" style="padding:10px;gap:8px"><div class="lbl">In transit</div><div class="h" style="font-size:28px">86</div><div class="ln" style="width:60%"></div></div>
+        <div class="b col" style="padding:10px;gap:8px"><div class="lbl">Delayed</div><div class="h" style="font-size:28px">12</div><div class="ln" style="width:65%"></div></div>
+        <div class="b col" style="padding:10px;gap:8px"><div class="lbl">On-time</div><div class="h" style="font-size:28px">91%</div><div class="ln" style="width:55%"></div></div>
+      </div>
+
+      <div class="row b" style="padding:9px 12px;gap:12px"><div class="lbl" style="white-space:nowrap">Shipment mix</div><div class="row" style="flex:1;gap:2px"><div style="flex:57;height:10px;background:#2a2a2a"></div><div style="flex:35;height:10px;background:#5980a6"></div><div style="flex:5;height:10px;background:#b9b9b9"></div><div style="flex:3;height:10px;background:#dedede"></div></div><div class="ln" style="width:120px"></div></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="row b" style="padding:12px;gap:12px;border-left:5px solid #2a2a2a"><div class="h" style="font-size:26px">5</div><div class="col" style="flex:1;gap:6px"><div>shipments delayed</div><div class="ln"></div></div><div class="b" style="padding:5px 9px;font-size:11px">View →</div></div>
+        <div class="row b" style="padding:12px;gap:12px;border-left:5px solid #8a8a8a"><div class="h" style="font-size:26px">8</div><div class="col" style="flex:1;gap:6px"><div>pending dispatch</div><div class="ln"></div></div><div class="b" style="padding:5px 9px;font-size:11px">Assign →</div></div>
+      </div>
+
+      <div class="b col">
+        <div class="row" style="justify-content:space-between;padding:10px 12px;border-bottom:1.5px solid #2a2a2a"><div class="h" style="font-size:19px">Live operations</div><div class="row" style="gap:0"><div class="b" style="padding:4px 10px;font-size:11px;background:#5980a6;color:#fff;border-color:#5980a6">All</div><div class="b" style="padding:4px 10px;font-size:11px">Transit</div><div class="b" style="padding:4px 10px;font-size:11px">Delayed</div></div></div>
+        <div class="row" style="align-items:stretch;gap:0">
+          <div class="grid" style="flex:1;height:230px;position:relative">
+            <svg viewBox="0 0 460 230" style="position:absolute;inset:0;width:100%;height:100%">
+              <path d="M40 190 C 150 160 210 110 300 60" fill="none" stroke="#5980a6" stroke-width="2"></path>
+              <path d="M120 40 C 180 90 200 150 260 200" fill="none" stroke="#9a9a9a" stroke-width="2" stroke-dasharray="6 5"></path>
+              <rect x="112" y="112" width="16" height="16" fill="#2a2a2a"></rect>
+              <circle cx="300" cy="60" r="6" fill="#fff" stroke="#2a2a2a" stroke-width="2"></circle>
+              <circle cx="260" cy="200" r="6" fill="#fff" stroke="#2a2a2a" stroke-width="2"></circle>
+              <text x="120" y="104" text-anchor="middle" font-family="Caveat" font-size="15" fill="#2a2a2a">Delhi hub</text>
+              <text x="312" y="58" font-family="Architects Daughter" font-size="11" fill="#7c7c7c">Ghaziabad · 11</text>
+              <text x="272" y="204" font-family="Architects Daughter" font-size="11" fill="#7c7c7c">Faridabad · 9</text>
+              <text x="352" y="216" font-family="Caveat" font-size="16" fill="#5980a6">[ schematic map ]</text>
+            </svg>
+          </div>
+          <div class="col" style="width:200px;border-left:1.5px solid #2a2a2a">
+            <div class="lbl" style="padding:9px 11px">4 active vehicles</div>
+            <div class="col" style="gap:5px;padding:9px 11px;border-top:1.5px solid #ddd;background:#e7edf3"><div class="row" style="justify-content:space-between">TRK-024<span class="pill">On route</span></div><div class="ln" style="width:80%"></div></div>
+            <div class="col" style="gap:5px;padding:9px 11px;border-top:1.5px solid #ddd"><div class="row" style="justify-content:space-between">TRK-018<span class="pill">Delayed</span></div><div class="ln" style="width:70%"></div></div>
+            <div class="col" style="gap:5px;padding:9px 11px;border-top:1.5px solid #ddd"><div class="row" style="justify-content:space-between">TRK-031<span class="pill">On route</span></div><div class="ln" style="width:75%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="b col">
+        <div class="row" style="justify-content:space-between;padding:10px 12px;border-bottom:1.5px solid #2a2a2a"><div class="h" style="font-size:19px">Today's deliveries</div><div class="lbl">View all →</div></div>
+        <div class="row" style="padding:8px 12px;gap:12px;border-bottom:1.5px solid #2a2a2a"><div class="lbl" style="flex:1">ID</div><div class="lbl" style="flex:1.4">Customer</div><div class="lbl" style="flex:1">Dest</div><div class="lbl" style="flex:1.2">Driver</div><div class="lbl" style="flex:.8">ETA</div><div class="lbl" style="flex:.9">Status</div></div>
+        <div class="row" style="padding:9px 12px;gap:12px;border-bottom:1px solid #e5e5e5"><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.4"></div><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.2"></div><div class="ln" style="flex:.8"></div><div style="flex:.9"><span class="pill">Transit</span></div></div>
+        <div class="row" style="padding:9px 12px;gap:12px;border-bottom:1px solid #e5e5e5"><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.4"></div><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.2"></div><div class="ln" style="flex:.8"></div><div style="flex:.9"><span class="pill">Delayed</span></div></div>
+        <div class="row" style="padding:9px 12px;gap:12px;border-bottom:1px solid #e5e5e5"><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.4"></div><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.2"></div><div class="ln" style="flex:.8"></div><div style="flex:.9"><span class="pill">Delivered</span></div></div>
+        <div class="row" style="padding:9px 12px;gap:12px"><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.4"></div><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.2"></div><div class="ln" style="flex:.8"></div><div style="flex:.9"><span class="pill">Pending</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Map-first control room — full-bleed map, floating panels, KPIs as a thin rail</div>
+<div class="dv-card">
+<div class="wf" style="flex-direction:column">
+  <div class="row" style="justify-content:space-between;padding:10px 16px;border-bottom:1.5px solid #2a2a2a">
+    <div class="row" style="gap:18px"><div class="row"><div class="b" style="width:20px;height:20px"></div><div class="h" style="font-size:16px">IndusLogix</div></div><div class="row" style="gap:14px"><div class="ln" style="width:44px"></div><div class="ln" style="width:52px"></div><div class="ln" style="width:40px"></div><div class="ln" style="width:56px"></div></div></div>
+    <div class="row" style="gap:9px"><div class="b" style="width:150px;height:26px"></div><div class="b" style="padding:5px 12px;background:#5980a6;color:#fff;border-color:#5980a6;font-size:11px">+ Shipment</div><div class="b circ" style="width:26px;height:26px"></div></div>
+  </div>
+
+  <div class="row" style="gap:0;border-bottom:1.5px solid #2a2a2a">
+    <div class="col" style="flex:1;padding:8px 14px;border-right:1px solid #ddd;gap:4px"><div class="lbl">Total</div><div class="h" style="font-size:20px">248</div></div>
+    <div class="col" style="flex:1;padding:8px 14px;border-right:1px solid #ddd;gap:4px"><div class="lbl">In transit</div><div class="h" style="font-size:20px">86</div></div>
+    <div class="col" style="flex:1;padding:8px 14px;border-right:1px solid #ddd;gap:4px"><div class="lbl">Delayed</div><div class="h" style="font-size:20px">12</div></div>
+    <div class="col" style="flex:1;padding:8px 14px;border-right:1px solid #ddd;gap:4px"><div class="lbl">Out for delivery</div><div class="h" style="font-size:20px">18</div></div>
+    <div class="col" style="flex:1;padding:8px 14px;gap:4px"><div class="lbl">On-time</div><div class="h" style="font-size:20px">91%</div></div>
+  </div>
+
+  <div class="grid" style="flex:1;position:relative;min-height:470px">
+    <svg viewBox="0 0 880 470" style="position:absolute;inset:0;width:100%;height:100%">
+      <path d="M120 380 C 300 340 420 250 620 150" fill="none" stroke="#5980a6" stroke-width="2.5"></path>
+      <path d="M240 90 C 330 190 330 300 420 420" fill="none" stroke="#9a9a9a" stroke-width="2" stroke-dasharray="7 6"></path>
+      <path d="M240 240 C 420 180 600 300 780 300" fill="none" stroke="#bdbdbd" stroke-width="2"></path>
+      <rect x="230" y="230" width="20" height="20" fill="#2a2a2a"></rect>
+      <text x="240" y="220" text-anchor="middle" font-family="Caveat" font-size="18">Delhi hub</text>
+      <circle cx="620" cy="150" r="7" fill="#fff" stroke="#2a2a2a" stroke-width="2"></circle>
+      <circle cx="420" cy="420" r="7" fill="#fff" stroke="#2a2a2a" stroke-width="2"></circle>
+      <circle cx="780" cy="300" r="7" fill="#fff" stroke="#2a2a2a" stroke-width="2"></circle>
+      <rect x="404" y="286" width="18" height="13" fill="#5980a6"></rect>
+      <rect x="330" y="330" width="18" height="13" fill="#9a9a9a"></rect>
+      <text x="640" y="150" font-family="Architects Daughter" font-size="12" fill="#7c7c7c">Ghaziabad · 11 stops</text>
+      <text x="436" y="424" font-family="Architects Daughter" font-size="12" fill="#7c7c7c">Faridabad · 9 stops</text>
+      <text x="700" y="330" font-family="Architects Daughter" font-size="12" fill="#7c7c7c">Gurgaon · 14 stops</text>
+    </svg>
+
+    <div class="b col" style="position:absolute;top:14px;left:14px;width:210px;padding:0">
+      <div class="row" style="padding:8px 10px;border-bottom:1.5px solid #2a2a2a;justify-content:space-between"><div class="lbl">Fleet · 14 active</div><div class="d" style="width:14px;height:14px"></div></div>
+      <div class="row" style="padding:7px 10px;gap:5px;border-bottom:1px solid #e5e5e5"><div class="b" style="padding:3px 8px;font-size:10px;background:#5980a6;color:#fff;border-color:#5980a6">All</div><div class="b" style="padding:3px 8px;font-size:10px">Transit</div><div class="b" style="padding:3px 8px;font-size:10px">Late</div></div>
+      <div class="col" style="gap:4px;padding:8px 10px;border-bottom:1px solid #e5e5e5;background:#e7edf3"><div class="row" style="justify-content:space-between">TRK-024<span class="pill">On route</span></div><div class="ln" style="width:85%"></div></div>
+      <div class="col" style="gap:4px;padding:8px 10px;border-bottom:1px solid #e5e5e5"><div class="row" style="justify-content:space-between">TRK-018<span class="pill">Late</span></div><div class="ln" style="width:70%"></div></div>
+      <div class="col" style="gap:4px;padding:8px 10px;border-bottom:1px solid #e5e5e5"><div class="row" style="justify-content:space-between">TRK-031<span class="pill">On route</span></div><div class="ln" style="width:78%"></div></div>
+      <div class="col" style="gap:4px;padding:8px 10px"><div class="row" style="justify-content:space-between">TRK-009<span class="pill">Delivery</span></div><div class="ln" style="width:65%"></div></div>
+    </div>
+
+    <div class="b col" style="position:absolute;top:14px;right:14px;width:230px;padding:0">
+      <div class="row" style="padding:8px 10px;border-bottom:1.5px solid #2a2a2a"><div class="h" style="font-size:17px">Exceptions (7)</div></div>
+      <div class="col" style="gap:6px;padding:9px 10px;border-bottom:1px solid #e5e5e5;border-left:4px solid #2a2a2a"><div>2 shipments &gt; 2h late</div><div class="ln"></div><div class="b" style="padding:4px 8px;font-size:10px;align-self:flex-start">Notify customers</div></div>
+      <div class="col" style="gap:6px;padding:9px 10px;border-bottom:1px solid #e5e5e5;border-left:4px solid #8a8a8a"><div>3 vehicles in maintenance</div><div class="ln"></div><div class="b" style="padding:4px 8px;font-size:10px;align-self:flex-start">Reassign</div></div>
+      <div class="col" style="gap:6px;padding:9px 10px;border-left:4px solid #8a8a8a"><div>2 failed deliveries</div><div class="ln"></div><div class="b" style="padding:4px 8px;font-size:10px;align-self:flex-start">Set reattempt</div></div>
+    </div>
+
+    <div class="b row" style="position:absolute;bottom:14px;left:14px;right:14px;padding:9px 12px;gap:14px;background:#fff">
+      <div class="lbl" style="white-space:nowrap">Dispatch queue · 8 pending</div>
+      <div class="row" style="flex:1;gap:8px;overflow:hidden">
+        <div class="d row" style="padding:6px 9px;gap:8px;white-space:nowrap">#SH-1028 <span class="ln" style="width:40px"></span></div>
+        <div class="d row" style="padding:6px 9px;gap:8px;white-space:nowrap">#SH-1029 <span class="ln" style="width:40px"></span></div>
+        <div class="d row" style="padding:6px 9px;gap:8px;white-space:nowrap">#SH-1030 <span class="ln" style="width:40px"></span></div>
+        <div class="d row" style="padding:6px 9px;gap:8px;white-space:nowrap">#SH-1031 <span class="ln" style="width:40px"></span></div>
+      </div>
+      <div class="b" style="padding:6px 12px;font-size:11px;white-space:nowrap">Open full table →</div>
+    </div>
+    <div class="note" style="position:absolute;bottom:78px;right:20px">map is the page · panels float over it</div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Triage worklist — exceptions queue is the primary column, map demoted to a side card</div>
+<div class="dv-card">
+<div class="wf">
+  <div class="col" style="width:58px;flex:none;border-right:1.5px solid #2a2a2a;padding:12px 0;gap:14px;align-items:center">
+    <div class="b" style="width:24px;height:24px"></div>
+    <div class="b" style="width:26px;height:26px;background:#e7edf3"></div>
+    <div class="d" style="width:26px;height:26px"></div>
+    <div class="d" style="width:26px;height:26px"></div>
+    <div class="d" style="width:26px;height:26px"></div>
+    <div class="d" style="width:26px;height:26px"></div>
+    <div class="circ" style="width:26px;height:26px;margin-top:auto"></div>
+  </div>
+
+  <div class="col" style="flex:1;min-width:0">
+    <div class="row" style="justify-content:space-between;padding:14px 18px;border-bottom:1.5px solid #2a2a2a">
+      <div class="col" style="gap:5px"><div class="lbl">Your queue · Mon 7 Sep</div><div class="h" style="font-size:23px">18 things need a decision</div></div>
+      <div class="row" style="gap:9px"><div class="b" style="width:160px;height:27px"></div><div class="b" style="padding:6px 12px;background:#5980a6;color:#fff;border-color:#5980a6;font-size:11px">+ Shipment</div></div>
+    </div>
+
+    <div class="row" style="padding:10px 18px;gap:7px;border-bottom:1px solid #ddd">
+      <div class="b" style="padding:5px 11px;font-size:11px;background:#2a2a2a;color:#fff">All 18</div>
+      <div class="b" style="padding:5px 11px;font-size:11px">Delayed 5</div>
+      <div class="b" style="padding:5px 11px;font-size:11px">Unassigned 8</div>
+      <div class="b" style="padding:5px 11px;font-size:11px">Failed 2</div>
+      <div class="b" style="padding:5px 11px;font-size:11px">Vehicle 3</div>
+      <div class="lbl" style="margin-left:auto">Sort: urgency</div>
+    </div>
+
+    <div class="row" style="align-items:stretch;flex:1;gap:0">
+      <div class="col" style="flex:1.55;min-width:0;border-right:1.5px solid #2a2a2a">
+        <div class="row" style="padding:12px 16px;gap:12px;border-bottom:1px solid #e0e0e0;background:#e7edf3">
+          <div class="col" style="width:52px;flex:none;align-items:center;gap:3px"><div class="h" style="font-size:22px">2h+</div><div class="lbl">late</div></div>
+          <div class="col" style="flex:1;gap:6px"><div class="row" style="gap:8px"><strong>#SH-1025 · XYZ Stores</strong><span class="pill">Critical</span></div><div class="ln" style="width:90%"></div><div class="ln" style="width:60%"></div></div>
+          <div class="col" style="gap:5px;width:120px;flex:none"><div class="b" style="padding:5px 9px;font-size:11px;text-align:center">Notify customer</div><div class="b" style="padding:5px 9px;font-size:11px;text-align:center">Reroute</div></div>
+        </div>
+        <div class="row" style="padding:12px 16px;gap:12px;border-bottom:1px solid #e0e0e0">
+          <div class="col" style="width:52px;flex:none;align-items:center;gap:3px"><div class="h" style="font-size:22px">8</div><div class="lbl">to assign</div></div>
+          <div class="col" style="flex:1;gap:6px"><div class="row" style="gap:8px"><strong>Pending dispatch batch</strong><span class="pill">10:30 cutoff</span></div><div class="ln" style="width:85%"></div><div class="ln" style="width:55%"></div></div>
+          <div class="col" style="gap:5px;width:120px;flex:none"><div class="b" style="padding:5px 9px;font-size:11px;text-align:center;background:#5980a6;color:#fff;border-color:#5980a6">Auto-assign</div><div class="b" style="padding:5px 9px;font-size:11px;text-align:center">Review</div></div>
+        </div>
+        <div class="row" style="padding:12px 16px;gap:12px;border-bottom:1px solid #e0e0e0">
+          <div class="col" style="width:52px;flex:none;align-items:center;gap:3px"><div class="h" style="font-size:22px">3</div><div class="lbl">vehicles</div></div>
+          <div class="col" style="flex:1;gap:6px"><div class="row" style="gap:8px"><strong>Maintenance at Delhi hub</strong><span class="pill">High</span></div><div class="ln" style="width:80%"></div></div>
+          <div class="col" style="gap:5px;width:120px;flex:none"><div class="b" style="padding:5px 9px;font-size:11px;text-align:center">Reassign</div></div>
+        </div>
+        <div class="row" style="padding:12px 16px;gap:12px;border-bottom:1px solid #e0e0e0">
+          <div class="col" style="width:52px;flex:none;align-items:center;gap:3px"><div class="h" style="font-size:22px">2</div><div class="lbl">failed</div></div>
+          <div class="col" style="flex:1;gap:6px"><div class="row" style="gap:8px"><strong>Recipient unavailable</strong><span class="pill">High</span></div><div class="ln" style="width:75%"></div></div>
+          <div class="col" style="gap:5px;width:120px;flex:none"><div class="b" style="padding:5px 9px;font-size:11px;text-align:center">Reattempt</div></div>
+        </div>
+        <div class="row" style="padding:12px 16px;gap:12px;border-bottom:1px solid #e0e0e0">
+          <div class="col" style="width:52px;flex:none;align-items:center;gap:3px"><div class="h" style="font-size:22px">1</div><div class="lbl">POD</div></div>
+          <div class="col" style="flex:1;gap:6px"><div class="row" style="gap:8px"><strong>Proof of delivery missing</strong><span class="pill">Low</span></div><div class="ln" style="width:70%"></div></div>
+          <div class="col" style="gap:5px;width:120px;flex:none"><div class="b" style="padding:5px 9px;font-size:11px;text-align:center">Chase driver</div></div>
+        </div>
+        <div class="d" style="margin:14px 16px;padding:10px;text-align:center;color:#8a8a8a">13 more · infinite list</div>
+      </div>
+
+      <div class="col" style="width:250px;flex:none;padding:14px;gap:14px">
+        <div class="b col" style="padding:10px;gap:8px">
+          <div class="lbl">Day at a glance</div>
+          <div class="row" style="justify-content:space-between"><span>Delivered</span><span class="h" style="font-size:18px">142</span></div>
+          <div class="row" style="justify-content:space-between"><span>In transit</span><span class="h" style="font-size:18px">86</span></div>
+          <div class="row" style="justify-content:space-between"><span>Delayed</span><span class="h" style="font-size:18px">12</span></div>
+          <div class="row" style="gap:2px"><div style="flex:57;height:8px;background:#2a2a2a"></div><div style="flex:35;height:8px;background:#5980a6"></div><div style="flex:8;height:8px;background:#dedede"></div></div>
+        </div>
+        <div class="b col" style="padding:0">
+          <div class="lbl" style="padding:8px 10px;border-bottom:1.5px solid #2a2a2a">Where they are</div>
+          <div class="grid" style="height:150px;position:relative">
+            <svg viewBox="0 0 240 150" style="position:absolute;inset:0;width:100%;height:100%">
+              <path d="M40 120 C 100 100 130 70 190 40" fill="none" stroke="#5980a6" stroke-width="2"></path>
+              <rect x="34" y="114" width="13" height="13" fill="#2a2a2a"></rect>
+              <circle cx="190" cy="40" r="5" fill="#fff" stroke="#2a2a2a" stroke-width="2"></circle>
+              <rect x="110" y="86" width="14" height="10" fill="#5980a6"></rect>
+              <text x="120" y="140" text-anchor="middle" font-family="Caveat" font-size="14" fill="#5980a6">open live map →</text>
+            </svg>
+          </div>
+        </div>
+        <div class="b col" style="padding:10px;gap:7px"><div class="lbl">Quick actions</div><div class="d" style="padding:6px 9px">Assign vehicle</div><div class="d" style="padding:6px 9px">Plan route</div><div class="d" style="padding:6px 9px">Export day report</div></div>
+        <div class="note">no vanity KPIs — every row is a task</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="1d">
+<div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Modular tile board — top nav, rearrangeable widgets, timeline instead of a map</div>
+<div class="dv-card">
+<div class="wf" style="flex-direction:column">
+  <div class="row" style="justify-content:space-between;padding:11px 18px;border-bottom:1.5px solid #2a2a2a">
+    <div class="row" style="gap:20px"><div class="row"><div class="b" style="width:20px;height:20px"></div><div class="h" style="font-size:16px">IndusLogix</div></div>
+      <div class="row" style="gap:16px"><div style="border-bottom:2.5px solid #5980a6;padding-bottom:2px">Overview</div><div class="ln" style="width:52px"></div><div class="ln" style="width:44px"></div><div class="ln" style="width:58px"></div><div class="ln" style="width:48px"></div></div></div>
+    <div class="row" style="gap:9px"><div class="b" style="width:140px;height:26px"></div><div class="b" style="padding:5px 11px;font-size:11px">Edit layout ✎</div><div class="b circ" style="width:26px;height:26px"></div></div>
+  </div>
+
+  <div class="row" style="justify-content:space-between;padding:12px 18px 6px">
+    <div class="h" style="font-size:22px">Operations board</div>
+    <div class="row" style="gap:0"><div class="b" style="padding:4px 11px;font-size:11px;background:#2a2a2a;color:#fff">Today</div><div class="b" style="padding:4px 11px;font-size:11px">Week</div><div class="b" style="padding:4px 11px;font-size:11px">Month</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:12px 18px 18px">
+    <div class="b col" style="grid-column:span 2;padding:11px;gap:7px"><div class="row" style="justify-content:space-between"><div class="lbl">Shipments today</div><div class="d" style="width:12px;height:12px"></div></div><div class="row" style="align-items:flex-end;gap:9px"><div class="h" style="font-size:34px">248</div><div class="ln" style="flex:1;margin-bottom:8px"></div></div>
+      <svg viewBox="0 0 200 44" style="width:100%;height:44px"><path d="M0 34 L30 28 L60 30 L90 18 L120 22 L150 10 L200 6" fill="none" stroke="#5980a6" stroke-width="2"></path></svg></div>
+    <div class="b col" style="grid-column:span 2;padding:11px;gap:7px"><div class="lbl">On-time delivery</div><div class="h" style="font-size:34px">91.4%</div>
+      <div class="row" style="gap:4px;align-items:flex-end;height:44px"><div style="flex:1;height:60%;background:#dedede"></div><div style="flex:1;height:75%;background:#dedede"></div><div style="flex:1;height:55%;background:#dedede"></div><div style="flex:1;height:85%;background:#dedede"></div><div style="flex:1;height:70%;background:#5980a6"></div><div style="flex:1;height:90%;background:#5980a6"></div></div></div>
+    <div class="b col" style="grid-column:span 2;padding:11px;gap:8px"><div class="lbl">Status mix</div>
+      <div class="row" style="gap:10px"><div class="circ" style="width:62px;height:62px;border-width:9px;border-color:#5980a6 #dedede #2a2a2a #b9b9b9"></div>
+      <div class="col" style="flex:1;gap:5px"><div class="row" style="gap:6px"><div style="width:8px;height:8px;background:#5980a6"></div><div class="ln" style="flex:1"></div></div><div class="row" style="gap:6px"><div style="width:8px;height:8px;background:#2a2a2a"></div><div class="ln" style="flex:1"></div></div><div class="row" style="gap:6px"><div style="width:8px;height:8px;background:#b9b9b9"></div><div class="ln" style="flex:1"></div></div><div class="row" style="gap:6px"><div style="width:8px;height:8px;background:#dedede"></div><div class="ln" style="flex:1"></div></div></div></div></div>
+
+    <div class="b col" style="grid-column:span 4;padding:0">
+      <div class="row" style="justify-content:space-between;padding:9px 12px;border-bottom:1.5px solid #2a2a2a"><div class="h" style="font-size:18px">Dispatch timeline</div><div class="lbl">06:00 — 20:00</div></div>
+      <div class="col" style="padding:12px;gap:11px">
+        <div class="row" style="gap:10px"><div class="lbl" style="width:58px">TRK-024</div><div style="flex:1;position:relative;height:16px;background:#f2f2f2"><div style="position:absolute;left:8%;width:44%;top:0;bottom:0;background:#5980a6"></div><div style="position:absolute;left:56%;width:16%;top:0;bottom:0;background:#cfd9e3"></div></div></div>
+        <div class="row" style="gap:10px"><div class="lbl" style="width:58px">TRK-018</div><div style="flex:1;position:relative;height:16px;background:#f2f2f2"><div style="position:absolute;left:14%;width:38%;top:0;bottom:0;background:#2a2a2a"></div><div class="d" style="position:absolute;left:52%;width:22%;top:0;bottom:0"></div></div></div>
+        <div class="row" style="gap:10px"><div class="lbl" style="width:58px">TRK-031</div><div style="flex:1;position:relative;height:16px;background:#f2f2f2"><div style="position:absolute;left:22%;width:50%;top:0;bottom:0;background:#5980a6"></div></div></div>
+        <div class="row" style="gap:10px"><div class="lbl" style="width:58px">TRK-009</div><div style="flex:1;position:relative;height:16px;background:#f2f2f2"><div style="position:absolute;left:4%;width:30%;top:0;bottom:0;background:#b9b9b9"></div><div style="position:absolute;left:38%;width:12%;top:0;bottom:0;background:#5980a6"></div></div></div>
+        <div class="row" style="gap:10px"><div class="lbl" style="width:58px">Unassigned</div><div class="d" style="flex:1;height:16px" ></div></div>
+      </div>
+    </div>
+
+    <div class="b col" style="grid-column:span 2;padding:0">
+      <div class="row" style="padding:9px 12px;border-bottom:1.5px solid #2a2a2a"><div class="h" style="font-size:18px">Alerts</div><div class="pill" style="margin-left:auto">7</div></div>
+      <div class="col" style="gap:6px;padding:9px 12px;border-bottom:1px solid #e5e5e5;border-left:4px solid #2a2a2a"><div>5 delayed shipments</div><div class="ln" style="width:80%"></div></div>
+      <div class="col" style="gap:6px;padding:9px 12px;border-bottom:1px solid #e5e5e5;border-left:4px solid #8a8a8a"><div>8 pending dispatch</div><div class="ln" style="width:70%"></div></div>
+      <div class="col" style="gap:6px;padding:9px 12px;border-left:4px solid #8a8a8a"><div>3 vehicles down</div><div class="ln" style="width:60%"></div></div>
+      <div class="lbl" style="padding:9px 12px;margin-top:auto">See all alerts →</div>
+    </div>
+
+    <div class="b col" style="grid-column:span 3;padding:0">
+      <div class="row" style="justify-content:space-between;padding:9px 12px;border-bottom:1.5px solid #2a2a2a"><div class="h" style="font-size:18px">Deliveries</div><div class="lbl">View all →</div></div>
+      <div class="row" style="padding:7px 12px;gap:10px;border-bottom:1.5px solid #2a2a2a"><div class="lbl" style="flex:1">ID</div><div class="lbl" style="flex:1.3">Customer</div><div class="lbl" style="flex:.9">ETA</div><div class="lbl" style="flex:1">Status</div></div>
+      <div class="row" style="padding:8px 12px;gap:10px;border-bottom:1px solid #e5e5e5"><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.3"></div><div class="ln" style="flex:.9"></div><div style="flex:1"><span class="pill">Transit</span></div></div>
+      <div class="row" style="padding:8px 12px;gap:10px;border-bottom:1px solid #e5e5e5"><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.3"></div><div class="ln" style="flex:.9"></div><div style="flex:1"><span class="pill">Delayed</span></div></div>
+      <div class="row" style="padding:8px 12px;gap:10px;border-bottom:1px solid #e5e5e5"><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.3"></div><div class="ln" style="flex:.9"></div><div style="flex:1"><span class="pill">Delivered</span></div></div>
+      <div class="row" style="padding:8px 12px;gap:10px"><div class="ln" style="flex:1"></div><div class="ln" style="flex:1.3"></div><div class="ln" style="flex:.9"></div><div style="flex:1"><span class="pill">Pending</span></div></div>
+    </div>
+
+    <div class="b col" style="grid-column:span 3;padding:0">
+      <div class="row" style="justify-content:space-between;padding:9px 12px;border-bottom:1.5px solid #2a2a2a"><div class="h" style="font-size:18px">Driver performance</div><div class="lbl">Top 4</div></div>
+      <div class="col" style="padding:11px 12px;gap:10px">
+        <div class="row" style="gap:9px"><div class="circ" style="width:22px;height:22px"></div><div class="ln" style="width:78px"></div><div style="flex:1;height:9px;background:#f2f2f2"><div style="width:92%;height:9px;background:#5980a6"></div></div><div style="width:34px;text-align:right">98%</div></div>
+        <div class="row" style="gap:9px"><div class="circ" style="width:22px;height:22px"></div><div class="ln" style="width:78px"></div><div style="flex:1;height:9px;background:#f2f2f2"><div style="width:80%;height:9px;background:#5980a6"></div></div><div style="width:34px;text-align:right">93%</div></div>
+        <div class="row" style="gap:9px"><div class="circ" style="width:22px;height:22px"></div><div class="ln" style="width:78px"></div><div style="flex:1;height:9px;background:#f2f2f2"><div style="width:66%;height:9px;background:#b9b9b9"></div></div><div style="width:34px;text-align:right">87%</div></div>
+        <div class="row" style="gap:9px"><div class="circ" style="width:22px;height:22px"></div><div class="ln" style="width:78px"></div><div style="flex:1;height:9px;background:#f2f2f2"><div style="width:52%;height:9px;background:#b9b9b9"></div></div><div style="width:34px;text-align:right">79%</div></div>
+      </div>
+      <div class="note" style="padding:0 12px 10px">tiles are drag-to-rearrange</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "build out <a class="dv-oid" href="#1b">1b</a> as a real screen" · "merge <a class="dv-oid" href="#1c">1c</a>'s queue into <a class="dv-oid" href="#1a">1a</a>" · "wireframe the mobile version of <a class="dv-oid" href="#1d">1d</a>"</p>
+</section>
+
+</x-dc>
+</body>
+</html>

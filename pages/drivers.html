@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="../design-system/industry-88dd333b-711c-41d8-81c0-9075dff1aa78/styles.css">
+<script src="../design-system/industry-88dd333b-711c-41d8-81c0-9075dff1aa78/_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-800); }
+  @keyframes il-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="{{ shellStyle }}">
+  <aside style="{{ asideStyle }}">
+    <div style="{{ brandRowStyle }}">
+      <a href="dashboard.html" style="{{ brandLinkStyle }}">
+        <svg width="24" height="24" viewBox="0 0 46 46" fill="none" stroke="var(--color-accent)" stroke-width="2" aria-hidden="true">
+          <rect x="1" y="1" width="44" height="44" stroke="var(--color-divider)"></rect>
+          <path d="M11 33 L22 33 Q30 33 30 25 L30 13" stroke-linecap="square"></path>
+          <circle cx="11" cy="33" r="3.6" fill="var(--color-bg)"></circle>
+          <rect x="26" y="9" width="8" height="8" fill="var(--color-accent)" stroke="none"></rect>
+        </svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="font-family: var(--font-heading); font-weight: 600; font-size: 18px; letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;"><span>Indus</span><span style="color: var(--color-accent-700);">Logix</span></span>
+        </sc-if>
+      </a>
+      <button style="{{ toggleStyle }}" style-hover="background: var(--color-neutral-200);" onClick="{{ onToggle }}" aria-label="Toggle navigation">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h16M4 12h16M4 19h16"></path></svg>
+      </button>
+    </div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="8">
+        <button style="{{ item.style }}" style-hover="background: var(--color-neutral-200);" onClick="{{ item.onClick }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><path d="{{ item.icon }}"></path></svg>
+          <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+            <span style="flex: 1; text-align: left; white-space: nowrap;">{{ item.label }}</span>
+          </sc-if>
+          <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="{{ item.badgeStyle }}">{{ item.badge }}</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="height: 1px; background: var(--color-divider); margin: 0 8px;"></div>
+
+    <nav style="display: flex; flex-direction: column; gap: 2px;">
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Settings</span>
+        </sc-if>
+      </button>
+      <button style="display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; color: color-mix(in srgb, var(--color-text) 72%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex: none;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.7"></path><path d="M12 17h.01"></path></svg>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <span style="white-space: nowrap;">Help &amp; Support</span>
+        </sc-if>
+      </button>
+    </nav>
+
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px;">
+      <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+        <div class="blueprint" style="padding: 12px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); margin-bottom: 6px;">Workspace</div>
+          <div style="font-size: 13.5px; line-height: 1.35;">ABC Manufacturing Pvt. Ltd.</div>
+        </div>
+      </sc-if>
+      <div style="display: flex; align-items: center; gap: 10px; padding: 4px 8px;">
+        <div style="width: 32px; height: 32px; flex: none; display: grid; place-items: center; background: var(--color-accent); color: #ffffff; font-size: 12.5px; letter-spacing: 0.04em;">NA</div>
+        <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; min-width: 0;">
+            <span style="font-size: 13.5px;">Niharika A.</span>
+            <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Logistics Manager</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </aside>
+
+  <div style="display: flex; flex-direction: column; min-width: 0;">
+    <header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 28px; flex-wrap: wrap; padding: 26px 32px 22px; border-bottom: 1px solid var(--color-divider);">
+      <div style="display: flex; flex-direction: column; gap: 7px; min-width: 0;">
+        <h1 style="margin: 0; font-size: 32px; line-height: 1.1;">Drivers</h1>
+        <p style="margin: 0; font-size: 15px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Manage your drivers, monitor availability, and keep assignments moving.</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300); color: var(--color-accent-700);" style-hover="background: var(--color-neutral-200);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"></path></svg>
+          <span>Export</span>
+        </button>
+        <button class="btn btn-primary blueprint" style="padding: 12px 22px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);" onClick="{{ onOpenAdd }}">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 5v14M5 12h14"></path></svg>
+          <span>Add driver</span>
+        </button>
+      </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; gap: 18px; padding: 22px 32px 44px; min-width: 0;">
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px;">
+        <sc-for list="{{ summary }}" as="s" hint-placeholder-count="4">
+          <div style="{{ s.cardStyle }}">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+              <span style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 58%, transparent);">{{ s.label }}</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{ s.signal }}" stroke-width="1.5"><path d="{{ s.icon }}"></path></svg>
+            </div>
+            <div style="font-family: var(--font-heading); font-size: 33px; line-height: 1; font-variant-numeric: tabular-nums;">{{ s.value }}</div>
+            <div style="font-size: 12px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">{{ s.note }}</div>
+          </div>
+        </sc-for>
+      </section>
+
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; align-items: start;">
+        <div style="padding: 16px 18px; background: #ffffff; border-radius: var(--radius-md);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+            <h2 style="margin: 0; font-size: 17px;">Driver availability</h2>
+            <span style="font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">36 drivers</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 9px; margin: 8px 0 12px;">
+            <span style="font-family: var(--font-heading); font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums;">67%</span>
+            <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 62%, transparent);">of drivers are currently available</span>
+          </div>
+          <div style="display: flex; height: 12px; overflow: hidden; border-radius: 2px; margin-bottom: 10px;">
+            <sc-for list="{{ availability }}" as="a" hint-placeholder-count="4">
+              <div style="{{ a.barStyle }}"></div>
+            </sc-for>
+          </div>
+          <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+            <sc-for list="{{ availability }}" as="a" hint-placeholder-count="4">
+              <span style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; white-space: nowrap;">
+                <span style="{{ a.dotStyle }}"></span>
+                <span>{{ a.label }}</span>
+                <span style="font-variant-numeric: tabular-nums; color: color-mix(in srgb, var(--color-text) 58%, transparent);">{{ a.count }}</span>
+              </span>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="padding: 16px 18px; background: #ffffff; border-radius: var(--radius-md);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 4px;">
+            <h2 style="margin: 0; font-size: 17px;">Driver attention</h2>
+            <span style="display: inline-flex; align-items: center; gap: 7px; padding: 3px 9px; font-size: 11.5px; background: #f7f3e8; color: #8a6423; border: 1px solid #b0842f55; border-radius: var(--radius-md);">
+              <span style="width: 7px; height: 7px; background: #b0842f;"></span>
+              <span>3 drivers</span>
+            </span>
+          </div>
+          <p style="margin: 0 0 8px; font-size: 13px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">3 drivers require attention.</p>
+          <div style="display: flex; flex-direction: column;">
+            <sc-for list="{{ attention }}" as="a" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px solid var(--color-divider);">
+                <button style="font: inherit; font-size: 13.5px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--color-accent-700); font-variant-numeric: tabular-nums; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--color-accent-300); text-underline-offset: 3px;" style-hover="color: var(--color-accent-800);" onClick="{{ a.onOpen }}">{{ a.id }}</button>
+                <span style="flex: 1; font-size: 13px; color: color-mix(in srgb, var(--color-text) 65%, transparent);">{{ a.note }}</span>
+                <button style="font: inherit; font-size: 12.5px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--color-accent-700); white-space: nowrap;" style-hover="color: var(--color-accent-800); text-decoration: underline;">{{ a.action }} →</button>
+              </div>
+            </sc-for>
+          </div>
+          <button class="btn btn-ghost" style="margin-top: 10px; padding: 6px 0; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-700);">View all →</button>
+        </div>
+      </section>
+
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <div style="position: relative; display: flex; align-items: center; flex: 1 1 320px; min-width: 250px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="color-mix(in srgb, var(--color-text) 45%, transparent)" stroke-width="1.5" style="position: absolute; left: 11px;"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
+          <input class="input" type="search" placeholder="Search drivers..." style="width: 100%; height: 40px; padding-left: 34px; font-size: 13.5px; background: #ffffff; border-color: var(--color-neutral-300);" style-focus="border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-100);" onInput="{{ onSearch }}">
+        </div>
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onStatus }}" value="{{ statusValue }}">
+          <option value="All">Status: all</option>
+          <option value="Available">Available</option>
+          <option value="On Route">On Route</option>
+          <option value="Off Duty">Off Duty</option>
+          <option value="Unavailable">Unavailable</option>
+        </select>
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onVehicle }}" value="{{ vehicleValue }}">
+          <option value="All">Vehicle: all</option>
+          <option value="VH-018">VH-018</option>
+          <option value="VH-024">VH-024</option>
+          <option value="VH-031">VH-031</option>
+          <option value="VH-012">VH-012</option>
+          <option value="Unassigned">Unassigned</option>
+        </select>
+        <select class="input" style="width: auto; height: 40px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onLocation }}" value="{{ locationValue }}">
+          <option value="All">Location: all</option>
+          <option value="Delhi NCR">Delhi NCR</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Gurugram">Gurugram</option>
+          <option value="Noida">Noida</option>
+          <option value="Faridabad">Faridabad</option>
+        </select>
+        <button class="btn btn-ghost" style="{{ moreStyle }}" onClick="{{ onToggleMore }}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h18M6 12h12M10 19h4"></path></svg>
+          <span>More filters</span>
+        </button>
+      </div>
+
+      <sc-if value="{{ moreOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; animation: il-rise 0.2s ease both;">
+          <select class="input" style="width: auto; height: 38px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onLicense }}" value="{{ licenseValue }}">
+            <option value="All">License: all</option>
+            <option value="Valid">Valid</option>
+            <option value="Expiring soon">Expiring soon</option>
+            <option value="Expired">Expired</option>
+          </select>
+          <select class="input" style="width: auto; height: 38px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onExperience }}" value="{{ experienceValue }}">
+            <option value="All">Experience: all</option>
+            <option value="Under 2 years">Under 2 years</option>
+            <option value="2–5 years">2–5 years</option>
+            <option value="Over 5 years">Over 5 years</option>
+          </select>
+          <select class="input" style="width: auto; height: 38px; font-size: 13px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onAssignment }}" value="{{ assignmentValue }}">
+            <option value="All">Assignment: all</option>
+            <option value="Assigned">Assigned</option>
+            <option value="Unassigned">Unassigned</option>
+          </select>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 50%, transparent);">Active filters</span>
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="2">
+            <button style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; font: inherit; font-size: 12.5px; color: var(--color-accent-700); background: var(--color-accent-100); border: 1px solid var(--color-accent-300); border-radius: var(--radius-md); cursor: pointer;" style-hover="background: var(--color-accent-200);" onClick="{{ c.onRemove }}">
+              <span>{{ c.label }}</span>
+              <span style="font-size: 13px; line-height: 1;">×</span>
+            </button>
+          </sc-for>
+          <button class="btn btn-ghost" style="padding: 5px 8px; font-size: 12.5px; color: var(--color-accent-700);" onClick="{{ onClear }}">Clear all</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasSelection }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; background: var(--color-accent-100); border: 1px solid var(--color-accent-300); border-radius: var(--radius-md); animation: il-rise 0.25s ease both;">
+          <span style="font-size: 13.5px; color: var(--color-accent-800);">{{ selectionLabel }}</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign vehicle</button>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign shipment</button>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Change status</button>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Update availability</button>
+            <button class="btn btn-secondary" style="padding: 8px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Export</button>
+            <button class="btn btn-ghost" style="padding: 8px 10px; font-size: 12.5px; color: var(--color-accent-700);" onClick="{{ onClearSelection }}">Clear selection</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <section class="blueprint" style="padding: 0; background: #ffffff; min-width: 0;">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 16px; border-bottom: 1px solid var(--color-divider);">
+          <span style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ resultLabel }}</span>
+          <span style="font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 42%, transparent);">Select a row for details</span>
+        </div>
+
+        <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
+          <div style="overflow-x: auto;">
+            <table class="table" style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13.5px; background: #ffffff;">
+              <thead>
+                <tr>
+                  <th style="width: 42px; padding: 12px 0 12px 16px;">
+                    <input type="checkbox" style="width: 15px; height: 15px; accent-color: var(--color-accent); cursor: pointer;" onChange="{{ onSelectAll }}" checked="{{ allSelected }}" aria-label="Select all drivers">
+                  </th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Driver</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Location</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Vehicle</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Current shipment</th>
+                  <th style="text-align: right; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Today</th>
+                  <th style="text-align: left; padding: 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent); border-left: 1px solid var(--color-neutral-200);">Status</th>
+                  <th style="text-align: right; padding: 12px 16px 12px 10px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 62%, transparent);">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+                  <tr style="{{ r.rowStyle }}" style-hover="background: var(--color-accent-100);" onClick="{{ r.onOpen }}">
+                    <td style="padding: 13px 0 13px 16px;">
+                      <input type="checkbox" style="width: 15px; height: 15px; accent-color: var(--color-accent); cursor: pointer;" checked="{{ r.selected }}" onChange="{{ r.onSelect }}" onClick="{{ r.stop }}" aria-label="Select driver">
+                    </td>
+                    <td style="padding: 11px 10px;">
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="width: 30px; height: 30px; flex: none; display: grid; place-items: center; font-size: 11.5px; letter-spacing: 0.04em; color: var(--color-accent-800); background: var(--color-accent-200); border-radius: 50%;">{{ r.initials }}</span>
+                        <span style="display: flex; flex-direction: column; min-width: 0;">
+                          <span style="font-size: 14px;">{{ r.name }}</span>
+                          <span style="font-size: 12px; color: var(--color-accent-700); font-variant-numeric: tabular-nums;">{{ r.id }}</span>
+                        </span>
+                      </div>
+                    </td>
+                    <td style="padding: 13px 10px;">{{ r.location }}</td>
+                    <td style="padding: 13px 10px; font-variant-numeric: tabular-nums;">{{ r.vehicle }}</td>
+                    <td style="padding: 13px 10px; font-variant-numeric: tabular-nums;">{{ r.shipment }}</td>
+                    <td style="padding: 13px 10px; text-align: right; font-variant-numeric: tabular-nums;">{{ r.deliveries }}</td>
+                    <td style="padding: 13px 10px; border-left: 1px solid var(--color-neutral-200);">
+                      <span style="{{ r.pillStyle }}">
+                        <span style="{{ r.dotStyle }}"></span>
+                        <span>{{ r.status }}</span>
+                      </span>
+                    </td>
+                    <td style="padding: 13px 16px 13px 10px; text-align: right; position: relative;">
+                      <button style="display: inline-grid; place-items: center; width: 30px; height: 30px; border: 1px solid transparent; background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 55%, transparent); border-radius: var(--radius-md);" style-hover="border-color: var(--color-neutral-300); background: #ffffff;" onClick="{{ r.onMenu }}" aria-label="Row actions">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="12" cy="19" r="1.6"></circle></svg>
+                      </button>
+                      <sc-if value="{{ r.menuOpen }}" hint-placeholder-val="{{ false }}">
+                        <div style="position: absolute; right: 14px; top: 40px; z-index: 5; min-width: 196px; display: flex; flex-direction: column; text-align: left; background: #ffffff; border: 1px solid var(--color-neutral-300); box-shadow: var(--shadow-md);">
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">View driver</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Edit driver</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Assign vehicle</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Assign shipment</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">View route</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">Update availability</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; color: var(--color-text); text-align: left; border: 0; border-top: 1px solid var(--color-divider); background: none; cursor: pointer;" style-hover="background: var(--color-accent-100);">View documents</button>
+                          <button style="padding: 10px 13px; font: inherit; font-size: 13px; text-align: left; border: 0; border-top: 2px solid var(--color-divider); background: none; cursor: pointer; color: #8a3d2e;" style-hover="background: #f6eeec;">Deactivate driver</button>
+                        </div>
+                      </sc-if>
+                    </td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 16px; border-top: 1px solid var(--color-divider);">
+            <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+              <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent); font-variant-numeric: tabular-nums;">{{ pageLabel }}</span>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 58%, transparent);">
+                <span>Rows per page</span>
+                <select class="input" style="width: auto; height: 32px; padding: 2px 8px; font-size: 12.5px; background: #ffffff; border-color: var(--color-neutral-300);" onChange="{{ onPerPage }}" value="{{ perPageValue }}">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </label>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <button style="{{ prevStyle }}" onClick="{{ onPrev }}" aria-label="Previous page">‹</button>
+              <sc-for list="{{ pages }}" as="p" hint-placeholder-count="4">
+                <button style="{{ p.style }}" onClick="{{ p.onClick }}">{{ p.label }}</button>
+              </sc-for>
+              <button style="{{ nextStyle }}" onClick="{{ onNext }}" aria-label="Next page">›</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 74px 24px; text-align: center; animation: il-rise 0.4s ease both;">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-neutral-400)" stroke-width="1.5"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
+            <div style="font-family: var(--font-heading); font-size: 22px;">No drivers found</div>
+            <div style="font-size: 13.5px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Try adjusting your search or filters.</div>
+            <button class="btn btn-secondary" style="margin-top: 6px; padding: 10px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);" onClick="{{ onClear }}">Clear all</button>
+          </div>
+        </sc-if>
+      </section>
+
+      <section style="display: flex; align-items: center; gap: 32px; flex-wrap: wrap; padding: 16px 18px; background: #ffffff; border-radius: var(--radius-md);">
+        <span style="font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Driver performance</span>
+        <sc-for list="{{ performance }}" as="p" hint-placeholder-count="4">
+          <span style="display: flex; align-items: baseline; gap: 9px;">
+            <span style="font-family: var(--font-heading); font-size: 24px; line-height: 1; font-variant-numeric: tabular-nums;">{{ p.value }}</span>
+            <span style="font-size: 12.5px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ p.label }}</span>
+          </span>
+        </sc-for>
+      </section>
+    </main>
+  </div>
+</div>
+
+<sc-if value="{{ addOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="dialog-backdrop" style="position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 28px; background: color-mix(in srgb, var(--color-neutral-900) 42%, transparent);" onClick="{{ onCloseAdd }}">
+    <div class="dialog blueprint" style="width: min(700px, 100%); max-height: 88vh; overflow-y: auto; padding: 0; background: #ffffff; animation: il-rise 0.25s ease both;" onClick="{{ stopDialog }}">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 20px 24px; border-bottom: 1px solid var(--color-divider);">
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <h2 style="margin: 0; font-size: 24px;">Add driver</h2>
+          <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">Register a driver so they can be assigned to vehicles and shipments.</span>
+        </div>
+        <button style="display: grid; place-items: center; width: 32px; height: 32px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 60%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);" onClick="{{ onCloseAdd }}" aria-label="Close">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 22px; padding: 22px 24px;">
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Driver information</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 18px;">
+            <div class="field">
+              <label for="d-name" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Full name <span style="color: var(--color-accent-700);">*</span></label>
+              <input id="d-name" class="input" type="text" placeholder="e.g. Amit Verma" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+            </div>
+            <div class="field">
+              <label for="d-id" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Driver ID <span style="color: var(--color-accent-700);">*</span></label>
+              <input id="d-id" class="input" type="text" placeholder="e.g. DR-037" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+            </div>
+            <div class="field">
+              <label for="d-phone" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Phone number <span style="color: var(--color-accent-700);">*</span></label>
+              <input id="d-phone" class="input" type="tel" placeholder="e.g. +91 98100 00000" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+            </div>
+            <div class="field">
+              <label for="d-email" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Email</label>
+              <input id="d-email" class="input" type="email" placeholder="e.g. name@company.com" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Work information</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 18px;">
+            <div class="field">
+              <label for="d-vehicle" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Assigned vehicle</label>
+              <select id="d-vehicle" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+                <option value="">Unassigned</option>
+                <option value="VH-024">VH-024</option>
+                <option value="VH-018">VH-018</option>
+                <option value="VH-031">VH-031</option>
+                <option value="VH-012">VH-012</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="d-loc" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Location <span style="color: var(--color-accent-700);">*</span></label>
+              <input id="d-loc" class="input" type="text" placeholder="e.g. Delhi NCR" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+            </div>
+            <div class="field">
+              <label for="d-type" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Driver type <span style="color: var(--color-accent-700);">*</span></label>
+              <select id="d-type" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+                <option value="Full-time">Full-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Third-party">Third-party</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="d-status" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Availability status <span style="color: var(--color-accent-700);">*</span></label>
+              <select id="d-status" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+                <option value="Available">Available</option>
+                <option value="On Route">On Route</option>
+                <option value="Off Duty">Off Duty</option>
+                <option value="Unavailable">Unavailable</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent-700);">Documents</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 18px;">
+            <div class="field">
+              <label for="d-lic" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Driving license number <span style="color: var(--color-accent-700);">*</span></label>
+              <input id="d-lic" class="input" type="text" placeholder="e.g. DL-1420110012345" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+            </div>
+            <div class="field">
+              <label for="d-exp" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">License expiry <span style="color: var(--color-accent-700);">*</span></label>
+              <input id="d-exp" class="input" type="date" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+            </div>
+            <div class="field">
+              <label for="d-docs" style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Required documents</label>
+              <select id="d-docs" class="input" style="height: 40px; font-size: 14px; background: #ffffff; border-color: var(--color-neutral-300);">
+                <option value="Pending">Pending upload</option>
+                <option value="Submitted">Submitted</option>
+                <option value="Verified">Verified</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--color-divider);">
+        <button class="btn btn-secondary" style="padding: 11px 18px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffffff; border-color: var(--color-neutral-300);" onClick="{{ onCloseAdd }}">Cancel</button>
+        <button class="btn btn-primary blueprint" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);" onClick="{{ onCloseAdd }}">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <span>Add driver</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ detailOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="dialog-backdrop" style="position: fixed; inset: 0; z-index: 40; display: flex; justify-content: flex-end; background: color-mix(in srgb, var(--color-neutral-900) 42%, transparent);" onClick="{{ onCloseDetail }}">
+    <div style="width: min(580px, 100%); height: 100%; overflow-y: auto; background: #ffffff; border-left: 1px solid var(--color-neutral-300); animation: il-rise 0.25s ease both;" onClick="{{ stopDialog }}">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 22px 24px; border-bottom: 1px solid var(--color-divider);">
+        <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+          <span style="width: 48px; height: 48px; flex: none; display: grid; place-items: center; font-size: 16px; letter-spacing: 0.04em; color: var(--color-accent-800); background: var(--color-accent-200); border-radius: 50%;">{{ detail.initials }}</span>
+          <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+            <h2 style="margin: 0; font-size: 26px; line-height: 1;">{{ detail.name }}</h2>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span style="font-size: 13px; color: var(--color-accent-700); font-variant-numeric: tabular-nums;">{{ detail.id }}</span>
+              <span style="{{ detail.pillStyle }}">
+                <span style="{{ detail.dotStyle }}"></span>
+                <span>{{ detail.status }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <button style="display: grid; place-items: center; width: 32px; height: 32px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 60%, transparent); border-radius: var(--radius-md);" style-hover="background: var(--color-neutral-200);" onClick="{{ onCloseDetail }}" aria-label="Close">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 24px; border-bottom: 1px solid var(--color-divider);">
+        <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Set availability</div>
+        <div class="seg" style="flex-wrap: wrap;">
+          <sc-for list="{{ availabilityOptions }}" as="o" hint-placeholder-count="4">
+            <button style="{{ o.style }}" onClick="{{ o.onClick }}">
+              <span style="{{ o.dotStyle }}"></span>
+              <span>{{ o.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; padding: 16px 24px; border-bottom: 1px solid var(--color-divider);">
+        <button class="btn btn-primary" style="padding: 9px 16px; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #ffffff;" style-hover="background: var(--color-accent-700);">Edit driver</button>
+        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign vehicle</button>
+        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-accent-300); color: var(--color-accent-700);">Assign shipment</button>
+        <button class="btn btn-secondary" style="padding: 9px 14px; font-size: 12.5px; background: #ffffff; border-color: var(--color-neutral-300);">View route</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 24px; padding: 22px 24px 40px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Driver overview</div>
+          <sc-for list="{{ detail.overview }}" as="o" hint-placeholder-count="4">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--color-divider);">
+              <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ o.label }}</span>
+              <span style="font-size: 13.5px; text-align: right;">{{ o.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div class="blueprint" style="padding: 16px 18px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent); margin-bottom: 10px;">Current assignment</div>
+          <sc-for list="{{ detail.assignment }}" as="a" hint-placeholder-count="4">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--color-divider);">
+              <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ a.label }}</span>
+              <span style="font-size: 13.5px; text-align: right;">{{ a.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Today</div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+            <sc-for list="{{ detail.today }}" as="t" hint-placeholder-count="3">
+              <div style="padding: 12px 14px; background: var(--color-accent-100); border-radius: var(--radius-md);">
+                <div style="font-family: var(--font-heading); font-size: 22px; line-height: 1; font-variant-numeric: tabular-nums;">{{ t.value }}</div>
+                <div style="margin-top: 5px; font-size: 11.5px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ t.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Performance</div>
+          <sc-for list="{{ detail.performance }}" as="p" hint-placeholder-count="3">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--color-divider);">
+              <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ p.label }}</span>
+              <span style="font-size: 13.5px; font-variant-numeric: tabular-nums;">{{ p.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Documents</div>
+          <sc-for list="{{ detail.documents }}" as="d" hint-placeholder-count="4">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--color-divider);">
+              <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ d.label }}</span>
+              <span style="{{ d.valueStyle }}">{{ d.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Recent activity</div>
+          <sc-for list="{{ detail.activity }}" as="a" hint-placeholder-count="4">
+            <div style="display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--color-divider);">
+              <span style="{{ a.dotStyle }}"></span>
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0;">
+                <span style="font-size: 13.5px;">{{ a.title }}</span>
+                <span style="font-size: 12px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ a.meta }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1100}}">
+const S = {
+  'Available': { sig: '#4f7a5c', text: '#3b5f46', tint: '#edf3ee' },
+  'On Route': { sig: '#5980a6', text: '#416180', tint: '#eef6ff' },
+  'Off Duty': { sig: '#b0842f', text: '#8a6423', tint: '#f7f3e8' },
+  'Unavailable': { sig: '#a9513f', text: '#8a3d2e', tint: '#f6eeec' }
+};
+const pill = st => 'display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px; font-size: 12px; white-space: nowrap; background: ' +
+  st.tint + '; color: ' + st.text + '; border: 1px solid ' + st.sig + '55; border-radius: var(--radius-md);';
+const dot = st => 'width: 7px; height: 7px; flex: none; background: ' + st.sig + ';';
+const initials = name => name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+const DATA = [
+  ['Amit Verma', 'DR-018', 'VH-018', 'Gurugram', 'SHP-10482', 'On Route', 4, 'Expiring soon', 'Over 5 years'],
+  ['Rahul Sharma', 'DR-024', 'VH-024', 'Delhi NCR', '—', 'Available', 0, 'Valid', '2–5 years'],
+  ['Rohan Mehta', 'DR-031', 'VH-031', 'Noida', '—', 'Available', 2, 'Valid', 'Under 2 years'],
+  ['Vikram Singh', 'DR-012', 'VH-012', 'Delhi', 'SHP-10491', 'On Route', 5, 'Valid', 'Over 5 years'],
+  ['Kabir Anand', 'DR-007', 'VH-007', 'Delhi NCR', 'SHP-10488', 'On Route', 3, 'Valid', '2–5 years'],
+  ['Neha Rawat', 'DR-014', 'VH-014', 'Faridabad', '—', 'Off Duty', 0, 'Valid', '2–5 years'],
+  ['Arjun Sharma', 'DR-019', 'VH-019', 'Delhi', '—', 'Available', 1, 'Valid', 'Over 5 years'],
+  ['Deepak Verma', 'DR-027', 'VH-027', 'Noida', '—', 'Available', 2, 'Expired', 'Under 2 years'],
+  ['Imran Qureshi', 'DR-033', 'VH-033', 'Gurugram', 'SHP-10494', 'On Route', 4, 'Valid', '2–5 years'],
+  ['Suresh Yadav', 'DR-041', 'Unassigned', 'Delhi NCR', '—', 'Unavailable', 0, 'Valid', 'Over 5 years']
+].map(([name, id, vehicle, location, shipment, status, deliveries, license, experience]) =>
+  ({ name, id, vehicle, location, shipment, status, deliveries, license, experience }));
+
+class Component extends DCLogic {
+  state = {
+    nav: 'Drivers', collapsed: false, menu: null, page: 1, perPage: 10,
+    query: '', status: 'All', vehicle: 'All', location: 'All',
+    license: 'All', experience: 'All', assignment: 'All', moreOpen: false,
+    selected: [], addOpen: false, detail: null, overrides: {}
+  };
+
+  setFilter(patch) { this.setState({ ...patch, page: 1, menu: null }); }
+
+  statusOf(r) { return this.state.overrides[r.id] || r.status; }
+
+  renderVals() {
+    const st = this.state;
+    const { collapsed } = st;
+    const expanded = !collapsed;
+    const navItems = [
+      ['Overview', 'M4 13h7V4H4v9Zm9 7h7v-9h-7v9ZM4 20h7v-4H4v4Zm9-11h7V4h-7v5Z'],
+      ['Shipments', 'M12 3 21 7.5v9L12 21 3 16.5v-9L12 3Zm0 0v18M3 7.5l9 4.5 9-4.5'],
+      ['Routes', 'M6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12-12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm-9.5 10h5a3 3 0 0 0 3-3V9.5'],
+      ['Vehicles', 'M3 16V8h11v8H3Zm11-5h4l3 3v2h-7v-5Z'],
+      ['Drivers', 'M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6'],
+      ['Tracking', 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z'],
+      ['Exceptions', 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01', '12'],
+      ['Reports', 'M5 20V9m7 11V4m7 16v-7']
+    ];
+    const nav = navItems.map(([label, icon, badge]) => {
+      const active = st.nav === label;
+      return {
+        label, icon, badge: collapsed ? false : (badge || false),
+        style: 'display: flex; align-items: center; gap: 10px; padding: 9px 10px; border: 0; cursor: pointer; font: inherit; font-size: 14px; border-radius: var(--radius-md); text-align: left;' +
+          (collapsed ? ' justify-content: center; padding-inline: 0;' : '') +
+          (active ? ' background: var(--color-accent); color: #ffffff;'
+                  : ' background: none; color: color-mix(in srgb, var(--color-text) 78%, transparent);'),
+        badgeStyle: 'display: inline-flex; align-items: center; padding: 1px 7px; font-size: 11px; font-variant-numeric: tabular-nums; border-radius: 2px;' +
+          (active ? ' background: #ffffff; color: var(--color-accent-800);' : ' background: #a9513f; color: #ffffff;'),
+        onClick: () => {
+          const url = { Overview: 'dashboard.html', Shipments: 'shipments.html', Routes: 'dashboard.html', Vehicles: 'vehicles.html', Drivers: 'drivers.html', Tracking: 'tracking.html', Exceptions: 'dashboard.html', Reports: 'reports.html' }[label];
+          if (url && label !== st.nav) window.location.href = url; else this.setState({ nav: label });
+        }
+      };
+    });
+
+    const summary = [
+      { label: 'Total drivers', value: '36', note: 'Across all locations', signal: 'var(--color-accent)', tint: 'color-mix(in srgb, var(--color-accent-100) 70%, #ffffff)', icon: 'M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-7 9c0-3.3 3.1-6 7-6s7 2.7 7 6' },
+      { label: 'Available', value: '24', note: 'Ready for assignment', signal: '#4f7a5c', tint: '#edf3ee', icon: 'M20 6 9 17 4 12' },
+      { label: 'On route', value: '9', note: 'Currently on active deliveries', signal: 'var(--color-accent)', tint: 'color-mix(in srgb, var(--color-accent-100) 70%, #ffffff)', icon: 'M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z' },
+      { label: 'Needs attention', value: '3', note: 'License / availability issues', signal: '#b0842f', tint: '#f7f3e8', icon: 'M12 3 22 20H2L12 3Zm0 6v5m0 3h.01' }
+    ].map(s => ({ ...s, cardStyle: 'padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; border-radius: var(--radius-md); background: ' + s.tint + ';' }));
+
+    const availability = [
+      { label: 'Available', count: 24, pct: 66.7, color: '#4f7a5c' },
+      { label: 'On route', count: 9, pct: 25, color: '#5980a6' },
+      { label: 'Off duty', count: 2, pct: 5.6, color: '#b0842f' },
+      { label: 'Unavailable', count: 1, pct: 2.7, color: '#a9513f' }
+    ].map(a => ({
+      ...a,
+      barStyle: 'width: ' + a.pct + '%; background: ' + a.color + ';',
+      dotStyle: 'width: 9px; height: 9px; flex: none; background: ' + a.color + ';'
+    }));
+
+    const q = st.query.trim().toLowerCase();
+    const rowsAll = DATA.filter(r => {
+      const status = this.statusOf(r);
+      const assigned = r.shipment !== '—';
+      return (st.status === 'All' || status === st.status) &&
+        (st.vehicle === 'All' || r.vehicle === st.vehicle) &&
+        (st.location === 'All' || r.location === st.location) &&
+        (st.license === 'All' || r.license === st.license) &&
+        (st.experience === 'All' || r.experience === st.experience) &&
+        (st.assignment === 'All' || (st.assignment === 'Assigned' ? assigned : !assigned)) &&
+        (!q || (r.name + ' ' + r.id + ' ' + r.vehicle + ' ' + r.location).toLowerCase().includes(q));
+    });
+
+    const chips = [];
+    if (st.status !== 'All') chips.push({ label: 'Status: ' + st.status, onRemove: () => this.setFilter({ status: 'All' }) });
+    if (st.vehicle !== 'All') chips.push({ label: 'Vehicle: ' + st.vehicle, onRemove: () => this.setFilter({ vehicle: 'All' }) });
+    if (st.location !== 'All') chips.push({ label: 'Location: ' + st.location, onRemove: () => this.setFilter({ location: 'All' }) });
+    if (st.license !== 'All') chips.push({ label: 'License: ' + st.license, onRemove: () => this.setFilter({ license: 'All' }) });
+    if (st.experience !== 'All') chips.push({ label: 'Experience: ' + st.experience, onRemove: () => this.setFilter({ experience: 'All' }) });
+    if (st.assignment !== 'All') chips.push({ label: 'Assignment: ' + st.assignment, onRemove: () => this.setFilter({ assignment: 'All' }) });
+    if (q) chips.push({ label: 'Search: "' + st.query.trim() + '"', onRemove: () => this.setFilter({ query: '' }) });
+
+    const filtered = chips.length > 0;
+    const total = filtered ? rowsAll.length : 36;
+    const pageCount = Math.max(1, Math.ceil(total / st.perPage));
+    const cur = Math.min(st.page, pageCount);
+    const from = total === 0 ? 0 : (cur - 1) * st.perPage + 1;
+    const to = Math.min(cur * st.perPage, total);
+
+    const pageBtn = (label, active, onClick) => ({
+      label, onClick,
+      style: 'min-width: 32px; height: 32px; padding: 0 9px; font: inherit; font-size: 12.5px; font-variant-numeric: tabular-nums; cursor: pointer; border: 1px solid ' +
+        (active ? 'var(--color-accent)' : 'var(--color-neutral-300)') + '; border-radius: var(--radius-md);' +
+        (active ? ' background: var(--color-accent); color: #ffffff;' : ' background: #ffffff; color: inherit;')
+    });
+    const nums = [];
+    for (let n = 1; n <= Math.min(4, pageCount); n++) nums.push(pageBtn(String(n), n === cur, () => this.setState({ page: n, menu: null })));
+
+    const arrow = on => 'min-width: 32px; height: 32px; font: inherit; font-size: 14px; cursor: ' + (on ? 'pointer' : 'not-allowed') +
+      '; border: 1px solid var(--color-neutral-300); background: #ffffff; border-radius: var(--radius-md); color: inherit; opacity: ' + (on ? '1' : '0.45') + ';';
+
+    const ids = rowsAll.map(r => r.id);
+    const sel = st.selected.filter(id => ids.includes(id));
+
+    const dv = st.detail ? DATA.find(r => r.id === st.detail) : null;
+    const dvStatus = dv ? this.statusOf(dv) : null;
+    const dvs = dv ? S[dvStatus] : null;
+    const act = (title, meta, color) => ({ title, meta, dotStyle: 'width: 8px; height: 8px; flex: none; margin-top: 6px; background: ' + color + ';' });
+
+    return {
+      nav, expanded, summary, availability, chips,
+      hasChips: chips.length > 0,
+      attention: [
+        { id: 'DR-018', note: 'License expires in 12 days', action: 'Review documents' },
+        { id: 'DR-024', note: 'Availability not updated', action: 'Update availability' },
+        { id: 'DR-031', note: 'Required document pending', action: 'Review profile' }
+      ].map(a => ({ ...a, onOpen: () => this.setState({ detail: a.id }) })),
+      performance: [
+        { value: '94.2%', label: 'On-time delivery' },
+        { value: '126', label: 'Deliveries completed' },
+        { value: '33', label: 'Active drivers' },
+        { value: '4.1', label: 'Avg. deliveries / day' }
+      ],
+      shellStyle: 'display: grid; grid-template-columns: ' + (collapsed ? '68px' : '244px') + ' minmax(0, 1fr); min-height: 100vh;',
+      asideStyle: 'display: flex; flex-direction: column; gap: 22px; padding: 20px ' + (collapsed ? '10px' : '16px') +
+        '; background: #ffffff; border-right: 1px solid var(--color-divider); position: sticky; top: 0; align-self: start; height: 100vh; box-sizing: border-box; overflow-y: auto; overflow-x: hidden;',
+      brandRowStyle: 'display: flex; align-items: center; gap: 8px;' + (collapsed ? ' flex-direction: column;' : ' justify-content: space-between;'),
+      brandLinkStyle: 'display: flex; align-items: center; gap: 10px; color: inherit;' + (collapsed ? '' : ' padding: 4px 8px;'),
+      toggleStyle: 'display: grid; place-items: center; width: 30px; height: 30px; flex: none; border: 1px solid var(--color-divider); background: none; cursor: pointer; color: color-mix(in srgb, var(--color-text) 65%, transparent); border-radius: var(--radius-md);' +
+        (collapsed ? ' margin: 0 auto;' : ''),
+      onToggle: () => this.setState({ collapsed: !collapsed }),
+
+      statusValue: st.status, vehicleValue: st.vehicle, locationValue: st.location,
+      licenseValue: st.license, experienceValue: st.experience, assignmentValue: st.assignment,
+      perPageValue: String(st.perPage),
+      moreOpen: st.moreOpen,
+      moreStyle: 'height: 40px; padding: 0 12px; font-size: 12.5px; color: var(--color-accent-700);' +
+        (st.moreOpen ? ' background: var(--color-accent-100);' : ''),
+      onToggleMore: () => this.setState({ moreOpen: !st.moreOpen }),
+      onSearch: e => this.setFilter({ query: e.target.value }),
+      onStatus: e => this.setFilter({ status: e.target.value }),
+      onVehicle: e => this.setFilter({ vehicle: e.target.value }),
+      onLocation: e => this.setFilter({ location: e.target.value }),
+      onLicense: e => this.setFilter({ license: e.target.value }),
+      onExperience: e => this.setFilter({ experience: e.target.value }),
+      onAssignment: e => this.setFilter({ assignment: e.target.value }),
+      onClear: () => this.setState({ status: 'All', vehicle: 'All', location: 'All', license: 'All', experience: 'All', assignment: 'All', query: '', page: 1, menu: null }),
+
+      hasSelection: sel.length > 0,
+      selectionLabel: sel.length + ' driver' + (sel.length === 1 ? '' : 's') + ' selected',
+      onClearSelection: () => this.setState({ selected: [] }),
+      allSelected: sel.length > 0 && sel.length === rowsAll.length,
+      onSelectAll: e => this.setState({ selected: e.target.checked ? ids : [] }),
+
+      hasRows: rowsAll.length > 0,
+      isEmpty: rowsAll.length === 0,
+      resultLabel: filtered
+        ? rowsAll.length + ' matching driver' + (rowsAll.length === 1 ? '' : 's')
+        : '36 drivers · 24 available now',
+      rows: rowsAll.map(r => {
+        const status = this.statusOf(r);
+        const s = S[status];
+        const selected = sel.includes(r.id);
+        return {
+          ...r, status, selected,
+          initials: initials(r.name),
+          pillStyle: pill(s),
+          dotStyle: dot(s),
+          rowStyle: 'border-top: 1px solid var(--color-neutral-200); cursor: pointer; transition: background 0.15s ease;' +
+            (selected ? ' background: var(--color-accent-100);' : '') +
+            (status === 'Unavailable' ? ' box-shadow: inset 3px 0 0 #a9513f;' : '') +
+            (status === 'Off Duty' ? ' box-shadow: inset 3px 0 0 #b0842f;' : ''),
+          menuOpen: st.menu === r.id,
+          onOpen: () => this.setState({ detail: r.id, menu: null }),
+          stop: e => e.stopPropagation(),
+          onSelect: e => {
+            e.stopPropagation();
+            const on = e.target.checked;
+            this.setState({ selected: on ? sel.concat([r.id]) : sel.filter(id => id !== r.id) });
+          },
+          onMenu: e => { e.stopPropagation(); this.setState({ menu: st.menu === r.id ? null : r.id }); }
+        };
+      }),
+
+      pageLabel: 'Showing ' + from + '–' + to + ' of ' + total + ' drivers',
+      pages: nums,
+      prevStyle: arrow(cur > 1),
+      nextStyle: arrow(cur < pageCount),
+      onPrev: () => this.setState({ page: Math.max(1, cur - 1), menu: null }),
+      onNext: () => this.setState({ page: Math.min(pageCount, cur + 1), menu: null }),
+
+      addOpen: st.addOpen,
+      onOpenAdd: () => this.setState({ addOpen: true }),
+      onCloseAdd: () => this.setState({ addOpen: false }),
+      stopDialog: e => e.stopPropagation(),
+
+      detailOpen: !!dv,
+      onCloseDetail: () => this.setState({ detail: null }),
+      availabilityOptions: ['Available', 'On Route', 'Off Duty', 'Unavailable'].map(label => {
+        const on = dvStatus === label;
+        const s = S[label];
+        return {
+          label,
+          dotStyle: 'width: 7px; height: 7px; flex: none; background: ' + s.sig + ';',
+          style: 'display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; font: inherit; font-size: 13px; cursor: pointer; border: 1px solid ' +
+            (on ? s.sig : 'var(--color-neutral-300)') + '; background: ' + (on ? s.tint : '#ffffff') +
+            '; color: ' + (on ? s.text : 'inherit') + '; border-radius: var(--radius-md);',
+          onClick: () => dv && this.setState({ overrides: { ...st.overrides, [dv.id]: label } })
+        };
+      }),
+      detail: dv ? {
+        name: dv.name, id: dv.id, status: dvStatus,
+        initials: initials(dv.name),
+        pillStyle: pill(dvs), dotStyle: dot(dvs),
+        overview: [
+          { label: 'Phone', value: '+91 98100 4' + dv.id.slice(-3) },
+          { label: 'Location', value: dv.location },
+          { label: 'Assigned vehicle', value: dv.vehicle },
+          { label: 'Driver type', value: 'Full-time · ' + dv.experience }
+        ],
+        assignment: [
+          { label: 'Current shipment', value: dv.shipment === '—' ? 'No active shipment' : dv.shipment },
+          { label: 'Route', value: dv.shipment === '—' ? '—' : dv.location + ' → Gurgaon' },
+          { label: 'Destination', value: dv.shipment === '—' ? '—' : 'Gurgaon · Sector 44' },
+          { label: 'Estimated arrival', value: dv.shipment === '—' ? '—' : 'Today, 3:40 PM' }
+        ],
+        today: [
+          { value: String(dv.deliveries), label: 'Completed' },
+          { value: dv.shipment === '—' ? '0' : '3', label: 'Remaining' },
+          { value: dv.shipment === '—' ? 'Idle' : 'On route', label: 'Route status' }
+        ],
+        performance: [
+          { label: 'On-time delivery', value: '94.2%' },
+          { label: 'Completed deliveries', value: '412' },
+          { label: 'Average delivery time', value: '2h 48m' }
+        ],
+        documents: [
+          { label: 'Driving license', value: 'DL-1420110012' + dv.id.slice(-3) },
+          { label: 'License expiry', value: dv.license === 'Expiring soon' ? '20 Sep 2026' : dv.license === 'Expired' ? '02 Aug 2026' : '14 Jun 2029', flag: dv.license },
+          { label: 'Required documents', value: dv.license === 'Valid' ? 'Complete' : 'Pending review', flag: dv.license },
+          { label: 'Verification status', value: dv.license === 'Valid' ? 'Verified' : 'Needs review', flag: dv.license }
+        ].map(d => ({
+          ...d,
+          valueStyle: 'font-size: 13.5px; text-align: right;' +
+            (d.flag && d.flag !== 'Valid' ? ' color: ' + (d.flag === 'Expired' ? '#8a3d2e' : '#8a6423') + ';' : '')
+        })),
+        activity: [
+          act('Delivered SHP-10461 · Noida', 'Yesterday, 6:12 PM · 11 stops', '#4f7a5c'),
+          act('Status changed to ' + dvStatus, 'Yesterday, 5:40 PM · by Niharika A.', '#5980a6'),
+          act('Route completed · Delhi → Noida', 'Yesterday, 2:05 PM · 84 km', '#5980a6'),
+          act('Vehicle assigned · ' + dv.vehicle, '6 Sep 2026, 9:15 AM', '#b0842f')
+        ]
+      } : {
+        name: '', id: '', status: '', initials: '', pillStyle: '', dotStyle: '',
+        overview: [], assignment: [], today: [], performance: [], documents: [], activity: []
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
